@@ -1,9 +1,12 @@
 "use client";
 
-import { Header, Footer } from '@/components/layout';
+import { Header, Footer } from '@/app/_components/layout';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 export default function PrivacyPolicyPage() {
+  const t = useTranslations('legal.privacy');
+
   return (
     <main className="overflow-hidden">
       <Header />
@@ -16,142 +19,143 @@ export default function PrivacyPolicyPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Privacy Policy
+              {t('title')}
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
-              Last updated: {new Date().toLocaleDateString()}
+              {t('lastUpdated')} {new Date().toLocaleDateString()}
             </p>
 
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <section className="mb-8">
+            <div className="prose prose-lg dark:prose-invert max-w-none space-y-8">
+              {/* Introduction */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  1. Introduction
+                  {t('sections.intro.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Welcome to Wayfera ("we," "our," or "us"). We are committed to protecting your personal information and your right to privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website https://wayfera.netlify.app.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.intro.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Information We Collect */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  2. Information We Collect
+                  {t('sections.collect.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We collect information that you provide directly to us, including:
+                  {t('sections.collect.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Name and contact information (email address, phone number)</li>
-                  <li>Travel preferences and booking information</li>
-                  <li>Payment information (processed securely through third-party payment processors)</li>
-                  <li>Communication preferences</li>
-                  <li>Feedback and correspondence</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.collect.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* How We Use Your Information */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  3. How We Use Your Information
+                  {t('sections.use.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We use the information we collect to:
+                  {t('sections.use.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Process your travel bookings and reservations</li>
-                  <li>Communicate with you about your bookings</li>
-                  <li>Send you marketing communications (with your consent)</li>
-                  <li>Improve our services and website</li>
-                  <li>Comply with legal obligations</li>
-                  <li>Prevent fraud and enhance security</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.use.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* Cookies and Tracking */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  4. Cookies and Tracking Technologies
+                  {t('sections.cookies.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We use cookies and similar tracking technologies to track activity on our website and store certain information. You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. However, if you do not accept cookies, you may not be able to use some portions of our website.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.cookies.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Data Sharing */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  5. Data Sharing and Disclosure
+                  {t('sections.sharing.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We may share your information with:
+                  {t('sections.sharing.intro')}
                 </p>
                 <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Service providers who assist in our operations</li>
-                  <li>Travel partners (hotels, airlines, tour operators)</li>
-                  <li>Payment processors</li>
-                  <li>Legal authorities when required by law</li>
+                  {t.raw('sections.sharing.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We do not sell your personal information to third parties.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.sharing.note')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Data Security */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  6. Data Security
+                  {t('sections.security.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We implement appropriate technical and organizational security measures to protect your personal information. However, no method of transmission over the Internet or electronic storage is 100% secure, and we cannot guarantee absolute security.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.security.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Your Rights */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  7. Your Rights
+                  {t('sections.rights.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Depending on your location, you may have the following rights:
+                  {t('sections.rights.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Access your personal information</li>
-                  <li>Correct inaccurate information</li>
-                  <li>Request deletion of your information</li>
-                  <li>Object to processing of your information</li>
-                  <li>Request restriction of processing</li>
-                  <li>Data portability</li>
-                  <li>Withdraw consent</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.rights.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* Children's Privacy */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  8. Children's Privacy
+                  {t('sections.children.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Our services are not directed to children under 13 years of age. We do not knowingly collect personal information from children under 13. If you become aware that a child has provided us with personal information, please contact us.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.children.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* International Data Transfers */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  9. International Data Transfers
+                  {t('sections.international.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Your information may be transferred to and processed in countries other than your country of residence. These countries may have data protection laws that are different from the laws of your country.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.international.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Changes to Privacy Policy */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  10. Changes to This Privacy Policy
+                  {t('sections.updates.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.updates.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Contact Us */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  11. Contact Us
+                  {t('sections.contact.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  If you have any questions about this Privacy Policy, please contact us:
+                  {t('sections.contact.intro')}
                 </p>
                 <ul className="list-none text-gray-700 dark:text-gray-300 space-y-2">
                   <li>Email: privacy@wayfera.com</li>

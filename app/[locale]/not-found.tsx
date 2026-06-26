@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Home, Search, MapPin, Compass } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/_components/ui/button';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
 
@@ -71,7 +71,7 @@ export default function NotFound() {
             Oops! Lost in Space
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-            Looks like this destination doesn't exist. Let's get you back on track to your next adventure!
+            Looks like this destination doesn&apos;t exist. Let&apos;s get you back on track to your next adventure!
           </p>
         </motion.div>
 

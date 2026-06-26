@@ -1,13 +1,33 @@
 "use client";
 
-import { Header, Footer } from '@/components/layout';
+import { useEffect, useState } from 'react';
+import { Header, Footer } from '@/app/_components/layout';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Award, Users, Globe, Heart } from 'lucide-react';
 import Image from 'next/image';
+import { PageStat } from '@/app/_types';
 
 export default function AboutPage() {
   const t = useTranslations();
+  const [stats, setStats] = useState<PageStat[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('/api/page-stats?pageType=about');
+        const data = await response.json();
+        setStats(data);
+      } catch (error) {
+        console.error('Error fetching stats:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStats();
+  }, []);
 
   const values = [
     { icon: Award, title: 'Excellence', description: 'We strive for excellence in every journey we create' },
@@ -50,10 +70,10 @@ export default function AboutPage() {
                 Founded in 2010, Wayfera began with a simple mission: to make world-class travel experiences accessible to everyone. What started as a small team of passionate travelers has grown into a global network of travel experts.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
-                Over the years, we've helped thousands of travelers discover amazing destinations, create lasting memories, and experience cultures from around the world.
+                Over the years, we&apos;ve helped thousands of travelers discover amazing destinations, create lasting memories, and experience cultures from around the world.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Today, we continue to innovate and expand our services, always keeping our customers' dreams and satisfaction at the heart of everything we do.
+                Today, we continue to innovate and expand our services, always keeping our customers&apos; dreams and satisfaction at the heart of everything we do.
               </p>
             </motion.div>
 
@@ -111,28 +131,25 @@ export default function AboutPage() {
           </motion.div>
 
           {/* Stats Section */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="grid md:grid-cols-4 gap-8 text-center"
-          >
-            {[
-              { number: '50+', label: 'Countries' },
-              { number: '1000+', label: 'Happy Clients' },
-              { number: '500+', label: 'Destinations' },
-              { number: '24/7', label: 'Support' }
-            ].map((stat, index) => (
-              <div key={index} className="p-6">
-                <div className="text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">
-                  {stat.number}
+          {!loading && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+              className="grid md:grid-cols-4 gap-8 text-center"
+            >
+              {stats.map((stat, index) => (
+                <div key={stat.id} className="p-6">
+                  <div className="text-5xl font-bold text-blue-600 dark:text-blue-400 mb-2">
+                    {stat.value}
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-lg">
+                    {stat.label}
+                  </div>
                 </div>
-                <div className="text-gray-600 dark:text-gray-400 text-lg">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </motion.div>
+              ))}
+            </motion.div>
+          )}
         </div>
       </section>
 

@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { AlertTriangle, RefreshCw, Home, Mail } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/_components/ui/button';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
 
@@ -64,7 +64,7 @@ export default function Error({
             Something Went Wrong
           </h1>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            We encountered an unexpected error. Don't worry, our team has been notified!
+            We encountered an unexpected error. Don&apos;t worry, our team has been notified!
           </p>
         </motion.div>
 
