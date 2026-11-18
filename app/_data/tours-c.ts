@@ -1,6 +1,6 @@
 import type { Tour } from "./tours-a";
 
-const wd = (n: number) => `/images/tours--wd-${n}.jpg`;
+const wd = (n: number) => `/images/tours--wd-${n}.webp`;
 
 export const toursC: Tour[] = [
   {
@@ -11,7 +11,7 @@ export const toursC: Tour[] = [
     duration: "1 or 2 Nights",
     description:
       "The White Desert has massive chalk rock formations created by occasional sandstorms. A night under the stars here is an experience never forgotten, as the sky turns pink then fiery orange.",
-    image: "/images/tours--bahareya.jpg",
+    image: "/images/tours--bahareya.webp",
     gallery: [
       { src: wd(1), caption: "The White Desert" },
       { src: wd(2), caption: "The Black Desert" },

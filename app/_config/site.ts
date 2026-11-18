@@ -5,7 +5,7 @@ export const siteConfig = {
   name: "Dahab Hostel",
   description: s.description,
   url: process.env.NEXT_PUBLIC_BASE_URL || s.url,
-  ogImage: "/images/tours--home-banner.jpg",
+  ogImage: "/images/og-cover.jpg",
   links: {
     facebook: "https://www.facebook.com/dahabhostel/",
     instagram: "https://www.instagram.com/dahabhostel/",

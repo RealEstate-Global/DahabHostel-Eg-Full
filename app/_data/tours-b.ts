@@ -1,7 +1,7 @@
 import type { Tour } from "./tours-a";
 
-const t = (p: string) => `/images/tours--${p}.jpg`;
-const a = (n: number) => `/images/tours--aswan-${n}.jpg`;
+const t = (p: string) => `/images/tours--${p}.webp`;
+const a = (n: number) => `/images/tours--aswan-${n}.webp`;
 
 export const toursB: Tour[] = [
   {

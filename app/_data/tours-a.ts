@@ -14,8 +14,8 @@ export type Tour = {
   notes?: string[];
 };
 
-const t = (p: string) => `/images/tours--${p}.jpg`;
-const g = (n: number) => `/images/tours--giza-${n}.jpg`;
+const t = (p: string) => `/images/tours--${p}.webp`;
+const g = (n: number) => `/images/tours--giza-${n}.webp`;
 
 export const toursA: Tour[] = [
   {
@@ -69,10 +69,10 @@ export const toursA: Tour[] = [
       "Combine the Giza Pyramids and Sphinx with the Grand Egyptian Museum (GEM), the largest archaeological museum in the world, home to the complete collection of Tutankhamun's treasures.",
     image: t("giza"),
     gallery: [
-      { src: "/images/tours--gem-1.jpg", caption: "The Grand Egyptian Museum" },
-      { src: "/images/tours--gem-2.jpg", caption: "Colossus of Ramses II, GEM atrium" },
-      { src: "/images/tours--gem-3.jpg", caption: "The Grand Staircase, GEM" },
-      { src: "/images/tours--gem-6.jpg", caption: "View of the Pyramids of Giza from the GEM" },
+      { src: "/images/tours--gem-1.webp", caption: "The Grand Egyptian Museum" },
+      { src: "/images/tours--gem-2.webp", caption: "Colossus of Ramses II, GEM atrium" },
+      { src: "/images/tours--gem-3.webp", caption: "The Grand Staircase, GEM" },
+      { src: "/images/tours--gem-6.webp", caption: "View of the Pyramids of Giza from the GEM" },
     ],
     highlights: ["Giza Pyramids and Sphinx", "Grand Egyptian Museum", "Grand Staircase", "Tutankhamun galleries"],
     itinerary: [
@@ -95,10 +95,10 @@ export const toursA: Tour[] = [
       "Islamic Cairo is part of central Cairo noted for its historically important mosques and monuments, overlooked by the Cairo Citadel. Coptic Cairo was a stronghold for Christianity until the Islamic era.",
     image: t("islamic"),
     gallery: [
-      { src: "/images/tours--islamic-1.jpg", caption: "Mohamed Ali (Alabaster) Mosque at the Citadel" },
-      { src: "/images/tours--islamic-5.jpg", caption: "Inside Sultan Hassan Mosque" },
-      { src: "/images/tours--islamic-7.jpg", caption: "Entrance of the Hanging Church Basilica" },
-      { src: "/images/tours--islamic-8.jpg", caption: "Ibn Tulun Mosque" },
+      { src: "/images/tours--islamic-1.webp", caption: "Mohamed Ali (Alabaster) Mosque at the Citadel" },
+      { src: "/images/tours--islamic-5.webp", caption: "Inside Sultan Hassan Mosque" },
+      { src: "/images/tours--islamic-7.webp", caption: "Entrance of the Hanging Church Basilica" },
+      { src: "/images/tours--islamic-8.webp", caption: "Ibn Tulun Mosque" },
     ],
     highlights: [
       "The Citadel of Saladin (El-Qala)",

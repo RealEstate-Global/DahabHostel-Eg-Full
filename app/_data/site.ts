@@ -30,18 +30,19 @@ export const site = {
 } as const;
 
 export const images = {
-  logo: "/images/1c76110e3757dac2f674c7be0dcdade0.png",
-  awardBestHostelEgypt: "/images/5c8662d4e8e3ce1b6cfab879b2fcc447.png",
-  awardBestSmallHostelAfrica: "/images/6c768d837da645bac6809f622ebacf8f.png",
-  tripAdvisor: "/images/tours--tripadvisor.png",
-  homeBanner: "/images/tours--home-banner.jpg",
-  provideBanner: "/images/tours--provide-banner.jpg",
-  toursBanner: "/images/tours--tours-banner.jpg",
-  collage: "/images/tours--collage.png",
-  terrace: "/images/tours--terrace.jpeg",
-  siwa: "/images/7f5e910fdb3056ca3aba57fbdcf2a476.jpg",
-  siwaView: "/images/8c9f18a4d6a16c4df3705bd336924e2b.jpg",
-  siwaDesert: "/images/bf5e6c86af527d39ed7165ca0c8365f6.jpg",
+  logo: "/images/1c76110e3757dac2f674c7be0dcdade0.webp",
+  ogCover: "/images/og-cover.jpg",
+  awardBestHostelEgypt: "/images/5c8662d4e8e3ce1b6cfab879b2fcc447.webp",
+  awardBestSmallHostelAfrica: "/images/6c768d837da645bac6809f622ebacf8f.webp",
+  tripAdvisor: "/images/tours--tripadvisor.webp",
+  homeBanner: "/images/tours--home-banner.webp",
+  provideBanner: "/images/tours--provide-banner.webp",
+  toursBanner: "/images/tours--tours-banner.webp",
+  collage: "/images/tours--collage.webp",
+  terrace: "/images/tours--terrace.webp",
+  siwa: "/images/7f5e910fdb3056ca3aba57fbdcf2a476.webp",
+  siwaView: "/images/8c9f18a4d6a16c4df3705bd336924e2b.webp",
+  siwaDesert: "/images/bf5e6c86af527d39ed7165ca0c8365f6.webp",
 } as const;
 
 export type NavItem = { title: string; href: string };

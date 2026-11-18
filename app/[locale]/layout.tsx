@@ -50,9 +50,9 @@ export const metadata: Metadata = {
     siteName: site.ogSiteName,
     title: site.title,
     description: site.description,
-    images: [{ url: images.homeBanner, width: 1200, height: 630, alt: "Dahab Hostel rooftop" }],
+    images: [{ url: images.ogCover, width: 1200, height: 630, alt: "Dahab Hostel rooftop" }],
   },
-  twitter: { card: "summary_large_image", title: site.title, description: site.description, images: [images.homeBanner] },
+  twitter: { card: "summary_large_image", title: site.title, description: site.description, images: [images.ogCover] },
   robots: { index: true, follow: true },
 };
 
