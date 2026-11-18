@@ -1,6 +1,24 @@
 {
-  "description": "Tu socio de confianza para experiencias de viaje inolvidables alrededor del mundo.",
-  "quickLinks": "Enlaces Rápidos",
-  "contact": "Información de Contacto",
-  "rights": "Todos los derechos reservados."
+  "description": "Hostel galardonado en el centro de El Cairo — un pequeño oasis en la ciudad desde 1998.",
+  "columns": {
+    "ourInfo": "Nuestra información",
+    "ourServices": "Nuestros servicios",
+    "followUs": "Síguenos"
+  },
+  "links": {
+    "entranceFees": "Precios de entrada",
+    "airportPickup": "Servicio de traslado al aeropuerto",
+    "roomRates": "Precios de habitaciones",
+    "requestTourPrices": "Solicitar precios de tours",
+    "onlineBooking": "Reserva en línea",
+    "newsBlog": "Nuestro blog",
+    "writeReview": "Escribir una reseña"
+  },
+  "getInTouch": "Contacto",
+  "bookYourRoom": "Reserva tu habitación",
+  "talaatHarb": "Plaza Talaat Harb",
+  "rights": "Todos los derechos reservados.",
+  "privacy": "Privacidad",
+  "terms": "Términos",
+  "cookies": "Configuración de cookies"
 }

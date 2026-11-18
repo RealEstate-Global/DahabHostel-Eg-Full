@@ -1,19 +1,21 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, ArrowUpRight } from "lucide-react";
 import { images, mainNav } from "@/app/_data";
 import { ThemeToggle } from "./theme-toggle";
+import { LangSwitcher } from "./lang-switcher";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const locale = useLocale();
   const pathname = usePathname();
+  const t = useTranslations("nav");
   const href = (path: string) => `/${locale}${path}`;
 
   useEffect(() => {
@@ -54,16 +56,17 @@ export function Header() {
                   active ? "bg-brand-soft text-brand" : "text-ink-muted hover:bg-surface-soft hover:text-ink-heading"
                 }`}
               >
-                {item.title}
+                {t(item.id)}
               </Link>
             );
           })}
         </nav>
 
         <div className="flex items-center gap-2">
+          <LangSwitcher label={t("language")} />
           <ThemeToggle />
           <Link href={href("/book-now")} className="btn-primary hidden !px-5 !py-2.5 text-xs sm:inline-flex">
-            Book now <ArrowUpRight size={15} />
+            {t("bookNow")} <ArrowUpRight size={15} />
           </Link>
           <button
             type="button"
@@ -92,11 +95,15 @@ export function Header() {
                 pathname === href(item.href) ? "bg-brand-soft text-brand" : "text-ink hover:bg-surface-soft"
               }`}
             >
-              {item.title}
+              {t(item.id)}
             </Link>
           ))}
+          <p className="px-4 pb-1 pt-4 text-[11px] font-bold uppercase tracking-[0.2em] text-ink-muted">
+            {t("language")}
+          </p>
+          <LangSwitcher variant="chips" label={t("language")} onPick={() => setOpen(false)} />
           <Link href={href("/book-now")} onClick={() => setOpen(false)} className="btn-primary mt-2">
-            Book now <ArrowUpRight size={16} />
+            {t("bookNow")} <ArrowUpRight size={16} />
           </Link>
         </nav>
       </div>

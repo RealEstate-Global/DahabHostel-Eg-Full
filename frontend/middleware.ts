@@ -1,13 +1,7 @@
 import createMiddleware from "next-intl/middleware";
-import { defineRouting } from "next-intl/routing";
 import type { NextRequest } from "next/server";
 import { updateSession } from "./utils/supabase/middleware";
-
-const routing = defineRouting({
-  locales: ["en", "ar", "fr", "es"],
-  defaultLocale: "en",
-  localePrefix: "always",
-});
+import { routing } from "./app/routing";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -15,7 +9,8 @@ export async function middleware(request: NextRequest) {
   // Keep Supabase auth sessions refreshed on every request.
   const { response: supabaseResponse } = await updateSession(request);
 
-  // Handle locale routing/redirects with next-intl.
+  // Handle locale routing/redirects with next-intl (also detects the
+  // visitor's Accept-Language on `/` and syncs the NEXT_LOCALE cookie).
   const response = intlMiddleware(request);
 
   // Carry any refreshed Supabase cookies over to the next-intl response.

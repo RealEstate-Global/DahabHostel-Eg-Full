@@ -1,7 +1,12 @@
 {
-  "home": "Accueil",
-  "destinations": "Destinations",
-  "services": "Services",
-  "about": "À propos", 
-  "contact": "Contact"
+  "ourTours": "Nos circuits",
+  "location": "Localisation",
+  "photos": "Photos",
+  "ratesBooking": "Tarifs & réservation",
+  "cityInfo": "Infos pratiques",
+  "aboutUs": "À propos",
+  "contactUs": "Nous contacter",
+  "servicesBrochure": "Brochure des services",
+  "bookNow": "Réserver",
+  "language": "Langue"
 }

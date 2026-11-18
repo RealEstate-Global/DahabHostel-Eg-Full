@@ -45,30 +45,30 @@ export const images = {
   siwaDesert: "/images/bf5e6c86af527d39ed7165ca0c8365f6.webp",
 } as const;
 
-export type NavItem = { title: string; href: string };
+export type NavItem = { id: string; title: string; href: string };
 
 export const mainNav: NavItem[] = [
-  { title: "Our Tours", href: "/our-tours" },
-  { title: "Location", href: "/location" },
-  { title: "Photos", href: "/photos" },
-  { title: "Rates & Booking", href: "/book-now" },
-  { title: "City Info", href: "/city-info" },
-  { title: "About Us", href: "/about-us" },
-  { title: "Contact Us", href: "/contact-us" },
-  { title: "Services Brochure", href: "/services-brochure" },
+  { id: "ourTours", title: "Our Tours", href: "/our-tours" },
+  { id: "location", title: "Location", href: "/location" },
+  { id: "photos", title: "Photos", href: "/photos" },
+  { id: "ratesBooking", title: "Rates & Booking", href: "/book-now" },
+  { id: "cityInfo", title: "City Info", href: "/city-info" },
+  { id: "aboutUs", title: "About Us", href: "/about-us" },
+  { id: "contactUs", title: "Contact Us", href: "/contact-us" },
+  { id: "servicesBrochure", title: "Services Brochure", href: "/services-brochure" },
 ];
 
 export const footerNav = {
   ourInfo: [
-    { title: "Entrance Fees", href: "/entrance-fees" },
-    { title: "Airport Pickup Service", href: "/airport-pickup-service" },
-    { title: "Room Rates", href: "/prices" },
-    { title: "Request Tour Prices", href: "/tours-prices" },
+    { id: "entranceFees", title: "Entrance Fees", href: "/entrance-fees" },
+    { id: "airportPickup", title: "Airport Pickup Service", href: "/airport-pickup-service" },
+    { id: "roomRates", title: "Room Rates", href: "/prices" },
+    { id: "requestTourPrices", title: "Request Tour Prices", href: "/tours-prices" },
   ],
-  ourServices: [{ title: "Online Booking", href: "/book-now" }],
+  ourServices: [{ id: "onlineBooking", title: "Online Booking", href: "/book-now" }],
   followUs: [
-    { title: "Our News Blog", href: "/blog" },
-    { title: "Write a Review", href: "/write-a-review" },
+    { id: "newsBlog", title: "Our News Blog", href: "/blog" },
+    { id: "writeReview", title: "Write a Review", href: "/write-a-review" },
   ],
 } as const;
 

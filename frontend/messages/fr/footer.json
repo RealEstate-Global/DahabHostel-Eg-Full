@@ -1,6 +1,24 @@
 {
-  "description": "Votre partenaire de confiance pour des expériences de voyage inoubliables à travers le monde.",
-  "quickLinks": "Liens Rapides",
-  "contact": "Informations de Contact",
-  "rights": "Tous droits réservés."
+  "description": "Hostel primé au cœur du centre-ville du Caire — une petite oasis dans la ville depuis 1998.",
+  "columns": {
+    "ourInfo": "Nos infos",
+    "ourServices": "Nos services",
+    "followUs": "Suivez-nous"
+  },
+  "links": {
+    "entranceFees": "Frais d'entrée",
+    "airportPickup": "Transfert aéroport",
+    "roomRates": "Tarifs des chambres",
+    "requestTourPrices": "Demander les prix des circuits",
+    "onlineBooking": "Réservation en ligne",
+    "newsBlog": "Notre blog",
+    "writeReview": "Écrire un avis"
+  },
+  "getInTouch": "Contactez-nous",
+  "bookYourRoom": "Réservez votre chambre",
+  "talaatHarb": "Place Talaat Harb",
+  "rights": "Tous droits réservés.",
+  "privacy": "Confidentialité",
+  "terms": "Conditions",
+  "cookies": "Paramètres des cookies"
 }

@@ -1,6 +1,24 @@
 {
-  "description": "Your trusted partner for unforgettable travel experiences around the globe.",
-  "quickLinks": "Quick Links",
-  "contact": "Contact Info",
-  "rights": "All rights reserved."
+  "description": "Award-winning rooftop hostel in the heart of Downtown Cairo — a little oasis in the city since 1998.",
+  "columns": {
+    "ourInfo": "Our Info",
+    "ourServices": "Our Services",
+    "followUs": "Follow Us"
+  },
+  "links": {
+    "entranceFees": "Entrance Fees",
+    "airportPickup": "Airport Pickup Service",
+    "roomRates": "Room Rates",
+    "requestTourPrices": "Request Tour Prices",
+    "onlineBooking": "Online Booking",
+    "newsBlog": "Our News Blog",
+    "writeReview": "Write a Review"
+  },
+  "getInTouch": "Get in touch",
+  "bookYourRoom": "Book your room",
+  "talaatHarb": "Talaat Harb Square",
+  "rights": "All rights reserved.",
+  "privacy": "Privacy",
+  "terms": "Terms",
+  "cookies": "Cookie settings"
 }

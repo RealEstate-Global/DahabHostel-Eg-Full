@@ -1,7 +1,12 @@
 {
-  "home": "الرئيسية",
-  "destinations": "الوجهات",
-  "services": "الخدمات", 
-  "about": "عنا",
-  "contact": "اتصل بنا"
+  "ourTours": "جولاتنا",
+  "location": "الموقع",
+  "photos": "الصور",
+  "ratesBooking": "الأسعار والحجز",
+  "cityInfo": "معلومات المدينة",
+  "aboutUs": "من نحن",
+  "contactUs": "اتصل بنا",
+  "servicesBrochure": "كتالوج الخدمات",
+  "bookNow": "احجز الآن",
+  "language": "اللغة"
 }

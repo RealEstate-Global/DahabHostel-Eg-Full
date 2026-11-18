@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 
 export default function CookiePolicyPage() {
   const t = useTranslations('legal.cookies');
-  const contactInfo = useTranslations('footer.contact');
 
   return (
     <main className="overflow-hidden">

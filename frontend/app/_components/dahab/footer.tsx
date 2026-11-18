@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { footerNav, site, socialLinks, images } from "@/app/_data";
 import { Facebook, Instagram, Youtube, Star, Mail, Phone, MapPin, ArrowUpRight } from "lucide-react";
@@ -12,13 +12,14 @@ const icons: Record<string, typeof Facebook> = {
 };
 
 const columns = [
-  { title: "Our Info", links: footerNav.ourInfo },
-  { title: "Our Services", links: footerNav.ourServices },
-  { title: "Follow Us", links: footerNav.followUs },
+  { id: "ourInfo", links: footerNav.ourInfo },
+  { id: "ourServices", links: footerNav.ourServices },
+  { id: "followUs", links: footerNav.followUs },
 ];
 
 export function Footer() {
   const locale = useLocale();
+  const t = useTranslations("footer");
   const href = (p: string) => `/${locale}${p}`;
 
   return (
@@ -33,7 +34,7 @@ export function Footer() {
               <Image src={images.logo} alt="Dahab Hostel" width={150} height={90} className="h-auto w-[130px]" />
             </div>
             <p className="mt-6 max-w-sm text-sm leading-relaxed text-white/60">
-              Award-winning rooftop hostel in the heart of Downtown Cairo. A little oasis in the city since 1998.
+              {t("description")}
             </p>
             <div className="mt-6 flex gap-3">
               {socialLinks.map((s) => {
@@ -56,13 +57,15 @@ export function Footer() {
 
           <div className="grid gap-8 sm:grid-cols-3">
             {columns.map((col) => (
-              <div key={col.title}>
-                <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-brand-light">{col.title}</h3>
+              <div key={col.id}>
+                <h3 className="mb-5 text-xs font-bold uppercase tracking-[0.2em] text-brand-light">
+                  {t(`columns.${col.id}`)}
+                </h3>
                 <ul className="space-y-3">
                   {col.links.map((l) => (
                     <li key={l.href}>
                       <Link href={href(l.href)} className="group inline-flex items-center gap-1 text-sm text-white/70 transition-colors hover:text-white">
-                        {l.title}
+                        {t(`links.${l.id}`)}
                         <ArrowUpRight size={13} className="opacity-0 transition-all group-hover:translate-x-0.5 group-hover:opacity-100" />
                       </Link>
                     </li>
@@ -77,25 +80,25 @@ export function Footer() {
 
         <div className="grid gap-8 md:grid-cols-[1.5fr_1fr] md:items-end">
           <div>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-light">Get in touch</p>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-light">{t("getInTouch")}</p>
             <p className="mt-4 text-lg font-medium">{site.address}</p>
             <div className="mt-4 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/70">
               <a href={`tel:${site.phone}`} className="inline-flex items-center gap-2 hover:text-white"><Phone size={15} className="text-brand-light" /> {site.phone}</a>
               <a href={`mailto:${site.email}`} className="inline-flex items-center gap-2 hover:text-white"><Mail size={15} className="text-brand-light" /> {site.email}</a>
-              <span className="inline-flex items-center gap-2"><MapPin size={15} className="text-brand-light" /> Talaat Harb Square</span>
+              <span className="inline-flex items-center gap-2"><MapPin size={15} className="text-brand-light" /> {t("talaatHarb")}</span>
             </div>
           </div>
           <Link href={href("/book-now")} className="btn-primary justify-self-start md:justify-self-end">
-            Book your room <ArrowUpRight size={16} />
+            {t("bookYourRoom")} <ArrowUpRight size={16} />
           </Link>
         </div>
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 text-xs text-white/45 sm:flex-row">
-          <p>© {new Date().getFullYear()} Dahab Hostel Cairo. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Dahab Hostel Cairo. {t("rights")}</p>
           <div className="flex gap-5">
-            <Link className="hover:text-white" href={href("/privacy")}>Privacy</Link>
-            <Link className="hover:text-white" href={href("/terms")}>Terms</Link>
-            <Link className="hover:text-white" href={href("/cookies")}>Cookie settings</Link>
+            <Link className="hover:text-white" href={href("/privacy")}>{t("privacy")}</Link>
+            <Link className="hover:text-white" href={href("/terms")}>{t("terms")}</Link>
+            <Link className="hover:text-white" href={href("/cookies")}>{t("cookies")}</Link>
           </div>
         </div>
       </div>
