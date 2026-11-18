@@ -1,0 +1,41 @@
+# ---- Dependencies & build output --------------------------------------------
+node_modules/
+.next/
+out/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# ---- Environment & secrets ---------------------------------------------------
+.env
+.env.local
+.env.*.local
+
+# ---- .NET (backend — planned) ------------------------------------------------
+bin/
+obj/
+*.user
+*.suo
+.vs/
+
+# ---- Editors & OS ------------------------------------------------------------
+/.idea/
+/.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- Logs --------------------------------------------------------------------
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ---- Replit / platform leftovers ---------------------------------------------
+.cache/
+.local/

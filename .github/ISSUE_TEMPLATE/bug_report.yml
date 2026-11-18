@@ -1,0 +1,69 @@
+name: 🐛 Bug report
+description: Something is broken in the site, CI or docs
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report! **Security issues must go through
+        [SECURITY.md](https://github.com/RealEstate-Global/DahabHostel-Eg-Full/blob/main/SECURITY.md) instead.**
+  - type: input
+    id: page
+    attributes:
+      label: Affected page / route
+      description: e.g. `/en/book-now`, `/ar/photos`, `/api/contact-info`
+      placeholder: /en/our-tours/giza-pyramids
+    validations:
+      required: true
+  - type: dropdown
+    id: locale
+    attributes:
+      label: Locale
+      options:
+        - en
+        - ar
+        - fr
+        - es
+        - all locales
+    validations:
+      required: true
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Clear description of the bug and the expected behaviour.
+      placeholder: When I submit the booking form, …
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Minimal steps someone else can follow.
+      placeholder: |
+        1. Go to /en/book-now
+        2. Select any room
+        3. Submit the form
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser + OS, or deployment environment.
+      placeholder: "Chrome 131 / Windows 11 — production"
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots / console errors
+      description: Paste console output or describe screenshots.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I searched existing issues and this is not a duplicate
+          required: true
+        - label: This is not a security vulnerability (those go to SECURITY.md)
+          required: true

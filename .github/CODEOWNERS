@@ -1,0 +1,12 @@
+# Default owners for everything in the repository.
+* @RealEstate-Global/maintainers
+
+# DevOps / CI changes need a second pair of eyes.
+/.github/ @RealEstate-Global/maintainers
+/docs/ @RealEstate-Global/maintainers
+
+# Frontend application code.
+/frontend/ @RealEstate-Global/maintainers
+
+# Planned backend (design docs only for now).
+/backend/ @RealEstate-Global/maintainers
