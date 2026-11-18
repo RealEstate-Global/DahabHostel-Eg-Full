@@ -4,7 +4,7 @@ import { Header, Footer, PageHero, ActionLink, SectionTitle } from "@/app/_compo
 import { generateSEO, generateBreadcrumbSchema } from "@/app/_lib/seo";
 import { JsonLd } from "@/app/_components/shared";
 import { site, images, home, provided, tours, gallery } from "@/app/_data";
-import { Compass, ShieldCheck, Clock, MapPin, Sparkles, ArrowUpRight } from "lucide-react";
+import { Compass, ShieldCheck, Clock, MapPin, Sparkles, ArrowUpRight, Quote, Star } from "lucide-react";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -77,9 +77,28 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
               <div className="mt-6 space-y-4 text-[15px] leading-relaxed text-ink-muted">
                 {home.experience.map((p) => <p key={p}>{p}</p>)}
               </div>
-              <p className="mt-6 rounded-2xl border-l-4 border-brand bg-brand-soft/60 p-5 font-display text-lg text-ink-heading">
-                Your Dahab hostel is the best accommodation deal in Cairo — great, affordable and centrally located.
-              </p>
+              <div className="relative mt-7 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-soft/50 via-surface to-surface-soft p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:shadow-card">
+                <div className="flex items-start gap-4">
+                  <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand shadow-xs">
+                    <Quote size={20} className="rotate-180" />
+                  </div>
+                  <div className="space-y-2">
+                    <blockquote className="font-display text-[17px] font-medium italic leading-relaxed text-ink-heading sm:text-lg">
+                      &ldquo;Your Dahab hostel is the best accommodation deal in Cairo — great, affordable and centrally located.&rdquo;
+                    </blockquote>
+                    <div className="flex items-center gap-2 pt-1 text-xs font-semibold text-brand">
+                      <div className="flex items-center text-amber-500">
+                        <Star size={13} className="fill-amber-500" />
+                        <Star size={13} className="fill-amber-500" />
+                        <Star size={13} className="fill-amber-500" />
+                        <Star size={13} className="fill-amber-500" />
+                        <Star size={13} className="fill-amber-500" />
+                      </div>
+                      <span className="text-ink-muted">· Guest Favorite in Downtown Cairo</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <div className="mt-8 flex flex-wrap gap-3">
                 <ActionLink href="/about-us">Our story</ActionLink>
                 <ActionLink href="/photos" variant="outline">Explore photos</ActionLink>
