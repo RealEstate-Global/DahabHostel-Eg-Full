@@ -1,0 +1,27 @@
+# ============================================================================
+# SECURITY: Minimum release age for npm packages (supply-chain defense)
+# ============================================================================
+# A package version must have been published for at least 1 day (1440 minutes)
+# before pnpm will install it. Malicious releases are usually discovered and
+# pulled within hours, so a 1-day delay provides a strong safety buffer.
+#
+# DO NOT DISABLE THIS SETTING. To urgently install a package released less
+# than a day ago (e.g. an urgent security fix), add it temporarily to
+# `minimumReleaseAgeExclude` and remove it once the window has passed.
+# ============================================================================
+minimumReleaseAge: 1440
+
+# Peer dependency policy (previously in .npmrc).
+autoInstallPeers: false
+strictPeerDependencies: false
+
+# ----------------------------------------------------------------------------
+# Dependency build scripts are blocked by default (strictDepBuilds: true).
+# Only these reviewed packages may run their install/build scripts.
+# ----------------------------------------------------------------------------
+allowBuilds:
+  '@swc/core': true
+  '@parcel/watcher': true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true

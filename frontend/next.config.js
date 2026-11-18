@@ -1,9 +1,15 @@
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import createNextIntlPlugin from 'next-intl/plugin';
 
 const withNextIntl = createNextIntlPlugin('./app/i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Pin the trace/output root to this package so a stray lockfile in a parent
+  // directory (e.g. the user's home) is never inferred as the workspace root.
+  outputFileTracingRoot: path.dirname(fileURLToPath(import.meta.url)),
+
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: 'images.pexels.com' },
