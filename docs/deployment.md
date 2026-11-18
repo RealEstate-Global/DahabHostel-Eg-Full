@@ -21,22 +21,24 @@ checkout → setup Node 22 (corepack) → pnpm install --frozen-lockfile
 
 | Variable | Where | Notes |
 | --- | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | build/runtime | required for forms |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | build/runtime | required for forms |
-| `NEXT_PUBLIC_BASE_URL` | build/runtime | canonical origin for SEO/sitemap |
+| `NEXT_PUBLIC_SUPABASE_URL` | build/runtime | required for Supabase client connection |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | build/runtime | required for Supabase public queries and forms |
+| `SUPABASE_SERVICE_ROLE_KEY` | runtime/admin | required for administrative scripts and media upload |
+| `DATABASE_URL` | runtime/admin | pooled PostgreSQL connection for Drizzle ORM |
+| `NEXT_PUBLIC_BASE_URL` | build/runtime | canonical origin for SEO/sitemap (`https://dahabhostel.com`) |
 
-Configure them as **repository secrets** (or your host's env UI). They are
-`NEXT_PUBLIC_*`, so they are inlined at build time — changing one requires a
-rebuild.
+Configure them as **repository secrets** in GitHub Actions (for CI) and as **Environment Variables** in Vercel (or your hosting provider).
 
 ## Hosting options
 
 ### A. Vercel (recommended, zero-config)
 
-1. Import the repo; set **Root Directory** to `frontend/`.
-2. Framework preset: **Next.js**; build `pnpm build`; output handled
-   automatically.
-3. Add the three env vars above (Production + Preview).
+1. Import the repository into Vercel.
+2. In **Project Settings → General**:
+   - Set **Root Directory** to `frontend`.
+   - Framework Preset: **Next.js** (auto-detected).
+   - Leave Build and Install commands as default (`pnpm build`, `pnpm install`).
+3. In **Project Settings → Environment Variables**, add the 5 variables above (Production + Preview).
 4. Point `dahabhostel.com` DNS at Vercel and enable automatic HTTPS.
 
 ### B. Self-hosted Node (VPS / Docker)

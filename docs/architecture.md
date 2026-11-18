@@ -33,13 +33,14 @@ a monorepo-ready root (docs, CI, future `backend/`) around that one app.
 | `frontend/` | The entire web app — self-contained `package.json`, lockfile, configs |
 | `frontend/app/[locale]/` | One folder per route; `[locale]` segment carries `en·ar·fr·es` |
 | `frontend/app/_components/` | UI components (`dahab/` feature components + `ui/` primitives) |
-| `frontend/app/_data/` | Typed content modules (tours, rooms, gallery, site settings) |
+| `frontend/app/_data/` | Typed content fallback modules (tours, rooms, gallery, site settings) |
 | `frontend/app/_config/` | Site-wide configuration (URLs, metadata defaults) |
 | `frontend/app/_lib/` | Helpers (SEO builders, constants) |
-| `frontend/messages/` | Translation JSON, 9 namespaces × 4 locales |
-| `frontend/utils/supabase/` | `client.ts` (browser), `server.ts` (RSC), `middleware.ts` (cookies) |
-| `frontend/supabase/schema.sql` | Idempotent DDL for the four form tables + RLS |
-| `frontend/scripts/` | `optimize-images.mjs` WebP pipeline |
+| `frontend/drizzle/` | Drizzle ORM schema (15 tables), db client, and generated migrations |
+| `frontend/messages/` | Translation JSON dictionaries (en, ar, es, fr) for common, nav, footer, legal |
+| `frontend/utils/supabase/` | `client.ts` (browser), `server.ts` (RSC), `middleware.ts` (cookies), `queries.ts` |
+| `frontend/supabase/` | `complete-setup.sql`, `migration.sql`, and `seed.sql` database scripts |
+| `frontend/scripts/` | Database diagnostics, image upload, and WebP optimization pipeline |
 | `docs/` · `.github/` · `backend/` | Documentation, DevOps, future API |
 
 ## Request lifecycle

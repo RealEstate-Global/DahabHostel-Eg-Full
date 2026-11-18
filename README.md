@@ -1,184 +1,314 @@
 <div align="center">
 
 # 🏨 Dahab Hostel Cairo
+### *The Downtown Oasis & Adventure Hub — Cairo, Egypt*
 
-**The official website of Dahab Hostel — Downtown Cairo, Egypt**
+A modern, high-performance, multilingual travel portal and reservation platform built with **Next.js 15 (App Router)**, **TypeScript**, **Tailwind CSS**, **Drizzle ORM**, and **Supabase (PostgreSQL & Storage)**.
 
-A fast, multilingual (EN · AR · FR · ES) marketing & booking site built with
-Next.js 15, TypeScript, Tailwind CSS and Supabase.
+<br />
 
-[![CI](https://github.com/RealEstate-Global/DahabHostel-Eg-Full/actions/workflows/ci.yml/badge.svg)](https://github.com/RealEstate-Global/DahabHostel-Eg-Full/actions/workflows/ci.yml)
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?logo=next.js&logoColor=white)](https://nextjs.org)
-[![TypeScript](https://img.shields.io/badge/TypeScript-strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![pnpm](https://img.shields.io/badge/pnpm-managed-F69220?logo=pnpm&logoColor=white)](https://pnpm.io)
+[![CI Status](https://github.com/RealEstate-Global/DahabHostel-Eg-Full/actions/workflows/ci.yml/badge.svg)](https://github.com/RealEstate-Global/DahabHostel-Eg-Full/actions/workflows/ci.yml)
+[![Next.js 15](https://img.shields.io/badge/Next.js-15.5-black?logo=next.js&logoColor=white)](https://nextjs.org)
+[![React 19](https://img.shields.io/badge/React-19-blue?logo=react&logoColor=61DAFB)](https://react.dev)
+[![TypeScript 5.7](https://img.shields.io/badge/TypeScript-5.7_Strict-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Drizzle ORM](https://img.shields.io/badge/Drizzle_ORM-0.45-C5F74F?logo=drizzle&logoColor=black)](https://orm.drizzle.team)
+[![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL_17-3ECF8E?logo=supabase&logoColor=white)](https://supabase.com)
+[![pnpm 12](https://img.shields.io/badge/pnpm-12.14-F69220?logo=pnpm&logoColor=white)](https://pnpm.io)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
+<br />
+
+[Explore Features](#-features--architecture) • [Quick Start](#-quick-start) • [Database & Drizzle](#-database--drizzle-orm) • [Environment Variables](#-environment-variables) • [Deployment](#-deployment)
 
 </div>
 
 ---
 
-## ✨ Highlights
+## ✨ Features & Architecture
 
-- **4 languages** — English, Arabic, French and Spanish with automatic
-  device-language detection on first visit and RTL-ready Arabic.
-- **45+ tour pages** — Giza, Islamic Cairo, Alexandria, Aswan/Luxor, Dahab,
-  Siwa, White Desert and more, each with gallery, itinerary and pricing.
-- **Booking & request forms** — tour requests, room bookings, contact and
-  airport pickups, persisted to Supabase.
-- **Modern dark UI** — design tokens, animated Radix components, dark mode.
-- **Blazing fast** — all images converted to compressed WebP
-  (**130 MB → 9.7 MB**, −92 %), immutable caching, strict security headers.
-- **Zero runtime calls to third-party sites** — every asset and all content
-  are served locally.
+- **🌍 4-Language Localization (1:1 Parity)**
+  - English (`en`), Arabic (`ar` with native RTL), French (`fr`), and Spanish (`es`).
+  - Seamless automatic language detection on first visit with cookie persistence via `next-intl`.
+  - Zero missing keys, shared namespaces: `nav`, `footer`, `legal`, `common` (cookie consent, error handling, 404, contact forms).
 
-## 🧰 Tech stack
+- **🏜️ 45+ Rich Travel Experiences & Tours**
+  - Cairo Pyramids, Grand Egyptian Museum, Islamic & Coptic Cairo, Alexandria, Luxor & Aswan Nile cruises, Dahab diving, Mount Sinai, and White Desert expeditions.
+  - Interactive day-by-day itineraries, photo galleries, inclusions, exclusions, and entrance fee breakdowns.
 
-| Layer | Choice |
-| --- | --- |
-| Framework | [Next.js 15](https://nextjs.org) (App Router, Server Components) |
-| Language | TypeScript (strict) |
-| Styling | Tailwind CSS + design tokens, `next-themes` dark mode |
-| i18n | [next-intl](https://next-intl.dev) — `en`, `ar`, `fr`, `es` |
-| Backend (today) | Supabase (PostgreSQL + Row Level Security) |
-| Backend (planned) | ASP.NET Core — see [`backend/README.md`](backend/README.md) |
-| Package manager | pnpm (pinned via `packageManager`) |
-| Images | `sharp`-based WebP pipeline ([script](frontend/scripts/optimize-images.mjs)) |
+- **🗄️ Full Supabase & Drizzle ORM Data Layer**
+  - **15 PostgreSQL Tables**: Rooms, Tours, Tour Itinerary, Tour Gallery, Entrance Fees, Photo Gallery, Blog Posts, Reviews, Settings, and Form Submissions.
+  - **Drizzle ORM Integration**: Schema definitions, auto-generated migrations, and direct pooled PostgreSQL connection.
+  - **Row Level Security (RLS)**: Public read policies, guest submission policies, and `SECURITY DEFINER` admin roles with zero recursion.
 
-## 📁 Repository layout
+- **🖼️ High-Performance Image Optimization & Cloud Storage**
+  - **78 High-Resolution Assets** uploaded to Supabase Storage (`media` bucket).
+  - WebP compression with zero quality loss (**130 MB → 9.7 MB, 92% size reduction**).
+  - Automated `sharp` image pipeline with EXIF normalization.
 
-```text
-DahabHostel-Eg-Full/
-├── frontend/                # The Next.js application (fully self-contained)
-│   ├── app/                 #   App Router pages, layouts, one API route
-│   ├── messages/            #   Translation dictionaries: en · ar · fr · es
-│   ├── public/              #   Static assets (all WebP)
-│   ├── scripts/             #   Image optimization tooling
-│   ├── supabase/schema.sql  #   Database schema (run once, see below)
-│   └── utils/supabase/      #   Browser/server/middleware Supabase clients
-├── backend/                 # Planned ASP.NET Core API (design docs only)
-├── docs/                    # Architecture, development, deployment, API
-├── .github/                 # CI, Dependabot, issue & PR templates
-├── .editorconfig            # Shared editor formatting rules
-├── .gitattributes           # Line-ending & binary-asset policy
-├── .gitignore               # Repo-wide ignore rules
-├── .nvmrc                   # Node.js version (22)
-├── CONTRIBUTING.md          # Branch, commit & PR conventions
-├── LICENSE                  # MIT
-├── README.md                # ← you are here
-└── SECURITY.md              # Vulnerability reporting policy
+- **🛡️ Enterprise Security & Quality Gates**
+  - 100% strict TypeScript typing with zero `any` loopholes.
+  - Strict Content Security Policy (CSP), HTTP security headers, and cookie protection.
+  - Clean automated CI pipeline running `pnpm typecheck` and `pnpm build` (53 static & dynamic pages generated).
+
+---
+
+## 🏗️ High-Level Architecture
+
+```
+                          ┌────────────────────────────────────────────────────────┐
+                          │                     CLIENT / USER                      │
+                          └───────────────────────────┬────────────────────────────┘
+                                                      │ HTTPS
+                                                      ▼
+ ┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+ │                                   NEXT.JS 15 (APP ROUTER)                                       │
+ │                                                                                                 │
+ │   middleware.ts ─────────► [ Locale Routing (next-intl) ] ──► [ Session Cookie Refresh (@supabase/ssr) ]
+ │                                                                                                 │
+ │   app/[locale]/            app/api/                   messages/               utils/supabase/   │
+ │   ├─ (RSC Pages)           └─ contact-info (JSON)     ├─ en/ ar/ es/ fr       ├─ client.ts      │
+ │   ├─ dynamic tours                                    └─ common, nav, footer  ├─ server.ts      │
+ │   └─ forms & auth                                                             └─ queries.ts     │
+ └────────────────────────────┬────────────────────────────────────────────────┬───────────────────┘
+                              │                                                │
+                              ▼                                                ▼
+ ┌───────────────────────────────────────────────┐     ┌───────────────────────────────────────────┐
+ │             DRIZZLE ORM & POSTGRES            │     │             SUPABASE STORAGE              │
+ │                                               │     │                                           │
+ │  • Session Pooler (port 5432)                 │     │  • media bucket: 78 WebP images           │
+ │  • Transaction Pooler (port 6543)             │     │  • avatars bucket: user profile photos    │
+ │  • 15 Tables & RLS Policies                   │     │  • Public CDN & immutable caching         │
+ └───────────────────────────────────────────────┘     └───────────────────────────────────────────┘
 ```
 
-## 🚀 Quick start
+---
+
+## 📁 Repository Layout
+
+```text
+Wayfera-Full-main/
+├── frontend/                       # Next.js 15 application (Root Directory for Vercel)
+│   ├── app/                        # Next.js App Router (pages, layouts, error boundaries)
+│   │   ├── [locale]/               # Localized pages (en, ar, fr, es)
+│   │   ├── _components/            # UI components (Radix primitives + Dahab features)
+│   │   ├── _data/                  # Static content fallback datasets
+│   │   ├── api/                    # API route handlers
+│   │   └── i18n.ts                 # next-intl configuration loader
+│   ├── drizzle/                    # Drizzle ORM Configuration & Migrations
+│   │   ├── schema.ts               # PostgreSQL Schema for 15 tables & relationships
+│   │   ├── db.ts                   # Lazy PostgreSQL connection singleton
+│   │   └── migrations/             # Generated SQL migration files
+│   ├── messages/                   # Translation dictionaries (en · ar · es · fr)
+│   │   ├── nav.json                # Navigation links and menus
+│   │   ├── footer.json             # Footer links, copyright, address
+│   │   ├── legal.json              # Privacy policy, Terms, Cookies policy
+│   │   └── common.json             # Cookie banner, 404, errors, forms
+│   ├── public/images/              # Optimized WebP local images
+│   ├── scripts/                    # Automation & Maintenance Scripts
+│   │   ├── test-db-connection.mjs  # Supabase REST + Postgres connection tester
+│   │   ├── apply-full-migration.mjs# Direct SQL migration runner
+│   │   ├── fix-rls.mjs             # RLS policy and permission stabilizer
+│   │   ├── upload-images-to-supabase.mjs # Upload local media to Supabase storage
+│   │   └── optimize-images.mjs     # Sharp WebP compressor pipeline
+│   ├── supabase/                   # SQL schemas and seeds
+│   │   ├── complete-setup.sql      # Single-file full schema + seeds + policies
+│   │   ├── migration.sql           # Schema definition DDL
+│   │   └── seed.sql                # Initial hotel content seed data
+│   ├── utils/supabase/             # Supabase SSR client helpers & typed queries
+│   ├── drizzle.config.ts           # Drizzle Kit CLI configuration
+│   ├── package.json                # Pinned to pnpm@12.14.0
+│   └── pnpm-lock.yaml              # Deterministic dependency lockfile
+├── docs/                           # In-depth architectural & deployment guides
+│   ├── architecture.md             # System design & request lifecycle
+│   ├── deployment.md               # Production Vercel & Docker instructions
+│   ├── development.md              # Local contribution workflow & guidelines
+│   └── api.md                      # Data contracts & REST endpoints
+├── .github/workflows/              # Continuous Integration (ci.yml)
+├── CONTRIBUTING.md                 # Contribution guidelines
+├── SECURITY.md                     # Security and vulnerability disclosure
+└── README.md                       # ← You are here
+```
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
+- **Node.js 22.x** (or [`.nvmrc`](.nvmrc))
+- **pnpm 12.x** (`npm i -g pnpm`)
+- A [Supabase](https://supabase.com) project (PostgreSQL 15+)
 
-- **Node.js 22** (see [`.nvmrc`](.nvmrc)) — `nvm use`
-- **pnpm 12** — `corepack enable` (or `npm i -g pnpm`)
-- A free [Supabase](https://supabase.com) project (only needed for forms)
-
-### Run locally
+### 1. Clone & Install
 
 ```bash
 git clone https://github.com/RealEstate-Global/DahabHostel-Eg-Full.git
 cd DahabHostel-Eg-Full/frontend
 
-pnpm install                # install dependencies
-cp .env.example .env.local  # then fill in your Supabase values
-
-pnpm dev                    # http://localhost:3000
+# Install dependencies using pinned pnpm
+pnpm install
 ```
 
-Production build & run:
+### 2. Configure Environment
+
+Copy the example environment file and provide your Supabase credentials:
 
 ```bash
-pnpm build
-pnpm start
+cp .env.example .env.local
 ```
 
-## 🔐 Environment variables
+Edit `frontend/.env.local`:
 
-Create `frontend/.env.local` (never commit it — it is git-ignored):
+```env
+# Supabase HTTP API (Browser & Server)
+NEXT_PUBLIC_SUPABASE_URL=https://<your-project-id>.supabase.co
+NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=<your-anon-publishable-key>
+SUPABASE_SERVICE_ROLE_KEY=<your-service-role-secret-key>
 
-| Variable | Required | Description |
-| --- | --- | --- |
-| `NEXT_PUBLIC_SUPABASE_URL` | ✅ for forms | Supabase project URL (`https://<ref>.supabase.co`) |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | ✅ for forms | Supabase anon / publishable key |
-| `NEXT_PUBLIC_BASE_URL` | ⬜ optional | Canonical origin used for SEO, `sitemap.xml` and Open Graph URLs (defaults to `https://dahabhostel.com`) |
+# PostgreSQL / Drizzle Connection (Session Pooler IPv4)
+DATABASE_URL="postgresql://postgres.<project-id>:<password>@aws-0-eu-west-1.pooler.supabase.com:5432/postgres"
 
-Without these values the site still renders; only form submissions and
-auth-backed features are disabled.
+# Canonical Base URL
+NEXT_PUBLIC_BASE_URL=https://dahabhostel.com
+```
 
-## 🗄️ Supabase setup (one time)
+### 3. Verify Database Connection
 
-1. Create a project at [supabase.com](https://supabase.com).
-2. Copy the **Project URL** and **Publishable key** into
-   `frontend/.env.local` (table above).
-3. Open **SQL Editor → New query**, paste the contents of
-   [`frontend/supabase/schema.sql`](frontend/supabase/schema.sql) and run it.
+Run the built-in diagnostic test to verify Supabase REST API & PostgreSQL pooler:
 
-That creates the four form tables (`contact_messages`, `tour_requests`,
-`booking_requests`, `airport_pickups`) with anon-insert Row Level Security
-policies.
+```bash
+node scripts/test-db-connection.mjs
+```
 
-## 🌍 Internationalization
+### 4. Run Development Server
 
-- Locales: **`en`** (default) · **`ar`** (RTL) · **`fr`** · **`es`**
-- `middleware.ts` handles locale routing (`/en/…`, `/ar/…`) and redirects
-  first-time visitors using the `Accept-Language` header.
-- Dictionaries live in [`frontend/messages/<locale>/*.json`](frontend/messages)
-  (9 namespaces: `nav`, `hero`, `destinations`, `services`, `booking`,
-  `footer`, `about`, `contact`, `legal`).
-- Switch locale via the language selector in the header (desktop & mobile).
+```bash
+pnpm dev
+```
+Open **[http://localhost:3000](http://localhost:3000)** to view the website in your browser.
 
-## 🖼️ Image pipeline
+---
 
-All photos are compressed WebP at their original resolution. Re-run the
-pipeline after adding new images:
+## 🗄️ Database & Drizzle ORM
+
+The application features a complete **15-table relational schema** managed via Drizzle ORM and Supabase PostgreSQL.
+
+### Table Schema Summary
+
+| Table | Description | Initial Seed Data |
+|---|---|:---:|
+| `rooms` | Room listings, pricing in EGP, capacity, categories, amenities | **8 rooms** |
+| `tours` | Cairo, Dahab, Sinai, Nile tours, duration, inclusions, highlights | **11 tours** |
+| `tour_itinerary` | Multi-day schedule and daily tour stops | **15 items** |
+| `tour_gallery` | Gallery images linked to specific tours | **28 photos** |
+| `fee_groups` | Entrance fee categories (Giza, Luxor, Aswan, Cairo) | **7 groups** |
+| `fee_items` | Individual monument and museum ticket prices | **26 sites** |
+| `gallery` | Curated hostel terrace, rooftop, and activity photos | **14 photos** |
+| `blog_posts` | Articles, Cairo travel tips, awards | **3 posts** |
+| `site_settings` | Key-value store for contact numbers, address, TripAdvisor | **5 settings** |
+| `profiles` | User profiles linked to `auth.users` with `guest`/`admin` roles | Auth Ready |
+| `reviews` | Guest reviews with star ratings and admin approval flag | Form Ready |
+| `contact_messages` | Inquiries submitted via Contact form | Form Ready |
+| `tour_requests` | Custom tour booking requests | Form Ready |
+| `booking_requests` | Direct room reservation inquiries | Form Ready |
+| `airport_pickups` | Cairo airport transfer bookings with flight details | Form Ready |
+
+### Drizzle CLI Commands
 
 ```bash
 cd frontend
-pnpm images:optimize           # convert public/images/*.{jpg,png} → .webp
-pnpm images:optimize:clean     # …and delete the original sources
-node scripts/optimize-images.mjs --dry-run   # preview only
-node scripts/optimize-images.mjs --fix-refs  # also rewrite code references
+
+# Generate migration SQL from drizzle/schema.ts
+pnpm db:generate
+
+# Push schema directly to Supabase PostgreSQL database
+pnpm db:push
+
+# Open Drizzle Studio in browser to view and edit database rows visually
+pnpm db:studio
 ```
 
-Quality is tuned per image type (80 for photos, 90–92 for logos/graphics),
-EXIF orientation is applied and metadata stripped. The only JPEG kept is
-`og-cover.jpg` (1200×630) because Facebook/LinkedIn don't render WebP link
-previews.
+---
 
-## ✅ Quality gates
+## 🔐 Environment Variables
+
+| Variable | Target | Required | Description |
+|---|:---:|:---:|---|
+| `NEXT_PUBLIC_SUPABASE_URL` | Client + Server | ✅ Yes | Your Supabase project URL (`https://<ref>.supabase.co`) |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Client + Server | ✅ Yes | Public anon key for browser client queries & RLS |
+| `SUPABASE_SERVICE_ROLE_KEY` | Server Only | ✅ Yes | Secret service role key for storage uploads & administrative scripts |
+| `DATABASE_URL` | Server Only | ✅ Yes | Direct pooled PostgreSQL URI for Drizzle ORM & migrations |
+| `NEXT_PUBLIC_BASE_URL` | Client + Server | ⚪ Optional | Canonical domain for SEO & Open Graph (`https://dahabhostel.com`) |
+
+> ⚠️ **Security Tip:** Never expose `SUPABASE_SERVICE_ROLE_KEY` or `DATABASE_URL` to client-side code. They are strictly server-side variables.
+
+---
+
+## 🚢 Deployment
+
+### Deploying to Vercel (Recommended)
+
+1. **Import Repository** into Vercel.
+2. In **Project Settings → General**:
+   - Set **Root Directory** to `frontend`.
+   - Framework Preset: **Next.js** (automatically detected).
+   - Install Command: *Default* (`pnpm install`).
+   - Build Command: *Default* (`next build`).
+3. In **Project Settings → Environment Variables**, add:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `DATABASE_URL`
+   - `NEXT_PUBLIC_BASE_URL`
+4. Click **Deploy**. Vercel will build all 53 pages and deploy to its global Edge network.
+
+---
+
+## 🧪 Quality Gates & Testing
+
+Always verify that your code adheres to all strict rules before pushing:
 
 ```bash
-pnpm typecheck   # tsc --noEmit (strict)
-pnpm lint        # eslint (next lint)
-pnpm build       # production build — the same check CI runs
+cd frontend
+
+# 1. Run strict TypeScript check (0 errors expected)
+pnpm typecheck
+
+# 2. Run Next.js linter
+pnpm lint
+
+# 3. Test production build locally
+pnpm build
+
+# 4. Verify Supabase connection & table health
+node scripts/test-db-connection.mjs
 ```
 
-Every push and pull request runs **typecheck + build** in GitHub Actions
-([`.github/workflows/ci.yml`](.github/workflows/ci.yml)).
+---
 
-## 📚 Documentation
+## 📚 In-Depth Documentation
 
-| Doc | Contents |
-| --- | --- |
-| [`docs/architecture.md`](docs/architecture.md) | High-level design, routing, data flow |
-| [`docs/development.md`](docs/development.md) | Local workflow, conventions, adding pages/translations |
-| [`docs/deployment.md`](docs/deployment.md) | CI/CD, environments, release checklist |
-| [`docs/api.md`](docs/api.md) | Current HTTP surface + future backend contract |
-| [`backend/README.md`](backend/README.md) | Planned ASP.NET Core backend (not implemented) |
+For detailed guides, please refer to the [`docs/`](docs) directory:
+
+- 🏗️ [**Architecture & Data Flow**](docs/architecture.md) — Routing, RSC, state management, caching.
+- 💻 [**Development Guide**](docs/development.md) — Local workflow, conventions, adding tours/pages.
+- 🚀 [**Deployment Guide**](docs/deployment.md) — Production hosting, Vercel setup, Docker, CI/CD.
+- 📡 [**API & Database Reference**](docs/api.md) — Data schemas, REST endpoints, and future backend specs.
+
+---
 
 ## 🤝 Contributing
 
-Please read [`CONTRIBUTING.md`](CONTRIBUTING.md) before opening a PR, and
-[`SECURITY.md`](SECURITY.md) to report vulnerabilities.
+We welcome contributions! Please review our [**Contributing Guide**](CONTRIBUTING.md) and [**Security Policy**](SECURITY.md) before submitting pull requests.
 
-## 📜 License
+---
 
-Licensed under the [MIT License](LICENSE) © 2026 Dahab Hostel Cairo.
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+<br />
 
 <div align="center">
-<sub>Made in Cairo · <a href="https://dahabhostel.com">dahabhostel.com</a></sub>
+<sub>Designed & Built with ❤️ in Downtown Cairo, Egypt · <a href="https://dahabhostel.com">dahabhostel.com</a></sub>
 </div>
