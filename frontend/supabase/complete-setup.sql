@@ -45,13 +45,27 @@ begin
   end loop;
 end $$;
 
--- Drop triggers so we can recreate
-drop trigger if exists rooms_updated_at on public.rooms;
-drop trigger if exists tours_updated_at on public.tours;
-drop trigger if exists profiles_updated_at on public.profiles;
-drop trigger if exists blog_posts_updated_at on public.blog_posts;
-drop trigger if exists site_settings_updated_at on public.site_settings;
-drop trigger if exists on_auth_user_created on auth.users;
+-- Drop triggers so we can recreate safely
+do $$ begin
+  if exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'rooms') then
+    drop trigger if exists rooms_updated_at on public.rooms;
+  end if;
+  if exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'tours') then
+    drop trigger if exists tours_updated_at on public.tours;
+  end if;
+  if exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'profiles') then
+    drop trigger if exists profiles_updated_at on public.profiles;
+  end if;
+  if exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'blog_posts') then
+    drop trigger if exists blog_posts_updated_at on public.blog_posts;
+  end if;
+  if exists (select 1 from information_schema.tables where table_schema = 'public' and table_name = 'site_settings') then
+    drop trigger if exists site_settings_updated_at on public.site_settings;
+  end if;
+  if exists (select 1 from information_schema.tables where table_schema = 'auth' and table_name = 'users') then
+    drop trigger if exists on_auth_user_created on auth.users;
+  end if;
+end $$;
 
 -- ============================================================================
 -- 2. AUTH — profiles linked to auth.users

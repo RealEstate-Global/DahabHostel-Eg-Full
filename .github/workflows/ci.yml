@@ -22,10 +22,10 @@ jobs:
       run:
         working-directory: frontend
     env:
-      # The app compiles without a real backend; placeholders keep any
-      # NEXT_PUBLIC_* reads deterministic in CI.
-      NEXT_PUBLIC_SUPABASE_URL: https://placeholder.supabase.co
-      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: placeholder-key
+      # Uses repository secrets if set; falls back to public values so PRs and builds succeed
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL || 'https://gckokgjotdwfhfxplbwj.supabase.co' }}
+      NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY || 'sb_publishable_aqwyk2WyyYfQ9SZuH4pVZw_00uekq2f' }}
+      DATABASE_URL: ${{ secrets.DATABASE_URL || '' }}
       CI: "true"
     steps:
       - name: Checkout
