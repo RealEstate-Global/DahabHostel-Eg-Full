@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 import { cookies } from "@/app/_lib/storage";
 import { Cookie, X } from "lucide-react";
 
 export function CookieConsent() {
   const [show, setShow] = useState(false);
+  const t = useTranslations("common.cookieConsent");
 
   useEffect(() => {
     if (!cookies.get("cookie-consent")) setShow(true);
@@ -34,12 +36,12 @@ export function CookieConsent() {
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center">
               <div className="grid h-12 w-12 shrink-0 place-items-center rounded-2xl bg-brand-soft text-brand"><Cookie size={22} /></div>
               <div className="flex-1">
-                <h3 className="font-display font-semibold text-ink-heading">We value your privacy</h3>
-                <p className="mt-1 text-sm leading-relaxed text-ink-muted">We use cookies to make your stay smoother and to understand how visitors use our site. You can accept or decline — it&apos;s your call.</p>
+                <h3 className="font-display font-semibold text-ink-heading">{t("title")}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-ink-muted">{t("description")}</p>
               </div>
               <div className="flex shrink-0 gap-2">
-                <button onClick={() => choose("declined")} className="btn-outline !px-5 !py-2.5 text-xs">Decline</button>
-                <button onClick={() => choose("accepted")} className="btn-primary !px-5 !py-2.5 text-xs">Accept all</button>
+                <button onClick={() => choose("declined")} className="btn-outline !px-5 !py-2.5 text-xs">{t("decline")}</button>
+                <button onClick={() => choose("accepted")} className="btn-primary !px-5 !py-2.5 text-xs">{t("accept")}</button>
               </div>
             </div>
           </div>

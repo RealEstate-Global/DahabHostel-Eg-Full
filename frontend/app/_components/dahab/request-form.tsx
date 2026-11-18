@@ -50,7 +50,7 @@ export function RequestForm({ kind }: { kind: Kind }) {
     if (form.arrival_date) payload.arrival_date = form.arrival_date;
     if (form.arrival_time) payload.arrival_time = form.arrival_time;
     if (form.flight_no) payload.flight_no = form.flight_no;
-    const { error } = await supabase.from(config[kind].table).insert(payload);
+    const { error } = await (supabase.from(config[kind].table) as any).insert(payload);
     if (error) { console.error("supabase insert failed", error); setStatus("error"); }
     else { setStatus("done"); }
   }

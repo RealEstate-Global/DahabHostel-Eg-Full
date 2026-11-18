@@ -1,0 +1,33 @@
+{
+  "cookieConsent": {
+    "title": "Valoramos tu privacidad",
+    "description": "Utilizamos cookies para que tu estancia sea más fluida y para comprender cómo los visitantes usan nuestro sitio. Puedes aceptar o rechazar: la decisión es tuya.",
+    "accept": "Aceptar todo",
+    "decline": "Rechazar"
+  },
+  "error": {
+    "eyebrow": "Algo salió mal",
+    "title": "Encontramos un pequeño desvío",
+    "description": "No te preocupes, nuestro equipo sigue aquí. Inténtalo de nuevo o regresa a la comodidad del hostel.",
+    "retry": "Intentar de nuevo",
+    "goHome": "Ir al inicio",
+    "contact": "¿Aún necesitas ayuda? Contáctanos"
+  },
+  "notFound": {
+    "title": "Esta calle no está en nuestro mapa",
+    "description": "La página que buscas ha hecho el check-out. Volvamos al hostel o te guiaremos a un lugar interesante.",
+    "backHome": "Volver al inicio",
+    "contactUs": "Contáctanos"
+  },
+  "contactForm": {
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "requiredNote": "Indica campo obligatorio",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "¡Gracias! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.",
+    "error": "Lo sentimos, ocurrió un error. Por favor contáctanos directamente en"
+  }
+}

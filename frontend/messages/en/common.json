@@ -1,0 +1,33 @@
+{
+  "cookieConsent": {
+    "title": "We value your privacy",
+    "description": "We use cookies to make your stay smoother and to understand how visitors use our site. You can accept or decline — it's your call.",
+    "accept": "Accept all",
+    "decline": "Decline"
+  },
+  "error": {
+    "eyebrow": "Something went sideways",
+    "title": "We hit a little detour",
+    "description": "Don't worry — our team is still here. Try again or head back to the comfort of the hostel.",
+    "retry": "Try again",
+    "goHome": "Go home",
+    "contact": "Still stuck? Contact us"
+  },
+  "notFound": {
+    "title": "This street isn't on our map",
+    "description": "The page you're looking for has checked out. Let's get you back to the hostel — or point you somewhere interesting.",
+    "backHome": "Back to home",
+    "contactUs": "Contact us"
+  },
+  "contactForm": {
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "requiredNote": "Indicates required field",
+    "send": "Send Message",
+    "sending": "Sending...",
+    "success": "Thank you! Your message has been sent. We will get back to you soon.",
+    "error": "Sorry, something went wrong. Please email us directly at"
+  }
+}

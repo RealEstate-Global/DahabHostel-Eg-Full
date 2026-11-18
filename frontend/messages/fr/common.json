@@ -1,0 +1,33 @@
+{
+  "cookieConsent": {
+    "title": "Nous respectons votre vie privée",
+    "description": "Nous utilisons des cookies pour faciliter votre navigation et comprendre comment notre site est utilisé. Vous pouvez accepter ou refuser — c'est votre choix.",
+    "accept": "Tout accepter",
+    "decline": "Refuser"
+  },
+  "error": {
+    "eyebrow": "Quelque chose s'est mal passé",
+    "title": "Nous avons rencontré un imprévu",
+    "description": "Ne vous inquiétez pas — notre équipe est là. Réessayez ou retournez au confort de l'auberge.",
+    "retry": "Réessayer",
+    "goHome": "Retour à l'accueil",
+    "contact": "Encore bloqué ? Contactez-nous"
+  },
+  "notFound": {
+    "title": "Cette rue n'est pas sur notre carte",
+    "description": "La page que vous cherchez a quitté les lieux. Revenons à l'auberge ou découvrez nos autres pages.",
+    "backHome": "Retour à l'accueil",
+    "contactUs": "Contactez-nous"
+  },
+  "contactForm": {
+    "name": "Nom",
+    "email": "E-mail",
+    "subject": "Objet",
+    "message": "Message",
+    "requiredNote": "Indique un champ obligatoire",
+    "send": "Envoyer le message",
+    "sending": "Envoi en cours...",
+    "success": "Merci ! Votre message a bien été envoyé. Nous vous répondrons très bientôt.",
+    "error": "Désolé, une erreur est survenue. Veuillez nous contacter directement à"
+  }
+}

@@ -1,107 +1,276 @@
 {
   "cookies": {
-    "title": "Politique en matière de cookies",
+    "title": "Politique de cookies",
     "lastUpdated": "Dernière mise à jour :",
     "sections": {
       "what": {
-        "title": "1. Qu'est-ce que les cookies ?",
-        "content": "Les cookies sont de petits fichiers texte placés sur votre ordinateur ou votre appareil mobile lorsque vous visitez un site Web. Ils sont largement utilisés pour rendre les sites Web plus efficaces et fournir des informations aux propriétaires de sites Web."
+        "title": "1. Qu'est-ce qu'un cookie ?",
+        "content": "Les cookies sont de petits fichiers texte déposés sur votre ordinateur ou votre appareil mobile lors de la consultation d'un site web. Ils permettent d'assurer le bon fonctionnement du site et de fournir des informations statistiques et d'optimisation aux gestionnaires."
       },
       "how": {
         "title": "2. Comment nous utilisons les cookies",
         "intro": "Dahab Hostel utilise des cookies pour :",
         "items": [
           "Mémoriser vos préférences et paramètres",
-          "Vous maintenir connecté à votre compte",
-          "Comprendre comment vous utilisez notre site Web",
-          "Améliorer nos services et l'expérience utilisateur",
-          "Fournir du contenu et des recommandations personnalisés",
-          "Analyser le trafic et les performances du site Web"
+          "Maintenir votre session ouverte de façon sécurisée",
+          "Comprendre la façon dont vous naviguez sur notre site",
+          "Améliorer en continu nos services et votre expérience utilisateur",
+          "Proposer des recommandations personnalisées",
+          "Analyser le trafic et les performances techniques"
         ]
       },
       "types": {
-        "title": "3. Types de cookies que nous utilisons",
+        "title": "3. Types de cookies utilisés",
         "essential": {
-          "title": "Cookies essentiels",
-          "description": "Ces cookies sont nécessaires au fonctionnement correct du site Web. Ils activent les fonctions de base telles que la navigation entre les pages, l'accès aux zones sécurisées et les processus de réservation.",
-          "duration": "Session ou jusqu'à 1 an"
+          "title": "Cookies indispensables",
+          "description": "Ces cookies sont strictement nécessaires au fonctionnement du site web. Ils permettent la navigation entre les pages, l'accès sécurisé et le processus de réservation.",
+          "duration": "Pendant la session ou jusqu'à 1 an"
         },
         "performance": {
           "title": "Cookies de performance",
-          "description": "Ces cookies collectent des informations sur la façon dont les visiteurs utilisent notre site Web, tels que les pages les plus fréquemment consultées. Cela nous aide à améliorer les performances de notre site Web.",
+          "description": "Ils recueillent des informations anonymes sur l'utilisation du site, comme les pages les plus visitées, pour nous aider à améliorer la rapidité et la convivialité.",
           "duration": "Jusqu'à 2 ans"
         },
         "functionality": {
           "title": "Cookies de fonctionnalité",
-          "description": "Ces cookies permettent au site Web de mémoriser les choix que vous faites (tels que la préférence de langue, la devise ou la région) et de fournir des fonctionnalités améliorées et personnalisées.",
+          "description": "Ces cookies mémorisent vos préférences (langue, devise, localisation) pour vous offrir un service fluide et personnalisé.",
           "duration": "Jusqu'à 1 an"
         },
         "targeting": {
-          "title": "Cookies de ciblage/publicité",
-          "description": "Ces cookies sont utilisés pour vous diffuser des publicités plus pertinentes et adaptées à vos intérêts. Ils aident également à mesurer l'efficacité des campagnes publicitaires.",
+          "title": "Cookies publicitaires et de ciblage",
+          "description": "Ils permettent d'afficher des contenus publicitaires plus pertinents pour vous et de mesurer l'efficacité de nos campagnes.",
           "duration": "Jusqu'à 2 ans"
         }
       },
       "third_party": {
-        "title": "4. Cookies de tiers",
-        "intro": "Nous pouvons utiliser des services tiers qui définissent également des cookies sur votre appareil. Ceux-ci comprennent :",
+        "title": "4. Cookies de services tiers",
+        "intro": "Nous faisons appel à des prestataires de confiance pouvant déposer des cookies sur votre appareil :",
         "items": [
-          "Google Analytics : pour analyser le trafic et le comportement des utilisateurs du site Web",
-          "Plates-formes de médias sociaux : pour activer les fonctionnalités de partage social",
-          "Processeurs de paiement : pour faciliter les transactions sécurisées",
-          "Réseaux publicitaires : pour afficher des publicités pertinentes"
+          "Google Analytics : pour analyser la fréquentation et le comportement des visiteurs",
+          "Réseaux sociaux : pour faciliter le partage de contenus",
+          "Passerelles de paiement sécurisées : pour garantir la sécurité des transactions",
+          "Réseaux publicitaires : pour proposer des offres adaptées"
         ]
       },
       "managing": {
-        "title": "5. Gestion des cookies",
-        "intro": "Vous avez le droit de décider si vous acceptez ou refusez les cookies. Vous pouvez exercer vos préférences en matière de cookies en :",
+        "title": "5. Gestion de vos préférences",
+        "intro": "Vous avez le droit d'accepter ou de refuser les cookies. Vous pouvez définir vos préférences par :",
         "items": [
-          "Utilisant notre banneau de consentement aux cookies lors de votre première visite sur notre site Web",
-          "Ajustant les paramètres de votre navigateur pour refuser les cookies",
-          "Supprimant les cookies qui ont déjà été définis"
+          "Le bandeau de consentement affiché lors de votre première visite",
+          "Les paramètres de votre navigateur pour bloquer les cookies",
+          "La suppression manuelle des cookies déjà enregistrés"
         ],
-        "note": "Veuillez noter que si vous choisissez de bloquer ou de supprimer des cookies, certaines fonctionnalités de notre site Web peuvent ne pas fonctionner correctement."
+        "note": "Veuillez noter que le blocage de certains cookies peut altérer le bon fonctionnement de notre site."
       },
       "browser": {
-        "title": "6. Instructions spécifiques au navigateur",
-        "intro": "Pour gérer les cookies dans votre navigateur :",
+        "title": "6. Configuration selon votre navigateur",
+        "intro": "Pour gérer vos cookies directement dans votre navigateur :",
         "items": [
-          "Chrome : Paramètres → Confidentialité et sécurité → Cookies et données de site",
-          "Firefox : Options → Confidentialité et sécurité → Cookies et données de site",
-          "Safari : Préférences → Confidentialité → Gérer les données du site Web",
-          "Edge : Paramètres → Cookies et autorisations du site → Cookies et données du site"
+          "Chrome : Paramètres → Confidentialité et sécurité → Cookies et autres données",
+          "Firefox : Paramètres → Vie privée et sécurité → Cookies et données de sites",
+          "Safari : Préférences → Confidentialité → Gérer les données du site web",
+          "Edge : Paramètres → Cookies et autorisations de site → Cookies et données du site"
         ]
       },
       "storage": {
-        "title": "7. Stockage local et stockage de session",
-        "intro": "En plus des cookies, nous utilisons les technologies de stockage du navigateur (localStorage et sessionStorage) pour :",
+        "title": "7. Stockage local et de session",
+        "intro": "En complément des cookies, nous utilisons le stockage web local (localStorage et sessionStorage) pour :",
         "items": [
-          "Stocker les préférences et les paramètres de l'utilisateur",
-          "Mettre en cache les données pour améliorer les performances",
-          "Maintenir les informations de session",
-          "Vous rappeler vos destinations préférées"
+          "Enregistrer vos préférences d'affichage",
+          "Mettre en cache des données pour accélérer le chargement",
+          "Conserver les informations de session courante",
+          "Mémoriser vos excursions préférées"
         ]
       },
       "dnt": {
-        "title": "8. Signaux de non-suivi",
-        "content": "Certains navigateurs incluent une fonctionnalité \"Ne pas me suivre\" (DNT) qui signale aux sites Web que vous ne souhaitez pas que votre activité en ligne soit suivie. Nous ne répondons actuellement pas aux signaux DNT, mais nous respectons vos choix en matière de confidentialité et vous proposons des options de gestion des cookies."
+        "title": "8. Signal \"Ne pas me suivre\" (Do Not Track)",
+        "content": "Certains navigateurs intègrent l'option \"Do Not Track\" (DNT). Notre site ne répond pas de manière automatisée à ces signaux, mais nous respectons vos choix de confidentialité via notre gestionnaire de cookies."
       },
       "updates": {
-        "title": "9. Mises à jour de cette politique",
-        "content": "Nous pouvons mettre à jour cette politique en matière de cookies de temps à autre pour refléter les changements technologiques, législatifs ou nos pratiques commerciales. Nous vous informerons de tout changement important en publiant la politique mise à jour sur notre site Web."
+        "title": "9. Évolution de la politique",
+        "content": "Nous pouvons modifier la présente politique de cookies pour tenir compte des évolutions légales ou techniques. La version actualisée sera publiée sur cette page avec sa date de mise à jour."
       },
       "contact": {
-        "title": "10. Nous contacter",
-        "intro": "Si vous avez des questions sur notre utilisation des cookies, veuillez nous contacter :"
+        "title": "10. Contact",
+        "intro": "Pour toute question relative aux cookies, n'hésitez pas à nous contacter :"
       }
     }
   },
   "privacy": {
     "title": "Politique de confidentialité",
-    "lastUpdated": "Dernière mise à jour :"
+    "lastUpdated": "Dernière mise à jour :",
+    "sections": {
+      "intro": {
+        "title": "1. Introduction",
+        "content": "Bienvenue chez Dahab Hostel. Nous accordons une grande importance à la protection de vos données personnelles et à votre vie privée. Cette politique détaille nos pratiques concernant la collecte, l'utilisation et la sécurité de vos informations."
+      },
+      "collect": {
+        "title": "2. Informations collectées",
+        "intro": "Nous collectons les données transmises directement par vos soins, notamment :",
+        "items": [
+          "Identité et coordonnées (nom, prénom, e-mail, téléphone)",
+          "Détails de réservation et dates de séjour",
+          "Informations de paiement (traitées de façon sécurisée par des prestataires certifiés)",
+          "Préférences de communication",
+          "Avis, retours et correspondances"
+        ]
+      },
+      "use": {
+        "title": "3. Utilisation des données",
+        "intro": "Vos données sont traitées pour les finalités suivantes :",
+        "items": [
+          "Gérer et confirmer vos réservations d'hébergement et d'excursions",
+          "Vous informer au sujet de votre réservation et de votre séjour",
+          "Vous adresser des communications informatives (avec votre accord exprès)",
+          "Améliorer nos prestations hôtelières et la navigation sur le site",
+          "Respecter nos obligations réglementaires et légales",
+          "Prévenir la fraude et assurer la sécurité de l'établissement"
+        ]
+      },
+      "cookies": {
+        "title": "4. Technologies de traçage",
+        "content": "Nous utilisons des cookies et technologies similaires afin de mesurer l'activité sur notre site. Vous pouvez à tout moment configurer votre navigateur pour les refuser."
+      },
+      "sharing": {
+        "title": "5. Partage des informations",
+        "intro": "Vos informations ne sont transmises qu'aux partenaires nécessaires à votre séjour :",
+        "items": [
+          "Prestataires techniques indispensables au fonctionnement du site",
+          "Partenaires d'excursions (chauffeurs, guides touristiques certifiés)",
+          "Organismes de paiement bancaire sécurisé",
+          "Autorités administratives ou judiciaires si la loi l'exige"
+        ],
+        "note": "Nous ne vendons en aucun cas vos données personnelles à des tiers."
+      },
+      "security": {
+        "title": "6. Sécurité des données",
+        "content": "Nous appliquons des mesures de sécurité techniques et organisationnelles rigoureuses pour protéger vos données. Aucun système n'étant totalement infaillible, nous nous efforçons d'appliquer les meilleurs standards du secteur."
+      },
+      "rights": {
+        "title": "7. Vos droits",
+        "intro": "Conformément aux lois applicables sur la protection des données, vous disposez des droits suivants :",
+        "items": [
+          "Accès à vos données personnelles",
+          "Rectification des informations inexactes",
+          "Suppression de vos données personnelles",
+          "Opposition au traitement de vos données",
+          "Limitation du traitement",
+          "Portabilité des données",
+          "Retrait de votre consentement à tout moment"
+        ]
+      },
+      "children": {
+        "title": "8. Protection des mineurs",
+        "content": "Nos services ne sont pas destinés aux enfants de moins de 13 ans. Si vous constatez qu'un mineur nous a transmis des informations sans accord parental, contactez-nous pour suppression immédiate."
+      },
+      "international": {
+        "title": "9. Transferts de données",
+        "content": "Certaines données peuvent être hébergées sur des serveurs situés en dehors de votre pays, dans le respect permanent des exigences de confidentialité et de sécurité requises."
+      },
+      "updates": {
+        "title": "10. Modifications",
+        "content": "Nous nous réservons le droit de mettre à jour cette politique. Toute révision sera consultable sur cette page avec la date de dernière mise à jour."
+      },
+      "contact": {
+        "title": "11. Nous contacter",
+        "intro": "Pour toute question relative à vos données personnelles, veuillez nous écrire à :"
+      }
+    }
   },
   "terms": {
-    "title": "Conditions de service",
-    "lastUpdated": "Dernière mise à jour :"
+    "title": "Conditions générales de service",
+    "lastUpdated": "Dernière mise à jour :",
+    "sections": {
+      "agreement": {
+        "title": "1. Acceptation des conditions",
+        "content": "En accédant aux services de Dahab Hostel ou en effectuant une réservation, vous acceptez d'être lié par les présentes conditions générales ainsi que par les lois applicables."
+      },
+      "license": {
+        "title": "2. Licence d'utilisation du site",
+        "intro": "L'accès aux contenus de notre site web est autorisé pour un usage strictement privé et non commercial. Il s'agit d'une autorisation d'accès et non d'une cession de droits. Il est interdit de :",
+        "items": [
+          "Copier ou altérer les éléments du site",
+          "Exploiter les contenus à des fins commerciales",
+          "Tenter de décompiler ou d'extraire le code source",
+          "Supprimer les mentions de propriété intellectuelle",
+          "Transférer les contenus vers d'autres plateformes"
+        ]
+      },
+      "booking": {
+        "title": "3. Modalités de réservation",
+        "intro": "Lors de toute réservation auprès de Dahab Hostel :",
+        "items": [
+          "Vous devez fournir des informations authentiques et à jour",
+          "Vous êtes redevable de l'ensemble des frais liés à votre réservation",
+          "Toute réservation demeure soumise à disponibilité et confirmation",
+          "Les tarifs peuvent être révisés avant confirmation définitive",
+          "Vous vous engagez à respecter le règlement intérieur de l'auberge"
+        ]
+      },
+      "payment": {
+        "title": "4. Conditions de règlement",
+        "content": "Le paiement est exigé selon les modalités indiquées lors de la réservation. Nous acceptons les cartes bancaires, les règlements en ligne et les espèces sur place selon les services. Les prix sont affichés en livres égyptiennes (EGP) ou en dollars (USD)."
+      },
+      "cancellation": {
+        "title": "5. Annulation et remboursements",
+        "intro": "Les conditions d'annulation dépendent de la formule souscrite :",
+        "items": [
+          "Annulation sans frais jusqu'à 48 heures avant l'arrivée pour la majorité des séjours",
+          "Des frais s'appliquent en cas d'annulation à moins de 48 heures",
+          "Toute non-présentation (no-show) entraîne la facturation totale sans remboursement",
+          "Les remboursements sont traités sous 7 à 14 jours ouvrés",
+          "Certaines excursions et réservations de groupe ont des conditions particulières"
+        ]
+      },
+      "travel_docs": {
+        "title": "6. Formalités administratives et voyage",
+        "intro": "Il incombe exclusivement au voyageur de :",
+        "items": [
+          "Disposer d'un passeport valide et des visas exigés pour l'Égypte",
+          "Se conformer aux obligations sanitaires en vigueur",
+          "Respecter la législation égyptienne et les réglementations douanières",
+          "Souscrire une assurance voyage personnelle adéquate"
+        ]
+      },
+      "liability": {
+        "title": "7. Limite de responsabilité",
+        "intro": "Dahab Hostel intervient en qualité d'organisateur et ne saurait être tenu responsable de :",
+        "items": [
+          "Fautes ou négligences imputables à des prestataires indépendants",
+          "Retards ou annulations de vols, trains ou bus",
+          "Perte ou vol d'effets personnels non déposés dans les coffres-forts",
+          "Cas de force majeure (aléas climatiques, perturbations imprévues)",
+          "Dommages indirects découlant de l'usage des prestations"
+        ]
+      },
+      "conduct": {
+        "title": "8. Comportement des usagers",
+        "intro": "Chaque voyageur s'engage à :",
+        "items": [
+          "Ne pas utiliser nos services à des fins illégales",
+          "Respecter l'ordre public et la tranquillité de l'établissement",
+          "Respecter les droits de propriété intellectuelle",
+          "Ne pas diffuser de logiciels malveillants",
+          "Adopter un comportement respectueux envers le personnel et les autres résidents",
+          "Ne pas usurper l'identité d'un tiers"
+        ]
+      },
+      "ip": {
+        "title": "9. Propriété intellectuelle",
+        "content": "L'ensemble des textes, photographies, éléments graphiques et fonctionnalités du site demeurent la propriété exclusive de Dahab Hostel et sont protégés par le droit d'auteur."
+      },
+      "dispute": {
+        "title": "10. Droit applicable et litiges",
+        "content": "Les présentes conditions sont régies par le droit égyptien. Tout différend relatif à leur exécution fera l'objet d'une tentative de règlement amiable avant toute action devant les juridictions compétentes du Caire, Égypte."
+      },
+      "changes": {
+        "title": "11. Modification des conditions",
+        "content": "Nous nous réservons le droit de modifier les présentes conditions à tout moment. Les conditions révisées sont applicables dès leur parution en ligne."
+      },
+      "contact": {
+        "title": "12. Contact",
+        "intro": "Pour toute question relative aux conditions de service, vous pouvez nous joindre à :"
+      }
+    }
   }
 }

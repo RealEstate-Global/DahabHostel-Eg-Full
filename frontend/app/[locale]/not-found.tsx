@@ -1,17 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { MapPin, Compass, ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   const locale = useLocale();
+  const t = useTranslations("common.notFound");
+  const tNav = useTranslations("nav");
   const href = (p: string) => `/${locale}${p}`;
   const links = [
-    { title: "Our Tours", href: "/our-tours", icon: Compass },
-    { title: "Location", href: "/location", icon: MapPin },
-    { title: "Photos", href: "/photos", icon: MapPin },
+    { title: tNav("ourTours"), href: "/our-tours", icon: Compass },
+    { title: tNav("location"), href: "/location", icon: MapPin },
+    { title: tNav("photos"), href: "/photos", icon: MapPin },
   ];
 
   return (
@@ -21,11 +23,11 @@ export default function NotFound() {
           <MapPin size={34} />
         </div>
         <p className="mt-8 font-display text-7xl font-bold tracking-tight text-brand/25">404</p>
-        <h1 className="heading-display mt-2">This street isn&apos;t on our map</h1>
-        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ink-muted">The page you&apos;re looking for has checked out. Let&apos;s get you back to the hostel — or point you somewhere interesting.</p>
+        <h1 className="heading-display mt-2">{t("title")}</h1>
+        <p className="mx-auto mt-4 max-w-md text-sm leading-relaxed text-ink-muted">{t("description")}</p>
         <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <Link href={href("/")} className="btn-primary"><ArrowLeft size={16} /> Back to home</Link>
-          <Link href={href("/contact-us")} className="btn-outline">Contact us</Link>
+          <Link href={href("/")} className="btn-primary"><ArrowLeft size={16} /> {t("backHome")}</Link>
+          <Link href={href("/contact-us")} className="btn-outline">{t("contactUs")}</Link>
         </div>
         <div className="mt-10 flex flex-wrap justify-center gap-3">
           {links.map(({ title, href: to, icon: Icon }) => (

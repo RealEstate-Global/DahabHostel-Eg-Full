@@ -1,18 +1,18 @@
 {
-  "description": "Hostel primé au cœur du centre-ville du Caire — une petite oasis dans la ville depuis 1998.",
+  "description": "Auberge de jeunesse primée sur les toits au cœur du centre-ville du Caire — une petite oasis en ville depuis 1998.",
   "columns": {
-    "ourInfo": "Nos infos",
+    "ourInfo": "Nos informations",
     "ourServices": "Nos services",
     "followUs": "Suivez-nous"
   },
   "links": {
-    "entranceFees": "Frais d'entrée",
-    "airportPickup": "Transfert aéroport",
+    "entranceFees": "Tarifs d'entrée",
+    "airportPickup": "Service de navette aéroport",
     "roomRates": "Tarifs des chambres",
-    "requestTourPrices": "Demander les prix des circuits",
+    "requestTourPrices": "Demander les tarifs des excursions",
     "onlineBooking": "Réservation en ligne",
     "newsBlog": "Notre blog",
-    "writeReview": "Écrire un avis"
+    "writeReview": "Laisser un avis"
   },
   "getInTouch": "Contactez-nous",
   "bookYourRoom": "Réservez votre chambre",
@@ -20,5 +20,5 @@
   "rights": "Tous droits réservés.",
   "privacy": "Confidentialité",
   "terms": "Conditions",
-  "cookies": "Paramètres des cookies"
+  "cookies": "Gestion des cookies"
 }

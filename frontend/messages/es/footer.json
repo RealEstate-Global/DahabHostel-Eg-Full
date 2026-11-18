@@ -1,5 +1,5 @@
 {
-  "description": "Hostel galardonado en el centro de El Cairo — un pequeño oasis en la ciudad desde 1998.",
+  "description": "Hostel galardonado en la azotea en el corazón del centro de El Cairo — un pequeño oasis en la ciudad desde 1998.",
   "columns": {
     "ourInfo": "Nuestra información",
     "ourServices": "Nuestros servicios",
@@ -8,13 +8,13 @@
   "links": {
     "entranceFees": "Precios de entrada",
     "airportPickup": "Servicio de traslado al aeropuerto",
-    "roomRates": "Precios de habitaciones",
-    "requestTourPrices": "Solicitar precios de tours",
-    "onlineBooking": "Reserva en línea",
+    "roomRates": "Tarifas de habitaciones",
+    "requestTourPrices": "Solicitar tarifas de tours",
+    "onlineBooking": "Reserva online",
     "newsBlog": "Nuestro blog",
     "writeReview": "Escribir una reseña"
   },
-  "getInTouch": "Contacto",
+  "getInTouch": "Ponte en contacto",
   "bookYourRoom": "Reserva tu habitación",
   "talaatHarb": "Plaza Talaat Harb",
   "rights": "Todos los derechos reservados.",
