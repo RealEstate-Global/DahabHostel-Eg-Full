@@ -2,10 +2,17 @@
 
 import { useState } from "react";
 import { createClient } from "@/utils/supabase/client";
-import { site } from "@/app/_data";
+import { site, rooms } from "@/app/_data";
+import { SelectField } from "./select-field";
 
 const input = "input-modern";
 const label = "label-modern";
+
+const roomOptions = rooms.map((room) => ({ value: room.name, label: room.name }));
+const airportOptions = [
+  { value: "(CAI) Cairo International Airport", label: "(CAI) Cairo International Airport" },
+  { value: "(SPX) Sphinx International Airport", label: "(SPX) Sphinx International Airport" },
+];
 
 type Kind = "tour" | "booking" | "pickup";
 
@@ -23,6 +30,10 @@ export function RequestForm({ kind }: { kind: Kind }) {
 
   async function submit(e: React.FormEvent) {
     e.preventDefault();
+    if ((kind === "booking" && !form.room) || (kind === "pickup" && !form.airport)) {
+      setStatus("error");
+      return;
+    }
     setStatus("sending");
     const supabase = createClient();
     const payload: Record<string, unknown> = {
@@ -51,7 +62,7 @@ export function RequestForm({ kind }: { kind: Kind }) {
   return (
     <form onSubmit={submit} className="max-w-[720px] space-y-4">
       <p className="text-[13px] text-ink-subtle"><span className="text-brand">*</span> Indicates required field</p>
-      {status === "error" && <p className="text-red-600 text-[13px]">Sorry, something went wrong. Please email us at {site.email}.</p>}
+      {status === "error" && <p className="text-red-600 text-[13px]">Please complete the required fields. If the problem continues, email us at {site.email}.</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className={label}>First Name *</label><input required className={input} value={form.first || ""} onChange={set("first")} /></div>
         <div><label className={label}>Last Name *</label><input required className={input} value={form.last || ""} onChange={set("last")} /></div>
@@ -60,13 +71,13 @@ export function RequestForm({ kind }: { kind: Kind }) {
       {kind === "pickup" ? (
         <>
           <div><label className={label}>Phone Number (WhatsApp preferred) *</label><input required className={input} value={form.phone || ""} onChange={set("phone")} /></div>
-          <div><label className={label}>Arrival Airport *</label><select required className={input} value={form.airport || ""} onChange={set("airport")}><option value="">Select Airport</option><option>(CAI) Cairo International Airport</option><option>(SPX) Sphinx International Airport</option></select></div>
+          <SelectField label="Arrival Airport" required placeholder="Select Airport" value={form.airport} onChange={(v) => setForm({ ...form, airport: v })} options={airportOptions} />
           <div className="grid grid-cols-2 gap-3"><div><label className={label}>Flight No. *</label><input required className={input} value={form.flight_no || ""} onChange={set("flight_no")} /></div><div><label className={label}>No. of Persons *</label><input required type="number" min="1" className={input} value={form.guests || ""} onChange={set("guests")} /></div></div>
           <div className="grid grid-cols-2 gap-3"><div><label className={label}>Arrival Date (DD/MM/YYYY) *</label><input required className={input} value={form.arrival_date || ""} onChange={set("arrival_date")} /></div><div><label className={label}>Arrival Time (HH:MM) *</label><input required className={input} value={form.arrival_time || ""} onChange={set("arrival_time")} /></div></div>
         </>
       ) : (
         <>
-          {kind === "booking" && <div><label className={label}>Room *</label><select required className={input} value={form.room || ""} onChange={set("room")}><option value="">Select Room</option><option>Bed in a Mixed 6 beds Dorm room</option><option>Deluxe Single; Ensuite</option><option>Deluxe Double; Ensuite</option><option>Deluxe 3-Bed; Ensuite</option><option>Female Dorm Room</option></select></div>}
+          {kind === "booking" && <SelectField label="Room" required placeholder="Select Room" value={form.room} onChange={(v) => setForm({ ...form, room: v })} options={roomOptions} />}
           <div className="grid grid-cols-2 gap-3"><div><label className={label}>No. of Guests</label><input type="number" min="1" className={input} value={form.guests || ""} onChange={set("guests")} /></div><div><label className={label}>{kind === "tour" ? "Period of Stay" : "Preferred Date"}</label><input className={input} value={form.period || ""} onChange={set("period")} placeholder="e.g. 10 days" /></div></div>
           {kind === "tour" && <div><label className={label}>Destination(s) of Interest</label><input className={input} value={form.destinations || ""} onChange={set("destinations")} /></div>}
           <div><label className={label}>Special Requests</label><textarea rows={4} className={input} value={form.special_requests || ""} onChange={set("special_requests")} /></div>
