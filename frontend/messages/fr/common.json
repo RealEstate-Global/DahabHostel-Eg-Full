@@ -29,5 +29,33 @@
     "sending": "Envoi en cours...",
     "success": "Merci ! Votre message a bien été envoyé. Nous vous répondrons très bientôt.",
     "error": "Désolé, une erreur est survenue. Veuillez nous contacter directement à"
+  },
+  "requestForm": {
+    "firstName": "Prénom",
+    "lastName": "Nom",
+    "email": "E-mail",
+    "phone": "Téléphone (WhatsApp de préférence)",
+    "arrivalAirport": "Aéroport d'arrivée",
+    "selectAirport": "Sélectionner un aéroport",
+    "flightNo": "N° de vol",
+    "persons": "Nombre de personnes",
+    "arrivalDate": "Date d'arrivée (JJ/MM/AAAA)",
+    "arrivalTime": "Heure d'arrivée (HH:MM)",
+    "room": "Chambre",
+    "selectRoom": "Sélectionner une chambre",
+    "guests": "Nombre d'hôtes",
+    "periodOfStay": "Durée du séjour",
+    "preferredDate": "Date souhaitée",
+    "destinations": "Destination(s) souhaitée(s)",
+    "specialRequests": "Demandes particulières",
+    "requiredNote": "Indique un champ obligatoire",
+    "errorRequired": "Veuillez renseigner les champs obligatoires. Si le problème persiste, écrivez-nous à",
+    "sending": "Envoi en cours...",
+    "tourButton": "Envoyer la demande de circuit",
+    "tourSuccess": "Merci ! Votre demande de circuit a bien été envoyée.",
+    "bookingButton": "Envoyer la demande de réservation",
+    "bookingSuccess": "Merci ! Votre demande de réservation a bien été envoyée.",
+    "pickupButton": "Transmettre les détails du vol",
+    "pickupSuccess": "Parfait ! Les détails de votre vol nous ont bien été transmis."
   }
 }

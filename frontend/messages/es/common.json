@@ -29,5 +29,33 @@
     "sending": "Enviando...",
     "success": "¡Gracias! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.",
     "error": "Lo sentimos, ocurrió un error. Por favor contáctanos directamente en"
+  },
+  "requestForm": {
+    "firstName": "Nombre",
+    "lastName": "Apellidos",
+    "email": "Correo electrónico",
+    "phone": "Teléfono (WhatsApp preferido)",
+    "arrivalAirport": "Aeropuerto de llegada",
+    "selectAirport": "Seleccionar aeropuerto",
+    "flightNo": "Nº de vuelo",
+    "persons": "Nº de personas",
+    "arrivalDate": "Fecha de llegada (DD/MM/AAAA)",
+    "arrivalTime": "Hora de llegada (HH:MM)",
+    "room": "Habitación",
+    "selectRoom": "Seleccionar habitación",
+    "guests": "Nº de huéspedes",
+    "periodOfStay": "Período de estancia",
+    "preferredDate": "Fecha preferida",
+    "destinations": "Destino(s) de interés",
+    "specialRequests": "Peticiones especiales",
+    "requiredNote": "Indica campo obligatorio",
+    "errorRequired": "Por favor completa los campos obligatorios. Si el problema persiste, escríbenos a",
+    "sending": "Enviando...",
+    "tourButton": "Enviar solicitud de tour",
+    "tourSuccess": "¡Gracias! Tu solicitud de tour ha sido enviada.",
+    "bookingButton": "Enviar solicitud de reserva",
+    "bookingSuccess": "¡Gracias! Tu solicitud de reserva ha sido enviada.",
+    "pickupButton": "Enviar datos de traslado",
+    "pickupSuccess": "¡Perfecto! Los datos de tu vuelo han sido enviados."
   }
 }

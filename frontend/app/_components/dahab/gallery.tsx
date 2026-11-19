@@ -17,7 +17,7 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
     <>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
         {photos.map((p, i) => (
-          <button key={i} onClick={() => setActive(i)} className="group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl border border-line bg-surface shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
+          <button key={i} onClick={() => setActive(i)} className="group relative block aspect-[4/3] w-full overflow-hidden rounded-2xl bg-surface shadow-soft ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
             <Image src={p.src} alt={p.caption} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
             <span className="absolute inset-0 flex items-center justify-center bg-gradient-to-t from-black/75 via-black/10 to-transparent p-3 text-center text-xs font-medium text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">{p.caption}</span>
           </button>

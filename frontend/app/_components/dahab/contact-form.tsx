@@ -35,7 +35,7 @@ export function ContactForm() {
   }
 
   if (status === "done") {
-    return <p className="border border-brand bg-brand-soft text-brand-dark px-5 py-4 rounded-2xl my-5">{t("success")}</p>;
+    return <p className="bg-gradient-to-r from-brand-soft to-brand-soft/50 text-brand-dark px-5 py-4 rounded-2xl my-5 shadow-soft ring-1 ring-brand/20">{t("success")}</p>;
   }
 
   return (

@@ -6,7 +6,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
 
   let messages = {} as Record<string, any>;
 
-  const messageFiles = ["nav", "footer", "legal", "common"];
+  const messageFiles = ["nav", "footer", "legal", "common", "pages"];
 
   for (const file of messageFiles) {
     try {

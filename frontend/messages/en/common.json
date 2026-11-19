@@ -29,5 +29,33 @@
     "sending": "Sending...",
     "success": "Thank you! Your message has been sent. We will get back to you soon.",
     "error": "Sorry, something went wrong. Please email us directly at"
+  },
+  "requestForm": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "phone": "Phone Number (WhatsApp preferred)",
+    "arrivalAirport": "Arrival Airport",
+    "selectAirport": "Select Airport",
+    "flightNo": "Flight No.",
+    "persons": "No. of Persons",
+    "arrivalDate": "Arrival Date (DD/MM/YYYY)",
+    "arrivalTime": "Arrival Time (HH:MM)",
+    "room": "Room",
+    "selectRoom": "Select Room",
+    "guests": "No. of Guests",
+    "periodOfStay": "Period of Stay",
+    "preferredDate": "Preferred Date",
+    "destinations": "Destination(s) of Interest",
+    "specialRequests": "Special Requests",
+    "requiredNote": "Indicates required field",
+    "errorRequired": "Please complete the required fields. If the problem continues, email us at",
+    "sending": "Sending...",
+    "tourButton": "Send Tour Request",
+    "tourSuccess": "Thank you! Your tour request has been sent.",
+    "bookingButton": "Send Booking Request",
+    "bookingSuccess": "Thank you! Your booking request has been sent.",
+    "pickupButton": "Submit Pickup Details",
+    "pickupSuccess": "Great! Your flight details have been sent to us."
   }
 }

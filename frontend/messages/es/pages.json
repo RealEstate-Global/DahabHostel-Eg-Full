@@ -1,0 +1,237 @@
+{
+  "home": {
+    "eyebrow": "Dahab Hostel · El Cairo",
+    "title": "Bienvenidos a Dahab Hostel en El Cairo",
+    "subtitle": "Tu oasis en el corazón de la ciudad...",
+    "highlights": {
+      "prime": "Ubicación",
+      "talaatHarb": "Plaza Talaat Harb",
+      "reception": "24/7",
+      "receptionLabel": "Recepción continua",
+      "award": "Premio",
+      "awardLabel": "Mejor Hostel de Egipto 2026",
+      "since": "Desde",
+      "sinceLabel": "1998 · Más de 800 mil huéspedes"
+    },
+    "awards": {
+      "eyebrow": "Reconocimiento mundial",
+      "title": "Premiado como Mejor Hostel de Egipto y Mejor Hostel Pequeño de África 2026",
+      "reserveBed": "Reserva tu cama"
+    },
+    "experience": {
+      "eyebrow": "Vive la experiencia Dahab Hostel",
+      "title": "Un campamento playero del Sinaí en el centro de El Cairo",
+      "p1": "El conjunto de cabañas de colores en la azotea y las zonas verdes recrean la sensación relajada de un campamento en la playa de Sinaí en pleno corazón urbano de El Cairo.",
+      "p2": "Nada más entrar, sentirás un ambiente acogedor y distendido. El jardín exterior es ideal para descansar y charlar con otros viajeros por la tarde con una brisa refrescante.",
+      "badge": "Tranquilidad, buenas vibras y grandes personas",
+      "quote": "Dahab Hostel es la mejor opción de alojamiento en El Cairo: excelente, económico y con una ubicación inmejorable.",
+      "guestFavorite": "El favorito de los viajeros en el centro de El Cairo",
+      "ourStory": "Nuestra historia",
+      "explorePhotos": "Explorar fotos"
+    },
+    "provide": {
+      "eyebrow": "Todo lo que necesitas",
+      "title": "Lo que ofrecemos",
+      "items": [
+        "Wi-Fi gratuito en todas las habitaciones y áreas comunes",
+        "Terraza y jardín en la azotea para relajarse",
+        "Recepción 24/7 con personal multilingüe",
+        "Desayuno gratuito con té y café todos los días",
+        "Servicio de recogida en el aeropuerto (CAI y SPX)",
+        "Tours económicos diarios por todo Egipto",
+        "Guardaequipaje y servicio de lavandería",
+        "Ubicación céntrica junto al metro y Museo Egipcio"
+      ]
+    },
+    "tours": {
+      "eyebrow": "Explora Egipto",
+      "title": "Excursiones y tours económicos en Egipto",
+      "allTrips": "Todos los viajes",
+      "desc": "Organizamos tours económicos por todo Egipto con la mejor calidad: Pirámides, Museo Egipcio, Desierto Blanco y cruceros por el Nilo. Precios fijos y grupos reducidos.",
+      "discoverMore": "Descubrir más",
+      "buildItinerary": "Diseña tu itinerario",
+      "requestPrice": "Solicitar precio del tour"
+    },
+    "gallery": {
+      "eyebrow": "Echa un vistazo",
+      "title": "Momentos en Dahab Hostel",
+      "viewAll": "Ver todas las fotos"
+    },
+    "cta": {
+      "eyebrow": "Tu oasis te espera",
+      "title": "Alójate en el corazón de El Cairo, duerme en nuestra azotea",
+      "desc": "Dormitorios y habitaciones privadas, cancelación flexible, recepción 24/7 y una comunidad de viajeros de todo el mundo.",
+      "checkAvailability": "Consultar disponibilidad",
+      "arrangePickup": "Reservar traslado al aeropuerto"
+    }
+  },
+  "about": {
+    "title": "Sobre Dahab Hostel — Empresa familiar en el centro de El Cairo desde 1998",
+    "subtitle": "Nacido en 1998 en una azotea del centro de El Cairo, ahora gestionado por la segunda generación. Casi 30 años y más de 800.000 huéspedes de todo el mundo.",
+    "ourStory": "Nuestra Historia",
+    "paragraphs": [
+      "Dahab Hostel fue fundado en 1998. Este negocio familiar está registrado en las principales guías y portales de viajes con excelentes valoraciones.",
+      "Todo comenzó cuando el Dr. Abdel Alim El Tamamy, cirujano general, visitó a un amigo en este edificio colonial. Los trasteros en la azotea inspiraron la gran idea.",
+      "Nos apasiona viajar y amamos Dahab. Ese amor por el Sinaí nos llevó a elegir el nombre Dahab. El albergue es una recreación de un campamento de playa relajado en el corazón de la capital.",
+      "A lo largo de los años hemos tenido la suerte de contar con un equipo maravilloso. Quienes regresan lo confirman: ¡Dahab Hostel tiene algo mágico!"
+    ],
+    "quote": "Tengo una idea loca: podríamos transformar este lugar en un albergue.",
+    "quoteBy": "Hoy dirigimos Dahab Hostel con la segunda generación.",
+    "contactUs": "Contáctanos"
+  },
+  "bookNow": {
+    "title": "Reservar habitación — Dahab Hostel El Cairo",
+    "subtitle": "Consulta disponibilidad y reserva al instante a través de nuestro sistema seguro en línea.",
+    "heading": "Reserva tu habitación ahora",
+    "roomRates": "Tarifas de habitaciones",
+    "checkAvailability": "Consultar disponibilidad y reservar",
+    "questions": "¿Preguntas sobre tu reserva?",
+    "contactLink": "Contáctanos",
+    "gladToHelp": "— ¡con mucho gusto te ayudamos!",
+    "airportPickup": "Traslado al aeropuerto",
+    "airportPickupDesc": "Reserva tu recogida en el aeropuerto y nuestro representante te esperará con un cartel con tu nombre y Dahab Hostel. Desde 550 EGP por coche.",
+    "orderPickup": "Solicitar traslado al aeropuerto",
+    "customRequest": "¿Prefieres una solicitud personalizada?",
+    "ratesNote": "Todas las tarifas incluyen desayuno, ropa de cama, toallas y Wi-Fi."
+  },
+  "contact": {
+    "title": "Contacto — Dahab Hostel El Cairo",
+    "subtitle": "¿Preguntas sobre tu reserva, tours o recogida en el aeropuerto? ¡Estamos para ayudarte!",
+    "heading": "Ponte en contacto",
+    "details": "Datos de contacto",
+    "address": "Dirección",
+    "phone": "Teléfono",
+    "email": "Correo electrónico",
+    "reception": "Recepción",
+    "receptionTime": "Abierta 24/7"
+  },
+  "location": {
+    "title": "Ubicación de Dahab Hostel — Centro de El Cairo",
+    "subtitle": "Ubicación céntrica en la calle Mahmoud Bassiouny, Plaza Talaat Harb, a minutos del Museo Egipcio y el metro.",
+    "intro": "Dahab Hostel está en pleno centro histórico y comercial de El Cairo, a solo 3 minutos a pie del Museo Egipcio.",
+    "howToGetThere": "¿Cómo llegar?",
+    "directions": [
+      "Desde la Plaza Abdel Menem Ryad, toma la calle Mahmoud Bassiouny",
+      "Desde la Plaza Talaat Harb, toma la calle Mahmoud Bassiouny (Groppi en la esquina)",
+      "Edificio Nº 26 – Azotea, 7º piso"
+    ],
+    "taxiTitle": "Taxi",
+    "taxi": "El transporte en El Cairo es económico y seguro. Los taxis blancos tienen taxímetro.",
+    "metroTitle": "Metro",
+    "metro": "El metro es rápido y muy barato. Bájate en la estación Sadat (Plaza Tahrir) y camina 5 minutos.",
+    "pickupTitle": "Recogida en el aeropuerto",
+    "pickup": "Nuestro representante te esperará con un cartel con tu nombre tras el control de aduanas.",
+    "pickupPrice": "De 1 a 3 personas desde 550 EGP por coche.",
+    "orderPickup": "Reservar traslado al aeropuerto",
+    "nearbyTitle": "Lugares de interés cercanos",
+    "nearby": [
+      "Bazares de compras", "Mercado Khan El-Khalili", "Mezquita Al Azhar", "El Cairo histórico",
+      "Barrio Copto", "La Ciudadela", "Torre de El Cairo", "Ópera de El Cairo"
+    ],
+    "evenings": "Por las noches, la zona cuenta con una gran variedad de restaurantes y cafeterías animadas."
+  },
+  "tours": {
+    "title": "Nuestros Tours — Excursiones económicas en Egipto",
+    "subtitle": "Organizamos tours económicos por todo Egipto con la mejor calidad. Precios fijos y grupos reducidos.",
+    "curated": "Experiencias seleccionadas",
+    "history": "Historia y Cultura",
+    "adventure": "Aventura y Ocio",
+    "discoverMore": "Descubrir más →",
+    "tourismSince": "Dahab Hostel trabaja con éxito en el turismo de El Cairo desde 1998.",
+    "requestPrices": "Solicitar precios de tours"
+  },
+  "tourDetail": {
+    "details": "Detalles del Tour",
+    "itinerary": "Itinerario",
+    "inclusions": "INCLUYE:",
+    "exclusions": "NO INCLUYE:",
+    "tripNotes": "NOTAS DEL VIAJE:",
+    "requestPrice": "Solicitar precio del tour",
+    "requestPriceDesc": "Indícanos tus fechas y te responderemos con precio y disponibilidad de inmediato.",
+    "backToAll": "Volver a todos los tours"
+  },
+  "entranceFees": {
+    "title": "Tarifas de entrada a monumentos en Egipto",
+    "subtitle": "Planifica tus días y presupuesto con nuestra guía de precios oficiales de entradas a los principales sitios turísticos.",
+    "sightseeing": "Lugar de interés",
+    "feesExcluded": "Tarifas de entrada (no incluidas)",
+    "requestPrices": "Solicitar precios de tours"
+  },
+  "photos": {
+    "title": "Fotos de Dahab Hostel El Cairo",
+    "subtitle": "Descubre nuestras habitaciones, terraza en la azotea y vistas de El Cairo. Fotos reales del albergue.",
+    "heading": "Habitaciones y Áreas Comunes",
+    "videoHeading": "Ver reseña en vídeo",
+    "videoCaption": "Viajar a Egipto: ¿es seguro? Viajeros reales en Dahab Hostel comparten sus experiencias."
+  },
+  "services": {
+    "title": "Catálogo de Servicios — Dahab Hostel",
+    "subtitle": "Todo lo que necesitas para una estancia cómoda y económica en el centro de El Cairo.",
+    "heading": "Lo que ofrecemos",
+    "bookNow": "Reservar ahora",
+    "exploreTours": "Explorar tours",
+    "since": "Dahab Hostel lleva en el sector turístico de El Cairo desde 1998."
+  },
+  "review": {
+    "title": "Escribir una opinión — Dahab Hostel El Cairo",
+    "subtitle": "¿Cómo fue tu experiencia en Dahab Hostel?",
+    "heading": "¿Cómo fue tu experiencia?",
+    "p1": "Gracias por elegir Dahab Hostel para tu estancia en El Cairo. Te agradeceríamos mucho que nos dejaras tu reseña en TripAdvisor.",
+    "p2": "Nuestros huéspedes siempre agradecen leer opiniones previas y nos encanta saber qué te gustó y cómo podemos mejorar.",
+    "tripAdvisorLink": "Escribir una opinión sobre Dahab Hostel en TripAdvisor",
+    "hostelWorldHeading": "¿Has reservado a través de HostelWorld?",
+    "hostelWorldText": "Inicia sesión en tu cuenta de HostelWorld para dejar tu valoración.",
+    "thanks": "Gracias de nuevo, esperamos recibirte pronto en tu próxima visita a El Cairo.",
+    "google": "¿Prefieres Google? Deja tu opinión en Google"
+  },
+  "toursPrices": {
+    "title": "Solicitar precios de tours — Dahab Hostel",
+    "subtitle": "Precios fijos y grupos reducidos. Elige entre nuestras rutas o cuéntanos qué deseas ver.",
+    "chooseTours": "Elige entre nuestros tours",
+    "tailorTour": "¿Deseas un tour a medida?",
+    "tailorDesc": "Dinos tu período de estancia en Egipto y destinos de interés y diseñaremos un tour a tu medida.",
+    "requestPrice": "Solicitar presupuesto"
+  },
+  "itinerary": {
+    "title": "Generador de Itinerarios — Dahab Hostel",
+    "subtitle": "Indícanos cuántos días te quedas y te ayudaremos a planificar tu viaje por Egipto.",
+    "heading": "Elige tus días y diseña tu plan",
+    "viewDetails": "Ver detalles del tour",
+    "requestCustom": "Solicitar itinerario a medida"
+  },
+  "cityInfo": {
+    "title": "Consejos para viajar a El Cairo — Transporte, taxis, metro y dinero",
+    "subtitle": "Consejos prácticos sobre cómo moverte por El Cairo, dinero y seguridad desde un albergue que recibe huéspedes desde 1998.",
+    "sections": [
+      { "title": "Visados", "text": "Los visitantes extranjeros necesitan un pasaporte válido. La mayoría de los turistas pueden obtener un visado de entrada en los principales aeropuertos por 25 USD." },
+      { "title": "Pasaporte", "text": "Se solicitará tu pasaporte a la llegada para registrar los datos conforme al procedimiento estándar." },
+      { "title": "Comida y agua", "text": "Bebe únicamente agua embotellada, disponible en el albergue. Los primeros días come ligero y evita verduras o frutas sin pelar." },
+      { "title": "Asistencia médica", "text": "Hay asistencia médica disponible en todo Egipto. Consulta en recepción si necesitas localizar un médico o centro de salud." },
+      { "title": "Dinero", "text": "La moneda oficial es la Libra Egipcia (EGP). Hay multitud de cajeros automáticos en El Cairo que aceptan tarjetas internacionales." },
+      { "title": "Propinas", "text": "Las propinas (baksheesh) forman parte de la cultura egipcia. Lleva billetes pequeños para propinas." },
+      { "title": "Vendedores ambulantes", "text": "Sé educado pero firme; di 'la Shukran' (no, gracias) amablemente." },
+      { "title": "Taxis", "text": "Los taxis son económicos y seguros. Lleva cambio justo para pagar el importe exacto." },
+      { "title": "Vestimenta", "text": "En Egipto se viste de forma informal. Se recomienda ropa de algodón fresca, calzado cómodo, gorra y gafas de sol." }
+    ]
+  },
+  "pickup": {
+    "title": "Solicitud de traslado al aeropuerto — Dahab Hostel",
+    "subtitle": "Te estaremos esperando con un cartel con tu nombre tras el control de pasaportes.",
+    "prices": "Precios:",
+    "cairoAirport": "Aeropuerto de El Cairo 550 EGP por coche (1 a 3 personas)",
+    "sphinxAirport": "Aeropuerto de Sphinx 1000 EGP por coche (1 a 3 personas)",
+    "desc": "Reserva tu traslado y nuestro representante te esperará con un cartel con tu nombre y Dahab Hostel tras la aduana.",
+    "note": "Nota: Debes tener una reserva de habitación confirmada con nosotros antes de solicitar el traslado.",
+    "bookRoom": "Reserva tu habitación ahora"
+  },
+  "blog": {
+    "title": "Blog de Noticias — Dahab Hostel",
+    "subtitle": "Historias, consejos de viaje y novedades desde Dahab Hostel en El Cairo."
+  },
+  "prices": {
+    "title": "Tarifas de habitaciones — Dahab Hostel El Cairo",
+    "subtitle": "Los mejores precios para camas en dormitorios y habitaciones privadas en el centro de El Cairo.",
+    "heading": "Tarifas de habitaciones",
+    "bookNow": "Reservar ahora"
+  }
+}

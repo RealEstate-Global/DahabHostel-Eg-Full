@@ -1,32 +1,36 @@
+import { getTranslations } from "next-intl/server";
 import { Header, Footer, PageHero } from "@/app/_components/dahab";
 import { generateSEO } from "@/app/_lib/seo";
 import { site, images } from "@/app/_data";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  return generateSEO({ title: "Write a Review — Dahab Hostel Cairo", description: "Stayed with us? Leave a review on Google, Hostelworld, Booking.com or Tripadvisor.", locale });
+  const t = await getTranslations({ locale, namespace: "pages.review" });
+  return generateSEO({ title: t("title"), description: t("subtitle"), locale });
 }
 
 export default async function WriteAReview({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "pages.review" });
+
   return (
     <>
       <Header />
       <main className="bg-surface">
-        <PageHero title="Write a Review" subtitle="How was Dahab Hostel?" image={images.homeBanner} />
+        <PageHero title={t("title")} subtitle={t("subtitle")} image={images.homeBanner} />
         <div className="container-page section-pad max-w-5xl grid grid-cols-1 md:grid-cols-2 gap-12">
           <div>
-            <h2 className="font-display text-[26px] text-ink mb-4">How was Dahab Hostel?</h2>
-            <p className="leading-relaxed text-justify mb-4">Thank you for choosing Dahab Hostel for your recent stay in Cairo. We'd be grateful if you would review us on TripAdvisor.</p>
-            <p className="leading-relaxed text-justify mb-4">Our guests often tell us how helpful it is to read past guests' reviews before booking their own visits. And we're always eager to hear what you liked and how we can improve.</p>
-            <p>Write a review of <a className="text-brand hover:underline" href={site.tripAdvisorUrl} target="_blank" rel="noreferrer">Dahab Hostel</a></p>
+            <h2 className="font-display text-[26px] text-ink mb-4">{t("heading")}</h2>
+            <p className="leading-relaxed text-justify mb-4">{t("p1")}</p>
+            <p className="leading-relaxed text-justify mb-4">{t("p2")}</p>
+            <p><a className="text-brand hover:underline" href={site.tripAdvisorUrl} target="_blank" rel="noreferrer">{t("tripAdvisorLink")}</a></p>
           </div>
           <div>
-            <h2 className="font-display text-[22px] text-ink mb-4">Have you booked through HostelWorld?</h2>
-            <p className="leading-relaxed text-justify"><a className="text-brand hover:underline" href={site.hostelWorldUrl} target="_blank" rel="noreferrer">Log in to your HostelWorld account</a> to write a review about Dahab hostel.</p>
-            <p className="mt-6">Thanks again, and we hope you'll choose Dahab Hostel the next time you're in Cairo.</p>
-            <div className="mt-8 border border-line rounded-2xl bg-surface-soft p-6">
-              <p className="mb-2">Prefer Google? <a className="text-brand hover:underline" href={site.googleReviewUrl} target="_blank" rel="noreferrer">Write a Google review</a></p>
+            <h2 className="font-display text-[22px] text-ink mb-4">{t("hostelWorldHeading")}</h2>
+            <p className="leading-relaxed text-justify"><a className="text-brand hover:underline" href={site.hostelWorldUrl} target="_blank" rel="noreferrer">{t("hostelWorldText")}</a></p>
+            <p className="mt-6">{t("thanks")}</p>
+            <div className="mt-8 rounded-2xl bg-gradient-to-br from-brand-soft/20 to-surface-soft p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+              <p className="mb-2"><a className="text-brand hover:underline" href={site.googleReviewUrl} target="_blank" rel="noreferrer">{t("google")}</a></p>
             </div>
           </div>
         </div>
