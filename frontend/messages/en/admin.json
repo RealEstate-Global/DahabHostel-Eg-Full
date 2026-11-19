@@ -56,7 +56,10 @@
     "requestsOverTime": "Requests Over Time",
     "requestsByType": "Requests by Type",
     "viewAll": "View all",
-    "ofTotal": "of {total} total"
+    "ofTotal": "of {total} total",
+    "loadErrorTitle": "Dashboard data could not be loaded",
+    "loadErrorDescription": "The database did not return all dashboard records. Refresh to try again.",
+    "retry": "Retry"
   },
   "table": {
     "name": "Name",
@@ -167,7 +170,8 @@
     "editRoom": "Edit Room",
     "priceEgp": "Price (EGP)",
     "dorm": "Dorm",
-    "private": "Private"
+    "private": "Private",
+    "roomCount": "{count} rooms"
   },
   "tours": {
     "title": "Tours",
@@ -226,7 +230,16 @@
     "changeRole": "Change Role",
     "guest": "Guest",
     "staff": "Staff",
-    "admin": "Admin"
+    "admin": "Admin",
+    "searchPlaceholder": "Search by name or email…"
+  },
+  "contentPage": {
+    "title": "Content Management",
+    "subtitle": "Manage blog posts, media gallery, entrance fees, and site settings"
+  },
+  "managementPage": {
+    "title": "Management Hub",
+    "subtitle": "Manage user roles, booking inquiries, pickups, and messages"
   },
   "analyticsPage": {
     "title": "Analytics & Reports",

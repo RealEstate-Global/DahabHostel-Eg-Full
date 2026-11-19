@@ -1,6 +1,5 @@
 import "./globals.css";
 import type { Viewport } from "next";
-import { Plus_Jakarta_Sans, Sora, Noto_Kufi_Arabic } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations } from "next-intl/server";
 import { notFound } from "next/navigation";
@@ -10,26 +9,6 @@ import { JsonLd, CookieConsent } from "@/app/_components/shared";
 import { generateOrganizationSchema } from "@/app/_lib/seo";
 import { images } from "@/app/_data";
 import { routing } from "@/app/routing";
-
-const sans = Plus_Jakarta_Sans({
-  subsets: ["latin", "latin-ext"],
-  display: "swap",
-  variable: "--font-sans",
-});
-
-const display = Sora({
-  subsets: ["latin", "latin-ext"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-display",
-});
-
-const arabic = Noto_Kufi_Arabic({
-  subsets: ["arabic"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-  variable: "--font-arabic",
-});
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -68,7 +47,6 @@ export default async function RootLayout({
     <html
       lang={locale}
       dir={locale === "ar" ? "rtl" : "ltr"}
-      className={`${sans.variable} ${display.variable} ${arabic.variable}`}
       suppressHydrationWarning
     >
       <head>

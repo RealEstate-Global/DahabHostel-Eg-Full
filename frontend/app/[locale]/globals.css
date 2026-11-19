@@ -6,6 +6,11 @@
   :root {
     color-scheme: light;
 
+    /* Keep production builds independent from Google Fonts availability. */
+    --font-sans: "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+    --font-display: "Sora", "Plus Jakarta Sans", "Segoe UI", Arial, sans-serif;
+    --font-arabic: "Noto Sans Arabic", Tahoma, "Segoe UI", Arial, sans-serif;
+
     --brand: 190 36% 49%;
     --brand-light: 191 45% 56%;
     --brand-dark: 190 35% 41%;

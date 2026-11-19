@@ -30,10 +30,11 @@ export default async function OverviewPage({
   const t = await getTranslations({ locale, namespace: "admin.overview" });
 
   // Fetch all data in parallel
-  let counts: Awaited<ReturnType<typeof getDashboardCounts>>;
-  let activity: Awaited<ReturnType<typeof getRecentActivity>>;
-  let chartData: Awaited<ReturnType<typeof getBookingRequestsByDate>>;
-  let pieData: Awaited<ReturnType<typeof getRequestsByType>>;
+  let counts: Awaited<ReturnType<typeof getDashboardCounts>> | null = null;
+  let activity: Awaited<ReturnType<typeof getRecentActivity>> | null = null;
+  let chartData: Awaited<ReturnType<typeof getBookingRequestsByDate>> | null = null;
+  let pieData: Awaited<ReturnType<typeof getRequestsByType>> | null = null;
+  let loadError = false;
   try {
     [counts, activity, chartData, pieData] = await Promise.all([
       getDashboardCounts(),
@@ -42,24 +43,25 @@ export default async function OverviewPage({
       getRequestsByType(),
     ]);
   } catch {
-    // If DB is unavailable, show empty state
-    counts = {
-      bookingRequests: 0,
-      tourRequests: 0,
-      airportPickups: 0,
-      contactMessages: 0,
-      activeRooms: 0,
-      totalRooms: 0,
-      activeTours: 0,
-      totalTours: 0,
-      pendingReviews: 0,
-      approvedReviews: 0,
-      publishedPosts: 0,
-      totalProfiles: 0,
-    };
-    activity = [];
-    chartData = [];
-    pieData = [];
+    loadError = true;
+  }
+
+  if (loadError || !counts || !activity || !chartData || !pieData) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
+          <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
+        </div>
+        <section role="alert" className="rounded-2xl border border-destructive/30 bg-destructive-soft p-6">
+          <h3 className="font-semibold text-ink-heading">{t("loadErrorTitle")}</h3>
+          <p className="mt-1 text-sm text-ink-muted">{t("loadErrorDescription")}</p>
+          <a href={`/${locale}/admin/overview`} className="mt-4 inline-flex min-h-11 items-center rounded-xl bg-surface px-4 text-sm font-semibold text-ink-heading ring-subtle">
+            {t("retry")}
+          </a>
+        </section>
+      </div>
+    );
   }
 
   return (

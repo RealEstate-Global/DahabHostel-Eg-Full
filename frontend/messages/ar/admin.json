@@ -56,7 +56,10 @@
     "requestsOverTime": "الطلبات بمرور الوقت",
     "requestsByType": "الطلبات حسب النوع",
     "viewAll": "عرض الكل",
-    "ofTotal": "من أصل {total}"
+    "ofTotal": "من أصل {total}",
+    "loadErrorTitle": "تعذر تحميل بيانات لوحة الإدارة",
+    "loadErrorDescription": "لم تُرجع قاعدة البيانات جميع سجلات لوحة الإدارة. حدّث الصفحة وحاول مرة أخرى.",
+    "retry": "إعادة المحاولة"
   },
   "table": {
     "name": "الاسم",
@@ -167,7 +170,8 @@
     "editRoom": "تعديل الغرفة",
     "priceEgp": "السعر (ج.م.)",
     "dorm": "مشترك",
-    "private": "خاص"
+    "private": "خاص",
+    "roomCount": "{count} غرفة"
   },
   "tours": {
     "title": "الجولات",
@@ -226,7 +230,16 @@
     "changeRole": "تغيير الدور",
     "guest": "نزيل",
     "staff": "موظف",
-    "admin": "مدير"
+    "admin": "مدير",
+    "searchPlaceholder": "ابحث بالاسم أو البريد الإلكتروني…"
+  },
+  "contentPage": {
+    "title": "إدارة المحتوى",
+    "subtitle": "إدارة المقالات ومعرض الصور ورسوم الدخول وإعدادات الموقع"
+  },
+  "managementPage": {
+    "title": "مركز الإدارة",
+    "subtitle": "إدارة صلاحيات المستخدمين وطلبات الحجز والتوصيل والرسائل"
   },
   "analyticsPage": {
     "title": "التحليلات والتقارير",

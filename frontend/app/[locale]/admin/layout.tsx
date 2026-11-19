@@ -16,7 +16,7 @@ export default async function AdminLayout({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "admin" });
 
-  // ── Auth guard: require admin role ────────────────────────────────────────
+  // ── Auth guard: admin-only until staff permissions are explicitly modeled. ──
   let profile;
   try {
     profile = await getProfile();
@@ -25,26 +25,12 @@ export default async function AdminLayout({
     profile = null;
   }
 
-  // Optional local dev inspection mode only when explicitly enabled
-  if (!profile && process.env.NODE_ENV === "development" && process.env.ADMIN_DEV_BYPASS === "true") {
-    profile = {
-      id: "dev-admin-id",
-      email: "admin@dahabhostel.com",
-      full_name: "Admin Developer",
-      role: "admin",
-      avatar_url: null,
-      phone: null,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    };
-  }
-
   if (!profile) {
     // Not logged in → redirect to login
     redirect(`/${locale}/login?next=/${locale}/admin/overview`);
   }
 
-  if (profile.role !== "admin" && profile.role !== "staff") {
+  if (profile.role !== "admin") {
     // Logged in but not admin/staff → show clean Forbidden screen
     return (
       <div className="flex min-h-screen items-center justify-center bg-surface-soft p-4" dir={locale === "ar" ? "rtl" : "ltr"}>

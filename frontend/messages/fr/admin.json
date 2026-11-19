@@ -56,7 +56,10 @@
     "requestsOverTime": "Demandes au fil du temps",
     "requestsByType": "Demandes par type",
     "viewAll": "Tout voir",
-    "ofTotal": "sur {total} au total"
+    "ofTotal": "sur {total} au total",
+    "loadErrorTitle": "Les données du tableau de bord n’ont pas pu être chargées",
+    "loadErrorDescription": "La base de données n’a pas renvoyé toutes les données. Actualisez la page pour réessayer.",
+    "retry": "Réessayer"
   },
   "table": {
     "name": "Nom",
@@ -167,7 +170,8 @@
     "editRoom": "Modifier la chambre",
     "priceEgp": "Prix (EGP)",
     "dorm": "Dortoir",
-    "private": "Privée"
+    "private": "Privée",
+    "roomCount": "{count} chambres"
   },
   "tours": {
     "title": "Circuits",
@@ -226,7 +230,16 @@
     "changeRole": "Changer le rôle",
     "guest": "Voyageur",
     "staff": "Personnel",
-    "admin": "Administrateur"
+    "admin": "Administrateur",
+    "searchPlaceholder": "Rechercher par nom ou e-mail…"
+  },
+  "contentPage": {
+    "title": "Gestion du contenu",
+    "subtitle": "Gérez les articles, la galerie, les tarifs d’entrée et les paramètres du site"
+  },
+  "managementPage": {
+    "title": "Centre de gestion",
+    "subtitle": "Gérez les rôles, les demandes de réservation, les transferts et les messages"
   },
   "analyticsPage": {
     "title": "Analyses et rapports",

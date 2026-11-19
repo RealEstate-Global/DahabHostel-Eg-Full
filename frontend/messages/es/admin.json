@@ -56,7 +56,10 @@
     "requestsOverTime": "Solicitudes a lo largo del tiempo",
     "requestsByType": "Solicitudes por tipo",
     "viewAll": "Ver todo",
-    "ofTotal": "de {total} en total"
+    "ofTotal": "de {total} en total",
+    "loadErrorTitle": "No se pudieron cargar los datos del panel",
+    "loadErrorDescription": "La base de datos no devolvió todos los registros. Actualiza la página para volver a intentarlo.",
+    "retry": "Reintentar"
   },
   "table": {
     "name": "Nombre",
@@ -167,7 +170,8 @@
     "editRoom": "Editar habitación",
     "priceEgp": "Precio (EGP)",
     "dorm": "Dormitorio",
-    "private": "Privada"
+    "private": "Privada",
+    "roomCount": "{count} habitaciones"
   },
   "tours": {
     "title": "Tours",
@@ -226,7 +230,16 @@
     "changeRole": "Cambiar rol",
     "guest": "Huésped",
     "staff": "Personal",
-    "admin": "Administrador"
+    "admin": "Administrador",
+    "searchPlaceholder": "Buscar por nombre o correo electrónico…"
+  },
+  "contentPage": {
+    "title": "Gestión de contenido",
+    "subtitle": "Administra artículos, galería, tarifas de entrada y ajustes del sitio"
+  },
+  "managementPage": {
+    "title": "Centro de gestión",
+    "subtitle": "Administra roles, solicitudes de reserva, traslados y mensajes"
   },
   "analyticsPage": {
     "title": "Análisis e informes",

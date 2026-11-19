@@ -69,7 +69,7 @@ export interface Database {
           sort_order?: number;
           is_active?: boolean;
         };
-        Update: Partial<Database["public"]["Tables"]["rooms"]["Insert"]>;
+        Update: Partial<Database["public"]["Tables"]["rooms"]["Insert"]> & { updated_at?: string };
       };
       tours: {
         Row: {
@@ -105,7 +105,7 @@ export interface Database {
           sort_order?: number;
           is_active?: boolean;
         };
-        Update: Partial<Database["public"]["Tables"]["tours"]["Insert"]>;
+        Update: Partial<Database["public"]["Tables"]["tours"]["Insert"]> & { updated_at?: string };
       };
       tour_itinerary: {
         Row: {
@@ -214,7 +214,7 @@ export interface Database {
           is_published?: boolean;
           published_at?: string | null;
         };
-        Update: Partial<Database["public"]["Tables"]["blog_posts"]["Insert"]>;
+        Update: Partial<Database["public"]["Tables"]["blog_posts"]["Insert"]> & { updated_at?: string };
       };
       reviews: {
         Row: {

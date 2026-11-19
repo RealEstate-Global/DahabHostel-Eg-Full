@@ -139,12 +139,10 @@ export default async function ManagementPage({
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-ink-heading">
-          {locale === "ar" ? "إدارة الطلبات والمستخدمين" : "Management Hub"}
+          {t("managementPage.title")}
         </h2>
         <p className="mt-1 text-sm text-ink-muted">
-          {locale === "ar"
-            ? "متابعة الحسابات، طلبات الحجز، رحلات المطار والرسائل الواردة"
-            : "Manage user roles, booking inquiries, pickups, and messages"}
+          {t("managementPage.subtitle")}
         </p>
       </div>
 

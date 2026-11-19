@@ -23,13 +23,14 @@ export async function getProfile(): Promise<Profile | null> {
 
   if (!user) return null;
 
-  const { data: profile } = await supabase
+  const { data: profile, error } = await supabase
     .from("profiles")
     .select("*")
     .eq("id", user.id)
     .single();
 
-  return (profile as unknown as Profile) ?? null;
+  if (error) return null;
+  return profile;
 }
 
 export async function requireAuth() {
