@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Header, Footer, PageHero, ActionLink } from "@/app/_components/dahab";
 import { generateSEO } from "@/app/_lib/seo";
-import { tours, images } from "@/app/_data";
+import { getLocalizedTours } from "@/app/_lib/localized-data";
+import { images } from "@/app/_data";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -13,6 +14,7 @@ export default async function ItineraryGenerator({ params }: { params: Promise<{
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.itinerary" });
   const href = (p: string) => `/${locale}${p}`;
+  const localizedTours = getLocalizedTours(locale);
 
   return (
     <>
@@ -22,7 +24,7 @@ export default async function ItineraryGenerator({ params }: { params: Promise<{
         <div className="container-page section-pad">
           <h2 className="font-display text-[26px] text-ink mb-6">{t("heading")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            {tours.map((item) => (
+            {localizedTours.map((item) => (
               <div key={item.slug} className="rounded-2xl bg-surface-soft/50 p-6 shadow-soft ring-subtle transition-all duration-200 hover:-translate-y-1 hover:shadow-card">
                 <h3 className="font-display text-[20px] text-ink mb-1">{item.title}</h3>
                 <p className="text-brand text-[13px] mb-3">{item.duration}</p>

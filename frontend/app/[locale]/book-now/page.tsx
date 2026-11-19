@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Header, Footer, PageHero, ActionLink, RequestForm } from "@/app/_components/dahab";
 import { generateSEO } from "@/app/_lib/seo";
-import { rooms, images, site } from "@/app/_data";
+import { getLocalizedRooms } from "@/app/_lib/localized-data";
+import { images, site } from "@/app/_data";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -13,6 +14,7 @@ export default async function BookNow({ params }: { params: Promise<{ locale: st
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.bookNow" });
   const href = (p: string) => `/${locale}${p}`;
+  const localizedRooms = getLocalizedRooms(locale);
 
   return (
     <>
@@ -25,7 +27,7 @@ export default async function BookNow({ params }: { params: Promise<{ locale: st
             <div>
               <h2 className="font-display text-[22px] text-ink mb-4">{t("roomRates")}</h2>
               <div className="space-y-3">
-                {rooms.map((room) => (
+                {localizedRooms.map((room) => (
                   <div key={room.name} className="flex flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-surface-soft/70 px-5 py-4 ring-subtle transition-all duration-200 hover:shadow-soft">
                     <div>
                       <h3 className="font-display text-[18px] text-ink">{room.name}</h3>

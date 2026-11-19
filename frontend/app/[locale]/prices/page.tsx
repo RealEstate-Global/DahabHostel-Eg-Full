@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Header, Footer, PageHero, ActionLink } from "@/app/_components/dahab";
 import { generateSEO } from "@/app/_lib/seo";
-import { rooms, images } from "@/app/_data";
+import { getLocalizedRooms } from "@/app/_lib/localized-data";
+import { images } from "@/app/_data";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -13,6 +14,7 @@ export default async function PricesPage({ params }: { params: Promise<{ locale:
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.prices" });
   const tBook = await getTranslations({ locale, namespace: "pages.bookNow" });
+  const localizedRooms = getLocalizedRooms(locale);
 
   return (
     <>
@@ -25,7 +27,7 @@ export default async function PricesPage({ params }: { params: Promise<{ locale:
             <p className="text-[15px] text-ink-muted">{tBook("ratesNote")}</p>
           </div>
           <div className="space-y-4">
-            {rooms.map((room) => (
+            {localizedRooms.map((room) => (
               <div key={room.name} className="rounded-2xl bg-surface-soft/60 p-5 ring-subtle transition-all duration-200 hover:shadow-soft">
                 <h2 className="font-display text-[19px] text-ink flex flex-wrap justify-between gap-2">
                   <span>{room.name}</span>

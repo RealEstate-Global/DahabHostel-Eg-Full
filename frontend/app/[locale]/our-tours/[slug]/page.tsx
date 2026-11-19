@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { Header, Footer, ActionLink, RequestForm } from "@/app/_components/dahab";
 import { generateSEO } from "@/app/_lib/seo";
-import { getTour, tours } from "@/app/_data";
+import { getLocalizedTour } from "@/app/_lib/localized-data";
+import { tours } from "@/app/_data";
 
 export function generateStaticParams() {
   return ["en", "ar", "fr", "es"].flatMap((locale) =>
@@ -13,7 +14,7 @@ export function generateStaticParams() {
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { slug, locale } = await params;
-  const tour = getTour(slug);
+  const tour = getLocalizedTour(slug, locale);
   if (!tour) return {};
   return generateSEO({ title: tour.cardTitle, description: tour.description, locale });
 }
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function TourDetail({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { slug, locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.tourDetail" });
-  const tour = getTour(slug);
+  const tour = getLocalizedTour(slug, locale);
   if (!tour) notFound();
 
   return (
@@ -49,7 +50,7 @@ export default async function TourDetail({ params }: { params: Promise<{ locale:
               {tour.highlights && tour.highlights.length > 0 && (
                 <section className="my-6">
                   <h2 className="font-bold text-ink text-[17px] mb-2">{t("details")}</h2>
-                  <ul className="list-disc pl-6 text-ink-muted mb-4">{tour.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
+                  <ul className="list-disc ms-6 text-ink-muted mb-4">{tour.highlights.map((h) => <li key={h}>{h}</li>)}</ul>
                 </section>
               )}
               {tour.itinerary && tour.itinerary.length > 0 && (
@@ -66,19 +67,19 @@ export default async function TourDetail({ params }: { params: Promise<{ locale:
               {tour.inclusions && tour.inclusions.length > 0 && (
                 <section className="my-6">
                   <h2 className="font-bold text-ink mb-1">{t("inclusions")}</h2>
-                  <ul className="list-disc pl-6 text-ink-muted leading-relaxed">{tour.inclusions.map((i) => <li key={i}>{i}</li>)}</ul>
+                  <ul className="list-disc ms-6 text-ink-muted leading-relaxed">{tour.inclusions.map((i) => <li key={i}>{i}</li>)}</ul>
                 </section>
               )}
               {tour.exclusions && tour.exclusions.length > 0 && (
                 <section className="my-6">
                   <h2 className="font-bold text-ink mb-1">{t("exclusions")}</h2>
-                  <ul className="list-disc pl-6 text-ink-muted leading-relaxed">{tour.exclusions.map((i) => <li key={i}>{i}</li>)}</ul>
+                  <ul className="list-disc ms-6 text-ink-muted leading-relaxed">{tour.exclusions.map((i) => <li key={i}>{i}</li>)}</ul>
                 </section>
               )}
               {tour.notes && tour.notes.length > 0 && (
                 <section className="my-6">
                   <h2 className="font-bold text-ink mb-1">{t("tripNotes")}</h2>
-                  <ul className="list-disc pl-6 text-ink-muted leading-relaxed">{tour.notes.map((i) => <li key={i}>{i}</li>)}</ul>
+                  <ul className="list-disc ms-6 text-ink-muted leading-relaxed">{tour.notes.map((i) => <li key={i}>{i}</li>)}</ul>
                 </section>
               )}
             </article>

@@ -3,7 +3,8 @@ import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 import { Header, Footer, PageHero, ActionLink } from "@/app/_components/dahab";
 import { generateSEO } from "@/app/_lib/seo";
-import { tours, images } from "@/app/_data";
+import { getLocalizedTours } from "@/app/_lib/localized-data";
+import { images } from "@/app/_data";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -19,9 +20,10 @@ export default async function OurTours({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.tours" });
   const href = (p: string) => `/${locale}${p}`;
+  const localizedTours = getLocalizedTours(locale);
   const groups = [
-    { name: t("history"), items: tours.filter((item) => item.category === "history") },
-    { name: t("adventure"), items: tours.filter((item) => item.category !== "history") },
+    { name: t("history"), items: localizedTours.filter((item) => item.category === "history") },
+    { name: t("adventure"), items: localizedTours.filter((item) => item.category !== "history") },
   ];
 
   return (
