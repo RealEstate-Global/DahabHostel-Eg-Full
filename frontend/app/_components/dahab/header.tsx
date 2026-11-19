@@ -445,16 +445,6 @@ export function Header() {
       {/* MOBILE MENU ACCORDION DRAWER */}
       {mobileOpen && <MobileDrawer />}
 
-      <div className="pt-4">
-        <Link
-          href={href("/book-now")}
-          onClick={() => setMobileOpen(false)}
-          className="btn-primary flex w-full items-center justify-center gap-2 py-3 text-center text-sm font-bold shadow-soft"
-        >
-          <span>{tNav("bookNow")}</span>
-          <ArrowUpRight size={16} />
-        </Link>
-      </div>
     </>
   );
 }

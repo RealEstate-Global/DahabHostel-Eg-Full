@@ -1,8 +1,7 @@
 import React from "react";
 import { SidebarNavItem } from "@/app/_components/sidebar-nav-item";
 import { ThemeToggle } from "@/app/_components/dahab/theme-toggle";
-import { getServerSession } from "next-auth/next";
-import authOptions from "@/app/_lib/auth-options";
+
 
 export const metadata = {
   title: "Admin Dashboard - Dahab Hostel",
@@ -16,8 +15,6 @@ export default async function AdminLayout({
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 }) {
-  const session = await getServerSession(authOptions);
-
   // Direct access for now - no login required
   // In production, you would add: if (!session) return <Redirect to="/login" />
 

@@ -1,13 +1,16 @@
 {
   "name": "Dahab Hostel Cairo",
   "short_name": "Dahab Hostel",
-  "description": "Award-winning rooftop hostel in Downtown Cairo. Dorms, private rooms, airport pickup and budget tours.",
+  "description": "Dahab Hostel Cairo - Your home away from home in downtown Cairo",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#5199a8",
   "icons": [
-    { "src": "/icon-192.svg", "sizes": "192x192", "type": "image/svg+xml" },
-    { "src": "/icon-512.svg", "sizes": "512x512", "type": "image/svg+xml" }
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
   ]
 }
