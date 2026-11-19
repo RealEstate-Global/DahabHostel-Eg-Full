@@ -1,4 +1,3 @@
-import "./globals.css";
 import { SidebarNavItem } from "@/app/_components/sidebar-nav-item";
 import { ThemeToggle } from "@/app/_components/dahab/theme-toggle";
 import { getServerSession } from "next-auth/next";
