@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import type { Locale } from "date-fns";
 import { formatDistanceToNow } from "date-fns";
+import Link from "next/link";
 import { enUS, ar, fr, es } from "date-fns/locale";
 import {
   CalendarCheck,
@@ -31,6 +32,14 @@ const typeColors = {
   review: "text-star bg-star/10",
 };
 
+const typeRoutes = {
+  booking: "bookings",
+  tour_request: "tour-requests",
+  pickup: "airport-pickups",
+  contact: "contacts",
+  review: "reviews",
+};
+
 interface Props {
   items: RecentActivityType[];
   locale: string;
@@ -38,6 +47,7 @@ interface Props {
 
 export function RecentActivityList({ items, locale }: Props) {
   const t = useTranslations("admin.overview");
+  const tTable = useTranslations("admin.table");
   const dateLocale = localeMap[locale] ?? enUS;
 
   if (items.length === 0) {
@@ -48,13 +58,14 @@ export function RecentActivityList({ items, locale }: Props) {
 
   return (
     <div className="space-y-2">
-      {items.map((item, i) => {
+      {items.map((item) => {
         const Icon = typeIcons[item.type];
         const color = typeColors[item.type];
         return (
-          <div
-            key={`${item.type}-${item.createdAt}-${i}`}
-            className="flex items-center gap-3 rounded-xl border border-line/60 bg-surface p-3 transition-colors hover:bg-surface-soft hover:border-brand/30"
+          <Link
+            key={`${item.type}-${item.id}`}
+            href={`/${locale}/admin/${typeRoutes[item.type]}?search=${encodeURIComponent(item.email || item.name)}`}
+            className="flex items-center gap-3 rounded-xl border border-line/60 bg-surface p-3 transition-colors hover:bg-surface-soft hover:border-brand/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
           >
             <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ${color}`}>
               <Icon className="h-4 w-4" />
@@ -66,6 +77,7 @@ export function RecentActivityList({ items, locale }: Props) {
               <p className="truncate text-xs text-ink-muted">
                 {item.email}
                 {item.detail ? ` · ${item.detail}` : ""}
+                {item.status ? ` · ${tTable(item.status)}` : ""}
               </p>
             </div>
             <span className="flex-shrink-0 text-xs text-ink-subtle">
@@ -74,7 +86,7 @@ export function RecentActivityList({ items, locale }: Props) {
                 locale: dateLocale,
               })}
             </span>
-          </div>
+          </Link>
         );
       })}
     </div>

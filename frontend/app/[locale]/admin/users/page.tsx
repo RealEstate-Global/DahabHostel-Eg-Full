@@ -14,7 +14,7 @@ export default async function UsersAdminPage({
   const { locale } = await params;
   const sp = await searchParams;
   const t = await getTranslations({ locale, namespace: "admin.usersMgmt" });
-  const tTable = await getTranslations({ locale, namespace: "admin.table" });
+  const tUsers = await getTranslations({ locale, namespace: "admin.usersMgmt" });
 
   const page = parseInt(sp.page ?? "1", 10);
 
@@ -68,7 +68,7 @@ export default async function UsersAdminPage({
           type="text"
           name="search"
           defaultValue={sp.search ?? ""}
-          placeholder={tTable("name") === "الاسم" ? "البحث بالاسم أو البريد…" : "Search by name or email…"}
+          placeholder={tUsers("searchPlaceholder")}
           className="input-modern"
         />
       </form>

@@ -4,62 +4,53 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgresql://postgres.gckokgjotdwfhfxplbwj:Memo%40356000@aws-0-eu-west-1.pooler.supabase.com:5432/postgres";
+const confirmation = "--confirm-admin-provisioning";
+const targetEmail = process.env.ADMIN_USER_EMAIL?.trim().toLowerCase();
+const connectionString = process.env.DATABASE_URL;
 
-const sql = postgres(connectionString, { prepare: false });
-
-async function main() {
-  const targetEmail = "m.ssaid356@gmail.com";
-  console.log(`Checking status for ${targetEmail}...`);
-
-  try {
-    // 1. Check auth.users
-    const authUsers = await sql`
-      SELECT id, email, created_at, email_confirmed_at
-      FROM auth.users
-      WHERE email = ${targetEmail};
-    `;
-    console.log("Auth users found:", authUsers);
-
-    // 2. Check public.profiles
-    const profiles = await sql`
-      SELECT id, email, full_name, role
-      FROM public.profiles
-      WHERE email = ${targetEmail};
-    `;
-    console.log("Profiles found:", profiles);
-
-    if (authUsers.length > 0) {
-      const user = authUsers[0];
-      // Upsert profile with role = 'admin'
-      await sql`
-        INSERT INTO public.profiles (id, email, full_name, role, updated_at)
-        VALUES (${user.id}, ${targetEmail}, 'Mostafa Said', 'admin', NOW())
-        ON CONFLICT (id) DO UPDATE
-        SET role = 'admin', updated_at = NOW();
-      `;
-      console.log(`✅ Successfully assigned role='admin' to ${targetEmail} for id=${user.id}`);
-    } else {
-      console.log(`⚠️ User ${targetEmail} is not yet registered in auth.users.`);
-      console.log(`Checking if any profile exists with that email...`);
-      if (profiles.length > 0) {
-        await sql`
-          UPDATE public.profiles
-          SET role = 'admin', updated_at = NOW()
-          WHERE email = ${targetEmail};
-        `;
-        console.log(`✅ Updated existing profile role to 'admin' for ${targetEmail}`);
-      } else {
-        console.log(`Notice: Once you sign up with ${targetEmail} on /login, a trigger or this script will ensure your role is 'admin'.`);
-      }
-    }
-  } catch (err) {
-    console.error("Error executing database update:", err);
-  } finally {
-    await sql.end();
-  }
+if (!process.argv.includes(confirmation)) {
+  console.error(`Refusing to change roles. Re-run with ${confirmation} after reviewing the target account.`);
+  process.exit(1);
 }
 
-main();
+if (!targetEmail || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(targetEmail)) {
+  console.error("Set ADMIN_USER_EMAIL to the exact email address of the existing account to provision.");
+  process.exit(1);
+}
+
+if (!connectionString) {
+  console.error("DATABASE_URL is required. No built-in database credentials are provided.");
+  process.exit(1);
+}
+
+const sql = postgres(connectionString, { prepare: false, max: 1 });
+
+try {
+  const users = await sql`
+    SELECT id, email
+    FROM auth.users
+    WHERE lower(email) = ${targetEmail}
+    LIMIT 1;
+  `;
+
+  if (users.length === 0) {
+    throw new Error("No matching Supabase Auth account exists; no profile role was changed.");
+  }
+
+  const [user] = users;
+  await sql.begin(async (transaction) => {
+    await transaction`
+      INSERT INTO public.profiles (id, email, role, updated_at)
+      VALUES (${user.id}, ${user.email}, 'admin', NOW())
+      ON CONFLICT (id) DO UPDATE
+      SET role = 'admin', updated_at = NOW();
+    `;
+  });
+
+  console.log("Administrator role assigned to the explicitly selected account.");
+} catch (error) {
+  console.error("Administrator provisioning failed:", error instanceof Error ? error.message : "Unknown database error");
+  process.exitCode = 1;
+} finally {
+  await sql.end();
+}

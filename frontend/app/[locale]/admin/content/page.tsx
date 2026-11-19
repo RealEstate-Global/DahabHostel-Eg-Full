@@ -86,12 +86,10 @@ export default async function ContentPage({
       {/* Header */}
       <div>
         <h2 className="text-2xl font-bold text-ink-heading">
-          {locale === "ar" ? "إدارة المحتوى" : "Content Management"}
+          {t("contentPage.title")}
         </h2>
         <p className="mt-1 text-sm text-ink-muted">
-          {locale === "ar"
-            ? "إدارة المقالات، معرض الصور، رسوم الدخول، وإعدادات الموقع"
-            : "Manage blog posts, media gallery, entrance fees, and site settings"}
+          {t("contentPage.subtitle")}
         </p>
       </div>
 

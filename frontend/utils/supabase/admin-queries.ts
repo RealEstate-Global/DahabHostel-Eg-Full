@@ -3,7 +3,9 @@
  * These return ALL records (not just active/published) for admin management.
  * Always call requireAdmin() before invoking these functions.
  */
+import "server-only";
 import { createClient } from "./server";
+import { requireAdmin } from "./auth";
 import type { Database } from "./types";
 
 type BookingRequest = Database["public"]["Tables"]["booking_requests"]["Row"];
@@ -19,6 +21,11 @@ type GalleryRow = Database["public"]["Tables"]["gallery"]["Row"];
 type FeeGroup = Database["public"]["Tables"]["fee_groups"]["Row"];
 type FeeItem = Database["public"]["Tables"]["fee_items"]["Row"];
 type SiteSetting = Database["public"]["Tables"]["site_settings"]["Row"];
+
+async function adminClient() {
+  await requireAdmin();
+  return createClient();
+}
 
 // ── Dashboard Overview Counts ───────────────────────────────────────────────
 
@@ -38,7 +45,7 @@ export interface DashboardCounts {
 }
 
 export async function getDashboardCounts(): Promise<DashboardCounts> {
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   const [
     bookings,
@@ -68,6 +75,10 @@ export async function getDashboardCounts(): Promise<DashboardCounts> {
     supabase.from("profiles").select("id", { count: "exact", head: true }),
   ]);
 
+  if ([bookings, tourReqs, pickups, contacts, roomsActive, roomsAll, toursActive, toursAll, reviewsPending, reviewsApproved, postsPublished, profiles].some((result) => result.error)) {
+    throw new Error("Unable to load dashboard counts from Supabase.");
+  }
+
   return {
     bookingRequests: bookings.count ?? 0,
     tourRequests: tourReqs.count ?? 0,
@@ -88,36 +99,42 @@ export async function getDashboardCounts(): Promise<DashboardCounts> {
 
 export interface RecentActivity {
   type: "booking" | "tour_request" | "pickup" | "contact" | "review";
+  id: number;
   name: string;
   email: string;
   detail: string | null;
   createdAt: string;
+  status: "approved" | "pending" | null;
 }
 
 export async function getRecentActivity(limit = 10): Promise<RecentActivity[]> {
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   const [bookings, tourReqs, pickups, contacts, reviews] = await Promise.all([
-    supabase.from("booking_requests").select("name, email, room, created_at").order("created_at", { ascending: false }).limit(limit),
-    supabase.from("tour_requests").select("name, email, destinations, created_at").order("created_at", { ascending: false }).limit(limit),
-    supabase.from("airport_pickups").select("name, email, airport, created_at").order("created_at", { ascending: false }).limit(limit),
-    supabase.from("contact_messages").select("name, email, subject, created_at").order("created_at", { ascending: false }).limit(limit),
-    supabase.from("reviews").select("author_name, author_email, title, created_at").order("created_at", { ascending: false }).limit(limit),
+    supabase.from("booking_requests").select("id, name, email, room, created_at").order("created_at", { ascending: false }).limit(limit),
+    supabase.from("tour_requests").select("id, name, email, destinations, created_at").order("created_at", { ascending: false }).limit(limit),
+    supabase.from("airport_pickups").select("id, name, email, airport, created_at").order("created_at", { ascending: false }).limit(limit),
+    supabase.from("contact_messages").select("id, name, email, subject, created_at").order("created_at", { ascending: false }).limit(limit),
+    supabase.from("reviews").select("id, author_name, author_email, title, is_approved, created_at").order("created_at", { ascending: false }).limit(limit),
   ]);
+
+  if ([bookings, tourReqs, pickups, contacts, reviews].some((result) => result.error)) {
+    throw new Error("Unable to load recent activity from Supabase.");
+  }
 
   const items: RecentActivity[] = [];
 
-  const bData = (bookings.data as Array<{ name: string; email: string; room: string | null; created_at: string }> | null) ?? [];
-  const tData = (tourReqs.data as Array<{ name: string; email: string; destinations: string | null; created_at: string }> | null) ?? [];
-  const pData = (pickups.data as Array<{ name: string; email: string; airport: string | null; created_at: string }> | null) ?? [];
-  const cData = (contacts.data as Array<{ name: string; email: string; subject: string | null; created_at: string }> | null) ?? [];
-  const rData = (reviews.data as Array<{ author_name: string; author_email: string | null; title: string | null; created_at: string }> | null) ?? [];
+  const bData = (bookings.data as Array<{ id: number; name: string; email: string; room: string | null; created_at: string }> | null) ?? [];
+  const tData = (tourReqs.data as Array<{ id: number; name: string; email: string; destinations: string | null; created_at: string }> | null) ?? [];
+  const pData = (pickups.data as Array<{ id: number; name: string; email: string; airport: string | null; created_at: string }> | null) ?? [];
+  const cData = (contacts.data as Array<{ id: number; name: string; email: string; subject: string | null; created_at: string }> | null) ?? [];
+  const rData = (reviews.data as Array<{ id: number; author_name: string; author_email: string | null; title: string | null; is_approved: boolean; created_at: string }> | null) ?? [];
 
-  bData.forEach((b) => items.push({ type: "booking", name: b.name, email: b.email, detail: b.room, createdAt: b.created_at }));
-  tData.forEach((t) => items.push({ type: "tour_request", name: t.name, email: t.email, detail: t.destinations, createdAt: t.created_at }));
-  pData.forEach((p) => items.push({ type: "pickup", name: p.name, email: p.email, detail: p.airport, createdAt: p.created_at }));
-  cData.forEach((c) => items.push({ type: "contact", name: c.name, email: c.email, detail: c.subject, createdAt: c.created_at }));
-  rData.forEach((r) => items.push({ type: "review", name: r.author_name, email: r.author_email ?? "", detail: r.title, createdAt: r.created_at }));
+  bData.forEach((b) => items.push({ type: "booking", id: b.id, name: b.name, email: b.email, detail: b.room, createdAt: b.created_at, status: null }));
+  tData.forEach((t) => items.push({ type: "tour_request", id: t.id, name: t.name, email: t.email, detail: t.destinations, createdAt: t.created_at, status: null }));
+  pData.forEach((p) => items.push({ type: "pickup", id: p.id, name: p.name, email: p.email, detail: p.airport, createdAt: p.created_at, status: null }));
+  cData.forEach((c) => items.push({ type: "contact", id: c.id, name: c.name, email: c.email, detail: c.subject, createdAt: c.created_at, status: null }));
+  rData.forEach((r) => items.push({ type: "review", id: r.id, name: r.author_name, email: r.author_email ?? "", detail: r.title, createdAt: r.created_at, status: r.is_approved ? "approved" : "pending" }));
 
   items.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
   return items.slice(0, limit);
@@ -135,7 +152,7 @@ export interface BookingRequestsParams {
 
 export async function getAdminBookingRequests(params: BookingRequestsParams = {}) {
   const { page = 1, pageSize = 20, search, sortBy = "created_at", sortDir = "desc" } = params;
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   let query = supabase.from("booking_requests").select("*", { count: "exact" });
 
@@ -162,7 +179,7 @@ export async function getAdminBookingRequests(params: BookingRequestsParams = {}
 
 export async function getAdminTourRequests(params: BookingRequestsParams = {}) {
   const { page = 1, pageSize = 20, search, sortBy = "created_at", sortDir = "desc" } = params;
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   let query = supabase.from("tour_requests").select("*", { count: "exact" });
 
@@ -189,7 +206,7 @@ export async function getAdminTourRequests(params: BookingRequestsParams = {}) {
 
 export async function getAdminAirportPickups(params: BookingRequestsParams = {}) {
   const { page = 1, pageSize = 20, search, sortBy = "created_at", sortDir = "desc" } = params;
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   let query = supabase.from("airport_pickups").select("*", { count: "exact" });
 
@@ -216,7 +233,7 @@ export async function getAdminAirportPickups(params: BookingRequestsParams = {})
 
 export async function getAdminContactMessages(params: BookingRequestsParams = {}) {
   const { page = 1, pageSize = 20, search, sortBy = "created_at", sortDir = "desc" } = params;
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   let query = supabase.from("contact_messages").select("*", { count: "exact" });
 
@@ -242,7 +259,7 @@ export async function getAdminContactMessages(params: BookingRequestsParams = {}
 // ── Rooms (admin — includes inactive) ───────────────────────────────────────
 
 export async function getAdminRooms() {
-  const supabase = await createClient();
+  const supabase = await adminClient();
   const { data, error } = await supabase
     .from("rooms")
     .select("*")
@@ -255,7 +272,7 @@ export async function getAdminRooms() {
 // ── Tours (admin — includes inactive) ───────────────────────────────────────
 
 export async function getAdminTours() {
-  const supabase = await createClient();
+  const supabase = await adminClient();
   const { data, error } = await supabase
     .from("tours")
     .select("*")
@@ -269,7 +286,7 @@ export async function getAdminTours() {
 
 export async function getAdminReviews(params: BookingRequestsParams & { approved?: boolean } = {}) {
   const { page = 1, pageSize = 20, search, sortBy = "created_at", sortDir = "desc", approved } = params;
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   let query = supabase.from("reviews").select("*", { count: "exact" });
 
@@ -299,7 +316,7 @@ export async function getAdminReviews(params: BookingRequestsParams & { approved
 // ── Blog Posts (admin — all) ────────────────────────────────────────────────
 
 export async function getAdminBlogPosts() {
-  const supabase = await createClient();
+  const supabase = await adminClient();
   const { data, error } = await supabase
     .from("blog_posts")
     .select("*")
@@ -312,7 +329,7 @@ export async function getAdminBlogPosts() {
 // ── Gallery (admin) ─────────────────────────────────────────────────────────
 
 export async function getAdminGallery() {
-  const supabase = await createClient();
+  const supabase = await adminClient();
   const { data, error } = await supabase
     .from("gallery")
     .select("*")
@@ -325,7 +342,7 @@ export async function getAdminGallery() {
 // ── Fee Groups & Items ──────────────────────────────────────────────────────
 
 export async function getAdminEntranceFees() {
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   const [groups, items] = await Promise.all([
     supabase.from("fee_groups").select("*").order("sort_order"),
@@ -345,7 +362,7 @@ export async function getAdminEntranceFees() {
 
 export async function getAdminProfiles(params: BookingRequestsParams = {}) {
   const { page = 1, pageSize = 20, search, sortBy = "created_at", sortDir = "desc" } = params;
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   let query = supabase.from("profiles").select("*", { count: "exact" });
 
@@ -371,7 +388,7 @@ export async function getAdminProfiles(params: BookingRequestsParams = {}) {
 // ── Site Settings ───────────────────────────────────────────────────────────
 
 export async function getAdminSiteSettings() {
-  const supabase = await createClient();
+  const supabase = await adminClient();
   const { data, error } = await supabase
     .from("site_settings")
     .select("*")
@@ -384,7 +401,7 @@ export async function getAdminSiteSettings() {
 // ── Booking requests over time (for charts) ─────────────────────────────────
 
 export async function getBookingRequestsByDate(days = 30) {
-  const supabase = await createClient();
+  const supabase = await adminClient();
   const since = new Date();
   since.setDate(since.getDate() - days);
 
@@ -420,7 +437,7 @@ export async function getBookingRequestsByDate(days = 30) {
 // ── Requests by type (for pie chart) ────────────────────────────────────────
 
 export async function getRequestsByType() {
-  const supabase = await createClient();
+  const supabase = await adminClient();
 
   const [bookings, tourReqs, pickups, contacts] = await Promise.all([
     supabase.from("booking_requests").select("id", { count: "exact", head: true }),
@@ -428,6 +445,10 @@ export async function getRequestsByType() {
     supabase.from("airport_pickups").select("id", { count: "exact", head: true }),
     supabase.from("contact_messages").select("id", { count: "exact", head: true }),
   ]);
+
+  if ([bookings, tourReqs, pickups, contacts].some((result) => result.error)) {
+    throw new Error("Unable to load request totals from Supabase.");
+  }
 
   return [
     { name: "bookings", value: bookings.count ?? 0 },

@@ -187,6 +187,7 @@ export function BlogRowActions({ id, isPublished }: { id: number; isPublished: b
 
 export function UserRoleSelect({ id, currentRole }: { id: string; currentRole: string }) {
   const [isPending, startTransition] = useTransition();
+  const t = useTranslations("admin.usersMgmt");
 
   return (
     <div className="flex items-center justify-end gap-2">
@@ -194,17 +195,18 @@ export function UserRoleSelect({ id, currentRole }: { id: string; currentRole: s
       <select
         disabled={isPending}
         value={currentRole}
+        aria-label={t("changeRole")}
         onChange={(e) => {
-          const newRole = e.target.value as "guest" | "admin" | "staff";
+          const newRole = e.target.value as "guest" | "admin";
           startTransition(async () => {
             await updateProfileRole(id, newRole);
           });
         }}
         className="rounded-lg border border-line bg-surface px-2 py-1 text-xs font-medium text-ink focus:border-brand focus:outline-none"
       >
-        <option value="guest">guest</option>
-        <option value="staff">staff</option>
-        <option value="admin">admin</option>
+        <option value="guest">{t("guest")}</option>
+        {currentRole === "staff" && <option value="staff" disabled>{t("staff")}</option>}
+        <option value="admin">{t("admin")}</option>
       </select>
     </div>
   );
