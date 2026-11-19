@@ -1,9 +1,5 @@
 import { redirect } from "next/navigation";
 
-export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }, { locale: "es" }, { locale: "fr" }];
-}
-
 export default async function AdminPage({
   params,
 }: {

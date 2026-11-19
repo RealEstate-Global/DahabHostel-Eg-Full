@@ -6,6 +6,8 @@
   "nav": {
     "brand": "إدارة دهب",
     "overview": "نظرة عامة",
+    "content": "مركز المحتوى",
+    "management": "مركز الإدارة",
     "bookings": "الحجوزات",
     "tourRequests": "طلبات الجولات",
     "airportPickups": "التوصيل من المطار",

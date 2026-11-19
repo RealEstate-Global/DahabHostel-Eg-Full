@@ -6,6 +6,8 @@
   "nav": {
     "brand": "Admin Dahab",
     "overview": "Vue d'ensemble",
+    "content": "Gestion du contenu",
+    "management": "Centre de gestion",
     "bookings": "Réservations",
     "tourRequests": "Demandes de circuits",
     "airportPickups": "Transferts aéroport",

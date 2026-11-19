@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/utils/supabase/client";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useLocale } from "next-intl";
 
 export default function LoginPage() {
@@ -16,7 +16,9 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const router = useRouter();
+  const searchParams = useSearchParams();
   const locale = useLocale();
+  const nextUrl = searchParams.get("next") ?? `/${locale}`;
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,7 +38,7 @@ export default function LoginPage() {
           };
           setError(messages[error.code ?? ""] ?? t("errors.generic"));
         } else {
-          router.push(`/${locale}`);
+          router.push(nextUrl);
           router.refresh();
         }
       } else {

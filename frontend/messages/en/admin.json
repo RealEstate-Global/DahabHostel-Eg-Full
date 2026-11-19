@@ -6,6 +6,8 @@
   "nav": {
     "brand": "Dahab Admin",
     "overview": "Overview",
+    "content": "Content Hub",
+    "management": "Management Hub",
     "bookings": "Bookings",
     "tourRequests": "Tour Requests",
     "airportPickups": "Airport Pickups",

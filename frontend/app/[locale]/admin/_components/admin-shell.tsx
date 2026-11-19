@@ -64,6 +64,7 @@ function getNavGroups(locale: string): NavGroup[] {
     {
       labelKey: "nav.groupRequests",
       items: [
+        { key: "nav.management", href: `${base}/management`, icon: Settings },
         { key: "nav.bookings", href: `${base}/bookings`, icon: CalendarCheck },
         { key: "nav.tourRequests", href: `${base}/tour-requests`, icon: MapPin },
         { key: "nav.airportPickups", href: `${base}/airport-pickups`, icon: Plane },
@@ -73,6 +74,7 @@ function getNavGroups(locale: string): NavGroup[] {
     {
       labelKey: "nav.groupContent",
       items: [
+        { key: "nav.content", href: `${base}/content`, icon: FileText },
         { key: "nav.rooms", href: `${base}/rooms`, icon: BedDouble },
         { key: "nav.tours", href: `${base}/tours`, icon: Route },
         { key: "nav.entranceFees", href: `${base}/entrance-fees`, icon: Ticket },
