@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { getAdminAirportPickups } from "@/utils/supabase/admin-queries";
 import { AdminDataTable } from "../_components/admin-data-table";
-import { format } from "date-fns";
+import { formatAdminDate } from "../_lib/date-format";
 
 export default async function AirportPickupsPage({
   params,
@@ -17,9 +17,11 @@ export default async function AirportPickupsPage({
   const page = parseInt(sp.page ?? "1", 10);
 
   let result;
+  let loadError = false;
   try {
     result = await getAdminAirportPickups({ page, search: sp.search });
   } catch {
+    loadError = true;
     result = { data: [], total: 0, page: 1, pageSize: 20, totalPages: 0 };
   }
 
@@ -36,7 +38,7 @@ export default async function AirportPickupsPage({
       key: "created_at",
       labelKey: "createdAt",
       render: (row: Record<string, unknown>) =>
-        format(new Date(row.created_at as string), "dd MMM yyyy"),
+        formatAdminDate(row.created_at, locale),
     },
   ];
 
@@ -65,6 +67,8 @@ export default async function AirportPickupsPage({
         emptyMessage={t("empty")}
         locale={locale}
         basePath={`/${locale}/admin/airport-pickups`}
+        queryParams={{ search: sp.search }}
+        loadError={loadError}
       />
     </div>
   );

@@ -7,6 +7,7 @@ import {
   getAdminReviews,
 } from "@/utils/supabase/admin-queries";
 import { RequestsBarChart, RequestsPieChart } from "../_components/overview-charts";
+import { AdminLoadError } from "../_components/admin-load-error";
 
 export default async function AnalyticsAdminPage({
   params,
@@ -19,7 +20,8 @@ export default async function AnalyticsAdminPage({
   const sp = await searchParams;
   const t = await getTranslations({ locale, namespace: "admin.analyticsPage" });
 
-  const days = parseInt(sp.days ?? "30", 10);
+  const requestedDays = Number(sp.days ?? 30);
+  const days = requestedDays === 7 || requestedDays === 90 ? requestedDays : 30;
 
   let chartData: Awaited<ReturnType<typeof getBookingRequestsByDate>> = [];
   let pieData: Awaited<ReturnType<typeof getRequestsByType>> = [];
@@ -32,6 +34,7 @@ export default async function AnalyticsAdminPage({
     pageSize: 100,
     totalPages: 0,
   };
+  let loadError = false;
   try {
     [chartData, pieData, rooms, tours, reviews] = await Promise.all([
       getBookingRequestsByDate(days),
@@ -41,21 +44,11 @@ export default async function AnalyticsAdminPage({
       getAdminReviews({ pageSize: 100 }),
     ]);
   } catch {
-    chartData = [];
-    pieData = [];
-    rooms = [];
-    tours = [];
-    reviews = {
-      data: [],
-      total: 0,
-      page: 1,
-      pageSize: 100,
-      totalPages: 0,
-    };
+    loadError = true;
   }
 
   // Calculate real metrics
-  const totalCapacity = rooms.reduce((acc, r) => acc + (r.capacity ?? 1), 0);
+  const totalCapacity = rooms.filter((room) => room.is_active).reduce((acc, room) => acc + (room.capacity ?? 1), 0);
   const avgRating =
     reviews.data.length > 0
       ? (
@@ -63,6 +56,18 @@ export default async function AnalyticsAdminPage({
           reviews.data.length
         ).toFixed(1)
       : "—";
+
+  if (loadError) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
+          <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
+        </div>
+        <AdminLoadError locale={locale} retryHref={`/${locale}/admin/analytics?days=${days}`} />
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-6">
@@ -73,10 +78,11 @@ export default async function AnalyticsAdminPage({
         </div>
 
         {/* Date range filters */}
-        <div className="flex items-center gap-2">
+        <nav aria-label={t("dateRange")} className="flex flex-wrap items-center gap-2">
           <a
             href={`/${locale}/admin/analytics?days=7`}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
+            aria-current={days === 7 ? "page" : undefined}
+            className={`inline-flex min-h-11 items-center rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               days === 7
                 ? "bg-brand text-white shadow-soft"
                 : "border border-line bg-surface text-ink-muted hover:border-brand/40 hover:text-ink-heading"
@@ -86,7 +92,8 @@ export default async function AnalyticsAdminPage({
           </a>
           <a
             href={`/${locale}/admin/analytics?days=30`}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
+            aria-current={days === 30 ? "page" : undefined}
+            className={`inline-flex min-h-11 items-center rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               days === 30
                 ? "bg-brand text-white shadow-soft"
                 : "border border-line bg-surface text-ink-muted hover:border-brand/40 hover:text-ink-heading"
@@ -96,7 +103,8 @@ export default async function AnalyticsAdminPage({
           </a>
           <a
             href={`/${locale}/admin/analytics?days=90`}
-            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
+            aria-current={days === 90 ? "page" : undefined}
+            className={`inline-flex min-h-11 items-center rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               days === 90
                 ? "bg-brand text-white shadow-soft"
                 : "border border-line bg-surface text-ink-muted hover:border-brand/40 hover:text-ink-heading"
@@ -104,7 +112,7 @@ export default async function AnalyticsAdminPage({
           >
             {t("last90")}
           </a>
-        </div>
+        </nav>
       </div>
 
       {/* Summary KPI Cards from real calculations */}
@@ -112,19 +120,19 @@ export default async function AnalyticsAdminPage({
         <div className="rounded-xl border border-line bg-surface p-5">
           <p className="text-sm text-ink-muted">{t("roomDistribution")}</p>
           <p className="mt-1 text-2xl font-bold text-ink-heading">{rooms.length}</p>
-          <p className="mt-0.5 text-xs text-ink-muted">Total bed capacity: {totalCapacity}</p>
+          <p className="mt-0.5 text-xs text-ink-muted">{t("activeGuestCapacity", { count: totalCapacity })}</p>
         </div>
 
         <div className="rounded-xl border border-line bg-surface p-5">
           <p className="text-sm text-ink-muted">{t("tourInventory")}</p>
           <p className="mt-1 text-2xl font-bold text-ink-heading">{tours.length}</p>
-          <p className="mt-0.5 text-xs text-ink-muted">{tours.filter((t) => t.is_active).length} active</p>
+          <p className="mt-0.5 text-xs text-ink-muted">{t("activeToursCount", { count: tours.filter((tour) => tour.is_active).length })}</p>
         </div>
 
         <div className="rounded-xl border border-line bg-surface p-5">
           <p className="text-sm text-ink-muted">{t("reviewRatings")}</p>
           <p className="mt-1 text-2xl font-bold text-ink-heading">{avgRating} / 5</p>
-          <p className="mt-0.5 text-xs text-ink-muted">{reviews.total} total reviews</p>
+          <p className="mt-0.5 text-xs text-ink-muted">{t("totalReviews", { count: reviews.total })}</p>
         </div>
 
         <div className="rounded-xl border border-line bg-surface p-5">
@@ -132,7 +140,7 @@ export default async function AnalyticsAdminPage({
           <p className="mt-1 text-2xl font-bold text-ink-heading">
             {pieData.reduce((acc, d) => acc + d.value, 0)}
           </p>
-          <p className="mt-0.5 text-xs text-ink-muted">Total incoming requests</p>
+          <p className="mt-0.5 text-xs text-ink-muted">{t("incomingRequestsTotal")}</p>
         </div>
       </div>
 
@@ -140,7 +148,7 @@ export default async function AnalyticsAdminPage({
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         <div className="rounded-xl border border-line bg-surface p-5 lg:col-span-2">
           <h3 className="mb-4 text-sm font-semibold text-ink-heading">
-            {t("bookingsOverTime")} ({days}d)
+            {t("bookingsWindow", { days })}
           </h3>
           <RequestsBarChart data={chartData} />
         </div>

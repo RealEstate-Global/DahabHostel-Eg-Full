@@ -3,7 +3,7 @@ import { getAdminReviews } from "@/utils/supabase/admin-queries";
 import { AdminDataTable } from "../_components/admin-data-table";
 import { ReviewActions } from "../_components/admin-actions";
 import { Star } from "lucide-react";
-import { format } from "date-fns";
+import { formatAdminDate } from "../_lib/date-format";
 
 export default async function ReviewsAdminPage({
   params,
@@ -26,6 +26,7 @@ export default async function ReviewsAdminPage({
         : undefined;
 
   let result;
+  let loadError = false;
   try {
     result = await getAdminReviews({
       page,
@@ -33,6 +34,7 @@ export default async function ReviewsAdminPage({
       approved,
     });
   } catch {
+    loadError = true;
     result = { data: [], total: 0, page: 1, pageSize: 20, totalPages: 0 };
   }
 
@@ -77,7 +79,7 @@ export default async function ReviewsAdminPage({
       key: "created_at",
       labelKey: "createdAt",
       render: (row: Record<string, unknown>) =>
-        format(new Date(row.created_at as string), "dd MMM yyyy"),
+        formatAdminDate(row.created_at, locale),
     },
   ];
 
@@ -134,6 +136,8 @@ export default async function ReviewsAdminPage({
         emptyMessage={t("empty")}
         locale={locale}
         basePath={`/${locale}/admin/reviews`}
+        queryParams={{ search: sp.search }}
+        loadError={loadError}
         actions={(row) => (
           <ReviewActions
             id={row.id as number}

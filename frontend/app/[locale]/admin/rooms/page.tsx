@@ -15,11 +15,12 @@ export default async function RoomsPage({
   const tTable = await getTranslations({ locale, namespace: "admin.table" });
 
   let rooms: Record<string, unknown>[] = [];
+  let loadError = false;
   try {
     const data = await getAdminRooms();
     rooms = data as unknown as Record<string, unknown>[];
   } catch {
-    rooms = [];
+    loadError = true;
   }
 
   const columns = [
@@ -82,6 +83,7 @@ export default async function RoomsPage({
         emptyMessage={t("empty")}
         locale={locale}
         basePath={`/${locale}/admin/rooms`}
+        loadError={loadError}
         actions={(row) => (
           <RoomRowActions room={row as unknown as Database["public"]["Tables"]["rooms"]["Row"]} />
         )}

@@ -13,11 +13,12 @@ export default async function ToursPage({
   const tTable = await getTranslations({ locale, namespace: "admin.table" });
 
   let tours: Record<string, unknown>[] = [];
+  let loadError = false;
   try {
     const data = await getAdminTours();
     tours = data as unknown as Record<string, unknown>[];
   } catch {
-    tours = [];
+    loadError = true;
   }
 
   const columns = [
@@ -58,7 +59,7 @@ export default async function ToursPage({
           <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
         </div>
         <span className="rounded-full bg-brand/10 px-3.5 py-1 text-xs font-semibold text-brand">
-          {tours.length} {locale === "ar" ? "جولات مسجلة" : "total tours"}
+          {t("tourCount", { count: tours.length })}
         </span>
       </div>
 
@@ -72,6 +73,7 @@ export default async function ToursPage({
         emptyMessage={t("empty")}
         locale={locale}
         basePath={`/${locale}/admin/tours`}
+        loadError={loadError}
         actions={(row) => (
           <TourRowActions
             id={row.id as number}

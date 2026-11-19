@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { getAdminBlogPosts } from "@/utils/supabase/admin-queries";
 import { AdminDataTable } from "../_components/admin-data-table";
 import { BlogRowActions } from "../_components/admin-actions";
-import { format } from "date-fns";
+import { formatAdminDate } from "../_lib/date-format";
 
 export default async function BlogAdminPage({
   params,
@@ -14,11 +14,12 @@ export default async function BlogAdminPage({
   const tTable = await getTranslations({ locale, namespace: "admin.table" });
 
   let posts: Record<string, unknown>[] = [];
+  let loadError = false;
   try {
     const data = await getAdminBlogPosts();
     posts = data as unknown as Record<string, unknown>[];
   } catch {
-    posts = [];
+    loadError = true;
   }
 
   const columns = [
@@ -43,7 +44,7 @@ export default async function BlogAdminPage({
       key: "created_at",
       labelKey: "createdAt",
       render: (row: Record<string, unknown>) =>
-        format(new Date(row.created_at as string), "dd MMM yyyy"),
+        formatAdminDate(row.created_at, locale),
     },
   ];
 
@@ -66,6 +67,7 @@ export default async function BlogAdminPage({
         emptyMessage={t("empty")}
         locale={locale}
         basePath={`/${locale}/admin/blog`}
+        loadError={loadError}
         actions={(row) => (
           <BlogRowActions
             id={row.id as number}

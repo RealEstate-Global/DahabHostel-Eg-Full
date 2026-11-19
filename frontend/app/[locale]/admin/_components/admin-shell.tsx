@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
@@ -104,6 +104,15 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
 
   const closeMobile = useCallback(() => setSidebarOpen(false), []);
 
+  useEffect(() => {
+    if (!sidebarOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSidebarOpen(false);
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [sidebarOpen]);
+
   // Find current page title
   let currentTitle = t("nav.overview");
   for (const group of navGroups) {
@@ -115,7 +124,7 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-background" dir={isRTL ? "rtl" : "ltr"}>
+    <div className="flex h-dvh min-h-0 min-w-0 overflow-hidden bg-background" dir={isRTL ? "rtl" : "ltr"}>
       {/* Mobile overlay */}
       {sidebarOpen && (
         <div
@@ -127,6 +136,7 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
 
       {/* Sidebar */}
       <aside
+        id="admin-sidebar"
         className={cn(
           "fixed inset-y-0 z-50 flex flex-col border-line bg-surface transition-all duration-300 lg:relative lg:z-auto",
           isRTL ? "right-0 border-s" : "left-0 border-e",
@@ -149,7 +159,10 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
             </Link>
           )}
           <button
+            type="button"
             onClick={() => setCollapsed((c) => !c)}
+            aria-expanded={!collapsed}
+            aria-controls="admin-navigation"
             className="hidden rounded-lg p-1.5 text-ink-muted transition-colors hover:bg-surface-soft hover:text-ink-heading lg:block"
             aria-label={collapsed ? t("nav.expand") : t("nav.collapse")}
           >
@@ -162,6 +175,7 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
           {/* Mobile close */}
           <button
             onClick={closeMobile}
+            type="button"
             className="rounded-lg p-1.5 text-ink-muted transition-colors hover:bg-surface-soft lg:hidden"
             aria-label={t("nav.closeMenu")}
           >
@@ -170,7 +184,7 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 overflow-y-auto px-3 py-4">
+        <nav id="admin-navigation" aria-label={t("nav.primaryNavigation")} className="flex-1 overflow-y-auto px-3 py-4">
           {navGroups.map((group, gi) => (
             <div key={gi} className="mb-4">
               {!collapsed && (
@@ -186,6 +200,7 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
                     <Link
                       key={item.href}
                       href={item.href}
+                      aria-current={isActive ? "page" : undefined}
                       onClick={closeMobile}
                       className={cn(
                         "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
@@ -211,15 +226,16 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
           {!collapsed && (
             <div className="mb-2 flex items-center gap-3 rounded-lg px-3 py-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-full bg-brand/10 text-sm font-semibold text-brand">
-                {profile.name.charAt(0).toUpperCase()}
+                {(profile.name || profile.email).charAt(0).toUpperCase()}
               </div>
               <div className="min-w-0 flex-1">
                 <p className="truncate text-sm font-medium text-ink-heading">{profile.name}</p>
-                <p className="truncate text-xs text-ink-muted">{profile.role}</p>
+                <p className="truncate text-xs text-ink-muted">{profile.role === "admin" ? t("usersMgmt.admin") : profile.role}</p>
               </div>
             </div>
           )}
           <button
+            type="button"
             onClick={async () => {
               await adminSignOut();
               window.location.href = `/${locale}/login`;
@@ -241,7 +257,10 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
         <header className="flex h-14 items-center gap-4 border-b border-line bg-surface px-4 lg:px-6">
           {/* Mobile menu button */}
           <button
+            type="button"
             onClick={() => setSidebarOpen(true)}
+            aria-expanded={sidebarOpen}
+            aria-controls="admin-sidebar"
             className="rounded-lg p-1.5 text-ink-muted transition-colors hover:bg-surface-soft lg:hidden"
             aria-label={t("nav.openMenu")}
           >
@@ -249,19 +268,19 @@ export function AdminShell({ locale, profile, children }: AdminShellProps) {
           </button>
 
           {/* Page title */}
-          <h1 className="text-lg font-semibold text-ink-heading">{currentTitle}</h1>
+          <h1 className="min-w-0 flex-1 truncate text-lg font-semibold text-ink-heading">{currentTitle}</h1>
 
           <div className="flex-1" />
 
           {/* Header actions */}
-          <div className="flex items-center gap-2">
+          <div className="flex shrink-0 items-center gap-2">
             <LangSwitcher />
             <ThemeToggle />
           </div>
         </header>
 
         {/* Page content */}
-        <main className="flex-1 overflow-y-auto bg-surface-soft p-4 lg:p-6">
+        <main id="admin-main" tabIndex={-1} className="min-h-0 min-w-0 flex-1 overflow-y-auto bg-surface-soft p-4 lg:p-6">
           {children}
         </main>
       </div>

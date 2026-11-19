@@ -9,17 +9,17 @@ export type Profile = Database["public"]["Tables"]["profiles"]["Row"];
 
 export async function getUser() {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data, error: authError } = await supabase.auth.getUser();
+  if (authError) throw authError;
+  const { user } = data;
   return user;
 }
 
 export async function getProfile(): Promise<Profile | null> {
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const { data, error: authError } = await supabase.auth.getUser();
+  if (authError) throw authError;
+  const { user } = data;
 
   if (!user) return null;
 
@@ -27,9 +27,9 @@ export async function getProfile(): Promise<Profile | null> {
     .from("profiles")
     .select("*")
     .eq("id", user.id)
-    .single();
+    .maybeSingle();
 
-  if (error) return null;
+  if (error) throw error;
   return profile;
 }
 

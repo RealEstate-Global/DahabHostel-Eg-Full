@@ -7,9 +7,12 @@ import {
 } from "@/utils/supabase/admin-queries";
 import { BlogRowActions } from "../_components/admin-actions";
 import { AdminDataTable } from "../_components/admin-data-table";
+import { SettingsManager } from "../_components/settings-manager";
+import { AdminLoadError } from "../_components/admin-load-error";
+import type { Database } from "@/utils/supabase/types";
 import { FileText, Image as ImageIcon, Ticket, Settings, Plus } from "lucide-react";
 import Image from "next/image";
-import { format } from "date-fns";
+import { formatAdminDate } from "../_lib/date-format";
 
 export default async function ContentPage({
   params,
@@ -38,7 +41,8 @@ export default async function ContentPage({
     note: string | null;
     items: Array<{ id: number; site_name: string; price: string; is_addon: boolean | null }>;
   }> = [];
-  let settings: Array<{ key: string; value: unknown; updated_at: string }> = [];
+  let settings: Database["public"]["Tables"]["site_settings"]["Row"][] = [];
+  let loadError = false;
 
   try {
     const [p, g, f, s] = await Promise.all([
@@ -52,7 +56,19 @@ export default async function ContentPage({
     feeGroups = f;
     settings = s;
   } catch {
-    // Keep empty fallbacks if DB is temporarily unreachable
+    loadError = true;
+  }
+
+  if (loadError) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold text-ink-heading">{t("contentPage.title")}</h2>
+          <p className="mt-1 text-sm text-ink-muted">{t("contentPage.subtitle")}</p>
+        </div>
+        <AdminLoadError locale={locale} retryHref={`/${locale}/admin/content?tab=${encodeURIComponent(activeTab)}`} />
+      </div>
+    );
   }
 
   const blogColumns = [
@@ -77,7 +93,7 @@ export default async function ContentPage({
       key: "created_at",
       labelKey: "createdAt",
       render: (row: Record<string, unknown>) =>
-        format(new Date(row.created_at as string), "dd MMM yyyy"),
+        formatAdminDate(row.created_at, locale),
     },
   ];
 
@@ -290,32 +306,7 @@ export default async function ContentPage({
 
       {/* Tab 4: Settings */}
       {activeTab === "settings" && (
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-ink-heading">{tSettings("title")}</h3>
-          </div>
-          {settings.length === 0 ? (
-            <div className="flex flex-col items-center justify-center rounded-2xl border border-line bg-surface py-16">
-              <p className="text-sm text-ink-muted">{tSettings("empty")}</p>
-            </div>
-          ) : (
-            <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-soft divide-y divide-line">
-              {settings.map((s) => (
-                <div key={s.key} className="p-4 sm:p-5">
-                  <div className="flex items-center justify-between">
-                    <h4 className="font-mono text-sm font-semibold text-brand">{s.key}</h4>
-                    <span className="text-xs text-ink-muted">
-                      {new Date(s.updated_at).toLocaleDateString()}
-                    </span>
-                  </div>
-                  <pre className="mt-2 overflow-x-auto rounded-xl bg-surface-soft p-3 font-mono text-xs text-ink">
-                    {JSON.stringify(s.value, null, 2)}
-                  </pre>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <SettingsManager settings={settings} locale={locale} showHeader={false} />
       )}
     </div>
   );

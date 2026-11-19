@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { getAdminBookingRequests } from "@/utils/supabase/admin-queries";
 import { AdminDataTable } from "../_components/admin-data-table";
-import { format } from "date-fns";
+import { formatAdminDate } from "../_lib/date-format";
 
 export default async function BookingsPage({
   params,
@@ -18,9 +18,11 @@ export default async function BookingsPage({
   const page = parseInt(sp.page ?? "1", 10);
 
   let result;
+  let loadError = false;
   try {
     result = await getAdminBookingRequests({ page, search: sp.search });
   } catch {
+    loadError = true;
     result = { data: [], total: 0, page: 1, pageSize: 20, totalPages: 0 };
   }
 
@@ -32,20 +34,20 @@ export default async function BookingsPage({
       key: "check_in",
       labelKey: "checkIn",
       render: (row: Record<string, unknown>) =>
-        row.check_in ? format(new Date(row.check_in as string), "dd MMM yyyy") : "—",
+        formatAdminDate(row.check_in, locale),
     },
     {
       key: "check_out",
       labelKey: "checkOut",
       render: (row: Record<string, unknown>) =>
-        row.check_out ? format(new Date(row.check_out as string), "dd MMM yyyy") : "—",
+        formatAdminDate(row.check_out, locale),
     },
     { key: "guests", labelKey: "guests" },
     {
       key: "created_at",
       labelKey: "createdAt",
       render: (row: Record<string, unknown>) =>
-        format(new Date(row.created_at as string), "dd MMM yyyy"),
+        formatAdminDate(row.created_at, locale),
     },
   ];
 
@@ -83,6 +85,8 @@ export default async function BookingsPage({
         emptyMessage={t("empty")}
         locale={locale}
         basePath={`/${locale}/admin/bookings`}
+        queryParams={{ search: sp.search }}
+        loadError={loadError}
       />
     </div>
   );
