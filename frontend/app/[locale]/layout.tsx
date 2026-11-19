@@ -3,11 +3,13 @@ import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Sora, Noto_Kufi_Arabic } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
+import { notFound } from "next/navigation";
 import { ThemeProvider } from "@/app/_components/providers";
 import { Toaster } from "react-hot-toast";
 import { JsonLd, CookieConsent } from "@/app/_components/shared";
 import { generateOrganizationSchema } from "@/app/_lib/seo";
 import { site, images } from "@/app/_data";
+import { routing } from "@/app/routing";
 
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || site.url;
 
@@ -70,6 +72,7 @@ export default async function RootLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  if (!routing.locales.includes(locale as (typeof routing.locales)[number])) notFound();
   const messages = await getMessages({ locale });
 
   return (

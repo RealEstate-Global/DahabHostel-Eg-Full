@@ -1,5 +1,6 @@
 {
   "ourTours": "Our Tours",
+  "home": "Home",
   "location": "Location",
   "photos": "Photos",
   "ratesBooking": "Rates & Booking",
@@ -18,5 +19,26 @@
   "cityGuide": "City Guide",
   "newsBlog": "News & Blog",
   "writeReview": "Write a Review",
-  "adminDashboard": "Admin Dashboard"
+  "adminDashboard": "Admin Dashboard",
+  "mobileNavigation": "Mobile navigation",
+  "headerHome": "Dahab Hostel home",
+  "mainNavigation": "Main navigation",
+  "toggleNavigationMenu": "Toggle navigation menu",
+  "descriptions": {
+    "ourTours": "Pyramids, Nile, Sinai and desert adventures",
+    "requestTourPrices": "Custom itineraries and group discounts",
+    "entranceFees": "Official ticket prices for Egypt monuments",
+    "onlineBooking": "Instant confirmation and flexible check-in",
+    "roomRates": "Private rooms and dorm bed price guide",
+    "servicesBrochure": "Rooftop terrace, breakfast and amenities",
+    "airportPickup": "24/7 hassle-free Cairo airport transfer",
+    "location": "Talaat Harb Square and Downtown Cairo map",
+    "photos": "Rooftop garden, rooms and hostel atmosphere",
+    "cityInfo": "Local food, metro stations and safety tips",
+    "newsBlog": "Travel guides, news and stories",
+    "aboutUs": "Cairo's downtown oasis since 1998",
+    "contactUs": "Direct WhatsApp, phone, email and address",
+    "writeReview": "Read feedback and share your experience",
+    "adminDashboard": "Admin dashboard for content management and analytics"
+  }
 }

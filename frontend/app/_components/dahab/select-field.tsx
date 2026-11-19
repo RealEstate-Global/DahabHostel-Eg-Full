@@ -7,12 +7,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/select";
+import { useTranslations } from "next-intl";
 
 export type SelectOption = { value: string; label: string };
 
 export function SelectField({
   label,
-  placeholder = "Select an option",
+  placeholder,
   value,
   onChange,
   options,
@@ -25,6 +26,7 @@ export function SelectField({
   options: SelectOption[];
   required?: boolean;
 }) {
+  const t = useTranslations("common.accessibility");
   return (
     <div>
       {label && (
@@ -37,7 +39,7 @@ export function SelectField({
           className="group flex h-12 w-full items-center justify-between rounded-xl border border-line-strong bg-surface px-4 text-sm text-ink shadow-soft transition-all duration-300 hover:border-brand/60 focus:border-brand focus:outline-none focus:ring-2 focus:ring-brand/20 data-[placeholder]:text-ink-subtle [&>span]:line-clamp-1 [&>svg]:h-4 [&>svg]:w-4 [&>svg]:shrink-0 [&>svg]:text-ink-subtle [&>svg]:transition-transform [&>svg]:duration-300 group-data-[state=open]:[&>svg]:rotate-180 group-data-[state=open]:[&>svg]:text-brand"
           aria-label={label}
         >
-          <SelectValue placeholder={placeholder} />
+          <SelectValue placeholder={placeholder ?? t("selectOption")} />
         </SelectTrigger>
         <SelectContent
           position="popper"

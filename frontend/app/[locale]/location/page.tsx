@@ -13,6 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function LocationPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.location" });
+  const tLabels = await getTranslations({ locale, namespace: "common.legalLabels" });
   const href = (p: string) => `/${locale}${p}`;
   const directions = t.raw("directions") as string[];
   const nearby = t.raw("nearby") as string[];
@@ -45,8 +46,8 @@ export default async function LocationPage({ params }: { params: Promise<{ local
           </ul>
           <p className="text-ink-muted">{t("evenings")}</p>
           <div className="mt-8 rounded-2xl bg-surface-soft/70 p-5 ring-subtle text-[14px] text-ink-muted">
-            <p><strong className="text-ink">Address:</strong> {site.address}</p>
-            <p><strong className="text-ink">Phone:</strong> {site.phone}</p>
+            <p><strong className="text-ink">{tLabels("address")}</strong> {site.address}</p>
+            <p><strong className="text-ink">{tLabels("phone")}</strong> {site.phone}</p>
           </div>
         </div>
       </main>

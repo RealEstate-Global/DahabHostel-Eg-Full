@@ -4,9 +4,11 @@ import { useState } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import type { Photo } from "@/app/_data";
+import { useTranslations } from "next-intl";
 
 export function GalleryGrid({ photos }: { photos: Photo[] }) {
   const [active, setActive] = useState<number | null>(null);
+  const t = useTranslations("common.accessibility");
 
   function move(dir: number) {
     if (active === null) return;
@@ -25,13 +27,13 @@ export function GalleryGrid({ photos }: { photos: Photo[] }) {
       </div>
       {active !== null && (
         <div className="fixed inset-0 z-50 bg-black/85 flex items-center justify-center p-4" onClick={() => setActive(null)}>
-          <button className="absolute top-4 right-4 text-white" aria-label="Close" onClick={() => setActive(null)}><X size={32} /></button>
-          <button className="absolute left-4 text-white" aria-label="Previous photo" onClick={(e) => { e.stopPropagation(); move(-1); }}><ChevronLeft size={40} /></button>
+          <button className="absolute top-4 right-4 text-white" aria-label={t("close")} onClick={() => setActive(null)}><X size={32} /></button>
+          <button className="absolute left-4 text-white" aria-label={t("previousPhoto")} onClick={(e) => { e.stopPropagation(); move(-1); }}><ChevronLeft size={40} /></button>
           <figure className="max-w-4xl w-full" onClick={(e) => e.stopPropagation()}>
             <img src={photos[active].src} alt={photos[active].caption} className="w-full max-h-[80vh] object-contain" />
             <figcaption className="text-white text-center mt-3">{photos[active].caption}</figcaption>
           </figure>
-          <button className="absolute right-4 text-white" aria-label="Next photo" onClick={(e) => { e.stopPropagation(); move(1); }}><ChevronRight size={40} /></button>
+          <button className="absolute right-4 text-white" aria-label={t("nextPhoto")} onClick={(e) => { e.stopPropagation(); move(1); }}><ChevronRight size={40} /></button>
         </div>
       )}
     </>

@@ -1,0 +1,9 @@
+{
+  "pickup": {
+    "title": "Great!",
+    "sent": "Your flight details have been sent to us.",
+    "reply": "We will reply soon to reconfirm your flight details.",
+    "questions": "If you have any questions, please",
+    "contact": "contact us"
+  }
+}

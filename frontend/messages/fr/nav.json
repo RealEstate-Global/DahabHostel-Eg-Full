@@ -1,5 +1,6 @@
 {
   "ourTours": "Nos Circuits",
+  "home": "Accueil",
   "location": "Emplacement",
   "photos": "Photos",
   "ratesBooking": "Tarifs et Réservation",
@@ -18,5 +19,26 @@
   "cityGuide": "Guide de la Ville",
   "newsBlog": "Actualités et Blog",
   "writeReview": "Écrire un Avis",
-  "adminDashboard": "Tableau de Bord"
+  "adminDashboard": "Tableau de Bord",
+  "mobileNavigation": "Navigation mobile",
+  "headerHome": "Accueil de Dahab Hostel",
+  "mainNavigation": "Navigation principale",
+  "toggleNavigationMenu": "Ouvrir ou fermer le menu de navigation",
+  "descriptions": {
+    "ourTours": "Aventures aux pyramides, sur le Nil, au Sinaï et dans le désert",
+    "requestTourPrices": "Itinéraires sur mesure et réductions pour les groupes",
+    "entranceFees": "Tarifs officiels des billets des monuments égyptiens",
+    "onlineBooking": "Confirmation immédiate et arrivée flexible",
+    "roomRates": "Tarifs des chambres privées et des lits en dortoir",
+    "servicesBrochure": "Terrasse sur le toit, petit-déjeuner et équipements",
+    "airportPickup": "Transfert pratique depuis l'aéroport du Caire, 24 h/24 et 7 j/7",
+    "location": "Place Talaat Harb et plan du centre-ville du Caire",
+    "photos": "Jardin sur le toit, chambres et ambiance de l'auberge",
+    "cityInfo": "Cuisine locale, stations de métro et conseils de sécurité",
+    "newsBlog": "Guides de voyage, actualités et récits",
+    "aboutUs": "Une oasis au centre du Caire depuis 1998",
+    "contactUs": "WhatsApp, téléphone, e-mail et adresse en direct",
+    "writeReview": "Consultez les avis et partagez votre expérience",
+    "adminDashboard": "Gestion du contenu et analyses"
+  }
 }

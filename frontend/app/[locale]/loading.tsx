@@ -3,8 +3,10 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { images } from "@/app/_data";
+import { useTranslations } from "next-intl";
 
 export default function Loading() {
+  const t = useTranslations("common.loading");
   return (
     <div className="flex min-h-[70vh] items-center justify-center bg-background px-6">
       <div className="text-center">
@@ -13,8 +15,8 @@ export default function Loading() {
             <Image src={images.logo} alt="Dahab Hostel" width={80} height={50} className="h-auto w-16" />
           </div>
         </motion.div>
-        <p className="font-display text-lg font-semibold text-ink-heading">Getting your stay ready</p>
-        <p className="mt-1 text-sm text-ink-muted">A little oasis is just a moment away...</p>
+        <p className="font-display text-lg font-semibold text-ink-heading">{t("title")}</p>
+        <p className="mt-1 text-sm text-ink-muted">{t("description")}</p>
         <div className="mx-auto mt-7 h-1.5 w-56 overflow-hidden rounded-full bg-surface-soft">
           <motion.div className="h-full w-1/3 rounded-full bg-brand-gradient" animate={{ x: ["-100%", "300%"] }} transition={{ duration: 1.4, repeat: Infinity, ease: "easeInOut" }} />
         </div>

@@ -1,0 +1,9 @@
+{
+  "pickup": {
+    "title": "C'est fait !",
+    "sent": "Nous avons bien reçu les détails de votre vol.",
+    "reply": "Nous vous répondrons bientôt pour confirmer à nouveau les détails de votre vol.",
+    "questions": "Pour toute question, n'hésitez pas à",
+    "contact": "nous contacter"
+  }
+}

@@ -1,124 +1,164 @@
-export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }, { locale: "es" }, { locale: "fr" }];
-}
+import { getTranslations } from "next-intl/server";
+import {
+  CalendarCheck,
+  MapPin,
+  Plane,
+  Mail,
+  BedDouble,
+  Route,
+  Star,
+  FileText,
+  Users,
+  MessageSquare,
+} from "lucide-react";
+import { KpiCard } from "../_components/kpi-card";
+import { RecentActivityList } from "../_components/recent-activity";
+import { RequestsBarChart, RequestsPieChart } from "../_components/overview-charts";
+import {
+  getDashboardCounts,
+  getRecentActivity,
+  getBookingRequestsByDate,
+  getRequestsByType,
+} from "@/utils/supabase/admin-queries";
 
-export default function OverviewPage() {
-  const locale = "ar" === "ar" ? "ar" : "en";
+export default async function OverviewPage({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "admin.overview" });
 
-  // Translate texts based on locale
-  const t = (key: string) => {
-    const translations: Record<string, Record<string, string>> = {
-      en: {
-        overview: "Overview",
-        totalTours: "Total Tours",
-        activeBookings: "Active Bookings",
-        occupancyRate: "Occupancy Rate",
-        recentActivity: "Recent Activity",
-        newTourAdded: "New tour added",
-        priceUpdated: "Price updated",
-      },
-      ar: {
-        overview: "نظرة عامة",
-        totalTours: "إجمالي الجولات",
-        activeBookings: "الحجوزات النشطة",
-        occupancyRate: "معدل الإشغال",
-        recentActivity: "نشاط حديث",
-        newTourAdded: "جولة جديدة أضيفت",
-        priceUpdated: "تم تحديث السعر",
-      },
+  // Fetch all data in parallel
+  let counts: Awaited<ReturnType<typeof getDashboardCounts>>;
+  let activity: Awaited<ReturnType<typeof getRecentActivity>>;
+  let chartData: Awaited<ReturnType<typeof getBookingRequestsByDate>>;
+  let pieData: Awaited<ReturnType<typeof getRequestsByType>>;
+  try {
+    [counts, activity, chartData, pieData] = await Promise.all([
+      getDashboardCounts(),
+      getRecentActivity(10),
+      getBookingRequestsByDate(30),
+      getRequestsByType(),
+    ]);
+  } catch {
+    // If DB is unavailable, show empty state
+    counts = {
+      bookingRequests: 0,
+      tourRequests: 0,
+      airportPickups: 0,
+      contactMessages: 0,
+      activeRooms: 0,
+      totalRooms: 0,
+      activeTours: 0,
+      totalTours: 0,
+      pendingReviews: 0,
+      approvedReviews: 0,
+      publishedPosts: 0,
+      totalProfiles: 0,
     };
-    return translations[key]?.[locale] || translations[key]?.en || key;
-  };
+    activity = [];
+    chartData = [];
+    pieData = [];
+  }
 
   return (
-    <section className="p-6 bg-white rounded-lg shadow-sm">
-      <h2 className="text-xl font-bold text-ink-heading mb-6">
-        {t("overview")}
-      </h2>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {/* Stats Cards */}
-        <article className="p-5 rounded-xl border border-border hover:transition-colors hover:border-brand">
-          <div className="flex items-start">
-            <div className="w-12 h-12 rounded-xl bg-brand-soft flex-shrink-0 flex items-center justify-center">
-              <svg className="w-6 h-6 text-brand" viewBox="0 0 24 24">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V9z" />
-                <path d="M0 0h24v24H0V0z" fill="none" />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm text-ink-muted">
-                {t("totalTours")}
-              </p>
-              <p className="text-2xl font-bold text-ink-heading">24</p>
-            </div>
-          </div>
-        </article>
-
-        <article className="p-5 rounded-xl border border-border hover:transition-colors hover:border-brand">
-          <div className="flex items-start">
-            <div className="w-12 h-12 rounded-xl bg-brand-soft flex-shrink-0 flex items-center justify-center">
-              <svg className="w-6 h-6 text-brand" viewBox="0 0 24 24">
-                <path d="M14 2H6a2 2 0 0 0-2 2v20a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                <path d="M18 20v-8l-6-4h12l-6 4z" />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm text-ink-muted">
-                {t("activeBookings")}
-              </p>
-              <p className="text-2xl font-bold text-ink-heading">156</p>
-            </div>
-          </div>
-        </article>
-
-        <article className="p-5 rounded-xl border border-border">
-          <div className="flex items-start">
-            <div className="w-12 h-12 rounded-xl bg-surface-soft flex-shrink-0 flex items-center justify-center">
-              <svg className="w-6 h-6 text-ink-muted" viewBox="0 0 24 24">
-                <path d="M10 8L8 10h4l-2 2-4-4 4-4-2-2h4l2 2 8-8" />
-              </svg>
-            </div>
-            <div className="ml-3">
-              <p className="text-sm text-ink-muted">
-                {t("occupancyRate")}
-              </p>
-              <p className="text-2xl font-bold text-ink-heading">78%</p>
-            </div>
-          </div>
-        </article>
+    <div className="space-y-6">
+      {/* Page Header */}
+      <div>
+        <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
+        <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
       </div>
 
-      {/* Recent Activity Section */}
-      <div className="mt-8 p-5 rounded-xl border border-border">
-        <h3 className="text-semibold text-ink-heading mb-4">
-          {t("recentActivity")}
-        </h3>
-        <div className="space-y-3">
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-surface/50">
-            <svg className="w-5 h-5 text-ink-muted" viewBox="0 0 24 24">
-              <path d="M17 2L12 7l-5 5L7 2" />
-            </svg>
-            <div>
-              <p className="font-medium text-ink-heading">
-                {t("newTourAdded")}
-              </p>
-              <p className="text-xs text-ink-muted">2 hours ago</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 p-3 rounded-lg bg-surface/50">
-            <svg className="w-5 h-5 text-ink-muted" viewBox="0 0 24 24">
-              <path d="M17 2L12 7l-5 5L7 2" />
-            </svg>
-            <div>
-              <p className="font-medium text-ink-heading">
-                {t("priceUpdated")}
-              </p>
-              <p className="text-xs text-ink-muted">Yesterday</p>
-            </div>
-          </div>
+      {/* KPI Grid */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+        <KpiCard
+          label={t("bookingRequests")}
+          value={counts.bookingRequests}
+          icon={CalendarCheck}
+          variant="brand"
+        />
+        <KpiCard
+          label={t("tourRequests")}
+          value={counts.tourRequests}
+          icon={MapPin}
+          variant="success"
+        />
+        <KpiCard
+          label={t("airportPickups")}
+          value={counts.airportPickups}
+          icon={Plane}
+          variant="warning"
+        />
+        <KpiCard
+          label={t("contactMessages")}
+          value={counts.contactMessages}
+          icon={Mail}
+          variant="default"
+        />
+        <KpiCard
+          label={t("pendingReviews")}
+          value={counts.pendingReviews}
+          icon={Star}
+          variant="destructive"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <KpiCard
+          label={t("activeRooms")}
+          value={counts.activeRooms}
+          subtitle={t("ofTotal", { total: counts.totalRooms })}
+          icon={BedDouble}
+          variant="brand"
+        />
+        <KpiCard
+          label={t("activeTours")}
+          value={counts.activeTours}
+          subtitle={t("ofTotal", { total: counts.totalTours })}
+          icon={Route}
+          variant="success"
+        />
+        <KpiCard
+          label={t("publishedPosts")}
+          value={counts.publishedPosts}
+          icon={FileText}
+          variant="default"
+        />
+        <KpiCard
+          label={t("totalUsers")}
+          value={counts.totalProfiles}
+          icon={Users}
+          variant="default"
+        />
+      </div>
+
+      {/* Charts + Recent Activity */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        {/* Bar Chart */}
+        <div className="rounded-xl border border-line bg-surface p-5 lg:col-span-2">
+          <h3 className="mb-4 text-sm font-semibold text-ink-heading">
+            {t("requestsOverTime")}
+          </h3>
+          <RequestsBarChart data={chartData} />
+        </div>
+
+        {/* Pie Chart */}
+        <div className="rounded-xl border border-line bg-surface p-5">
+          <h3 className="mb-4 text-sm font-semibold text-ink-heading">
+            {t("requestsByType")}
+          </h3>
+          <RequestsPieChart data={pieData} locale={locale} />
         </div>
       </div>
-    </section>
+
+      {/* Recent Activity */}
+      <div className="rounded-xl border border-line bg-surface p-5">
+        <h3 className="mb-4 text-sm font-semibold text-ink-heading">
+          {t("recentActivity")}
+        </h3>
+        <RecentActivityList items={activity} locale={locale} />
+      </div>
+    </div>
   );
 }

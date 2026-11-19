@@ -1,0 +1,9 @@
+{
+  "pickup": {
+    "title": "¡Listo!",
+    "sent": "Hemos recibido los datos de tu vuelo.",
+    "reply": "Te responderemos pronto para confirmar de nuevo los datos de tu vuelo.",
+    "questions": "Si tienes alguna pregunta, no dudes en",
+    "contact": "contactarnos"
+  }
+}

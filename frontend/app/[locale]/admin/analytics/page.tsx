@@ -1,138 +1,157 @@
-export async function generateStaticParams() {
-  return [{ locale: "en" }, { locale: "ar" }, { locale: "es" }, { locale: "fr" }];
-}
+import { getTranslations } from "next-intl/server";
+import {
+  getBookingRequestsByDate,
+  getRequestsByType,
+  getAdminRooms,
+  getAdminTours,
+  getAdminReviews,
+} from "@/utils/supabase/admin-queries";
+import { RequestsBarChart, RequestsPieChart } from "../_components/overview-charts";
 
-export default function AnalyticsPage() {
-  const locale = "ar" === "ar" ? "ar" : "en";
+export default async function AnalyticsAdminPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ locale: string }>;
+  searchParams: Promise<{ days?: string }>;
+}) {
+  const { locale } = await params;
+  const sp = await searchParams;
+  const t = await getTranslations({ locale, namespace: "admin.analyticsPage" });
 
-  // Translate texts based on locale
-  const t = (key: string) => {
-    const translations: Record<string, Record<string, string>> = {
-      en: {
-        analytics: "Analytics",
-        dailyVisitors: "Daily Visitors",
-        bookingsToday: "Bookings Today",
-        conversionRate: "Conversion rate",
-        revenueToday: "Revenue Today",
-        bookingsOverTime: "Bookings Over Time",
-        trafficSources: "Traffic Sources",
-        demographics: "Guest Demographics",
-        keyPerformance: "Key Performance Indicators",
-        occupancyRate: "Occupancy Rate",
-        averageBookingValue: "Average Booking Value",
-      },
-      ar: {
-        analytics: "التحليلات",
-        dailyVisitors: "زوار اليومية",
-        bookingsToday: "حجوزات اليوم",
-        conversionRate: "معدل التحويل",
-        revenueToday: "إيرادات اليوم",
-        bookingsOverTime: "الحجوزات عبر الزمن",
-        trafficSources: "مصادر الحركة",
-        demographics: " demographics",
-        keyPerformance: "المؤشرات الرئيسية للأداء",
-        occupancyRate: "معدل الإشغال",
-        averageBookingValue: "متوسط قيمة الحجز",
-      },
-    };
-    return translations[key]?.[locale] || translations[key]?.en || key;
+  const days = parseInt(sp.days ?? "30", 10);
+
+  let chartData: Awaited<ReturnType<typeof getBookingRequestsByDate>> = [];
+  let pieData: Awaited<ReturnType<typeof getRequestsByType>> = [];
+  let rooms: Awaited<ReturnType<typeof getAdminRooms>> = [];
+  let tours: Awaited<ReturnType<typeof getAdminTours>> = [];
+  let reviews: Awaited<ReturnType<typeof getAdminReviews>> = {
+    data: [],
+    total: 0,
+    page: 1,
+    pageSize: 100,
+    totalPages: 0,
   };
+  try {
+    [chartData, pieData, rooms, tours, reviews] = await Promise.all([
+      getBookingRequestsByDate(days),
+      getRequestsByType(),
+      getAdminRooms(),
+      getAdminTours(),
+      getAdminReviews({ pageSize: 100 }),
+    ]);
+  } catch {
+    chartData = [];
+    pieData = [];
+    rooms = [];
+    tours = [];
+    reviews = {
+      data: [],
+      total: 0,
+      page: 1,
+      pageSize: 100,
+      totalPages: 0,
+    };
+  }
+
+  // Calculate real metrics
+  const totalCapacity = rooms.reduce((acc, r) => acc + (r.capacity ?? 1), 0);
+  const avgRating =
+    reviews.data.length > 0
+      ? (
+          reviews.data.reduce((acc, r) => acc + (r.rating ?? 0), 0) /
+          reviews.data.length
+        ).toFixed(1)
+      : "—";
 
   return (
-    <section className="p-6 bg-white rounded-lg shadow-sm">
-      <h2 className="text-xl font-bold text-ink-heading mb-6">
-        {t("analytics")}
-      </h2>
-
-      {/* Traffic Overview */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-        {/* Daily Visitors Card */}
-        <div className="p-6 rounded-xl border border-border">
-          <h5 className="font-medium text-ink-muted mb-3">
-            {t("dailyVisitors")}
-          </h5>
-          <p className="text-3xl font-bold text-ink-heading">1,247</p>
-          <p className="text-sm text-ink-muted">Today</p>
+    <div className="space-y-6">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
+          <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
         </div>
 
-        {/* Booking Conversions Card */}
-        <div className="p-6 rounded-xl border border-border">
-          <h5 className="font-medium text-ink-muted mb-3">
-            {t("bookingsToday")}
-          </h5>
-          <p className="text-3xl font-bold text-ink-heading">23</p>
-          <p className="text-sm text-ink-muted">
-            {t("conversionRate")}: 3.2%
+        {/* Date range filters */}
+        <div className="flex items-center gap-2">
+          <a
+            href={`/${locale}/admin/analytics?days=7`}
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+              days === 7
+                ? "bg-brand text-white"
+                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+            }`}
+          >
+            {t("last7")}
+          </a>
+          <a
+            href={`/${locale}/admin/analytics?days=30`}
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+              days === 30
+                ? "bg-brand text-white"
+                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+            }`}
+          >
+            {t("last30")}
+          </a>
+          <a
+            href={`/${locale}/admin/analytics?days=90`}
+            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+              days === 90
+                ? "bg-brand text-white"
+                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+            }`}
+          >
+            {t("last90")}
+          </a>
+        </div>
+      </div>
+
+      {/* Summary KPI Cards from real calculations */}
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="rounded-xl border border-line bg-surface p-5">
+          <p className="text-sm text-ink-muted">{t("roomDistribution")}</p>
+          <p className="mt-1 text-2xl font-bold text-ink-heading">{rooms.length}</p>
+          <p className="mt-0.5 text-xs text-ink-muted">Total bed capacity: {totalCapacity}</p>
+        </div>
+
+        <div className="rounded-xl border border-line bg-surface p-5">
+          <p className="text-sm text-ink-muted">{t("tourInventory")}</p>
+          <p className="mt-1 text-2xl font-bold text-ink-heading">{tours.length}</p>
+          <p className="mt-0.5 text-xs text-ink-muted">{tours.filter((t) => t.is_active).length} active</p>
+        </div>
+
+        <div className="rounded-xl border border-line bg-surface p-5">
+          <p className="text-sm text-ink-muted">{t("reviewRatings")}</p>
+          <p className="mt-1 text-2xl font-bold text-ink-heading">{avgRating} / 5</p>
+          <p className="mt-0.5 text-xs text-ink-muted">{reviews.total} total reviews</p>
+        </div>
+
+        <div className="rounded-xl border border-line bg-surface p-5">
+          <p className="text-sm text-ink-muted">{t("requestsByType")}</p>
+          <p className="mt-1 text-2xl font-bold text-ink-heading">
+            {pieData.reduce((acc, d) => acc + d.value, 0)}
           </p>
-        </div>
-
-        {/* Revenue Card */}
-        <div className="p-6 rounded-xl border border-border">
-          <h5 className="font-medium text-ink-muted mb-3">
-            {t("revenueToday")}
-          </h5>
-          <p className="text-3xl font-bold text-ink-heading">$4,580</p>
-          <p className="text-sm text-ink-muted">USD</p>
+          <p className="mt-0.5 text-xs text-ink-muted">Total incoming requests</p>
         </div>
       </div>
 
-      {/* Charts Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Bookings Over Time */}
-        <div className="p-6 rounded-xl border border-border">
-          <h5 className="font-medium text-ink-muted mb-3">
-            {t("bookingsOverTime")}
-          </h5>
-          <div className="h-40 rounded-lg bg-surface relative">
-            {/* Chart placeholder would go here */}
-            <p className="text-center text-ink-muted absolute inset-0">Chart</p>
-          </div>
+      {/* Charts */}
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="rounded-xl border border-line bg-surface p-5 lg:col-span-2">
+          <h3 className="mb-4 text-sm font-semibold text-ink-heading">
+            {t("bookingsOverTime")} ({days}d)
+          </h3>
+          <RequestsBarChart data={chartData} />
         </div>
 
-        {/* Source Analysis */}
-        <div className="p-6 rounded-xl border border-border">
-          <h5 className="font-medium text-ink-muted mb-3">
-            {t("trafficSources")}
-          </h5>
-          <ul className="list-disc list-inside space-y-2 text-sm text-ink-muted">
-            <li>Organic Search: 45%</li>
-            <li>Direct: 30%</li>
-            <li>Social: 15%</li>
-            <li>Referral: 10%</li>
-          </ul>
-        </div>
-
-        {/* Demographics */}
-        <div className="p-6 rounded-xl border border-border">
-          <h5 className="font-medium text-ink-muted mb-3">
-            {t("demographics")}
-          </h5>
-          <p className="text-xs text-ink-muted">
-            Distribution by country visualized in chart
-          </p>
+        <div className="rounded-xl border border-line bg-surface p-5">
+          <h3 className="mb-4 text-sm font-semibold text-ink-heading">
+            {t("requestsByType")}
+          </h3>
+          <RequestsPieChart data={pieData} locale={locale} />
         </div>
       </div>
-
-      {/* Key Metrics */}
-      <div className="mt-8 p-6 rounded-xl border border-border">
-        <h5 className="font-medium text-ink-heading mb-4">
-          {t("keyPerformance")}
-        </h5>
-        <div className="grid grid-cols-2 gap-4">
-          <div>
-            <p className="text-sm text-ink-muted">
-              {t("occupancyRate")}
-            </p>
-            <p className="text-2xl font-bold text-ink-heading">78%</p>
-          </div>
-          <div>
-            <p className="text-sm text-ink-muted">
-              {t("averageBookingValue")}
-            </p>
-            <p className="text-2xl font-bold text-ink-heading">$187</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   );
 }

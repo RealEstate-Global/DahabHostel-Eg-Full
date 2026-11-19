@@ -30,7 +30,7 @@ export function CookieConsent() {
           className="fixed bottom-4 left-4 right-4 z-50 mx-auto max-w-3xl sm:bottom-6"
         >
           <div className="relative rounded-3xl border border-line bg-surface/95 p-5 shadow-lift backdrop-blur-xl sm:p-6">
-            <button onClick={() => choose("declined")} aria-label="Close" className="absolute right-4 top-4 text-ink-subtle transition-colors hover:text-ink">
+            <button onClick={() => choose("declined")} aria-label={t("close")} className="absolute right-4 top-4 text-ink-subtle transition-colors hover:text-ink">
               <X size={18} />
             </button>
             <div className="flex flex-col gap-5 sm:flex-row sm:items-center">

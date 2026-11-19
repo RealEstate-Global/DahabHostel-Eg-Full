@@ -4,11 +4,13 @@ import { motion } from 'framer-motion';
 import { WifiOff, RefreshCw } from 'lucide-react';
 import { Button } from '@/app/_components/ui/button';
 import { NetworkErrorProps } from '@/app/_types';
+import { useTranslations } from 'next-intl';
 
 export function NetworkError({ 
-  onRetry, 
-  message = "Unable to connect to the server. Please check your internet connection." 
+  onRetry,
+  message,
 }: NetworkErrorProps) {
+  const t = useTranslations("common.accessibility");
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -33,11 +35,11 @@ export function NetworkError({
       </motion.div>
 
       <h3 className="text-2xl font-bold text-ink-heading mb-3 font-display">
-        Connection Lost
+        {t("networkErrorTitle")}
       </h3>
       
       <p className="text-ink-muted mb-6 text-center max-w-md">
-        {message}
+        {message ?? t("networkErrorMessage")}
       </p>
 
       {onRetry && (
@@ -46,7 +48,7 @@ export function NetworkError({
           className="bg-brand hover:bg-brand-dark text-white shadow-soft"
         >
           <RefreshCw className="w-4 h-4 mr-2" />
-          Retry Connection
+          {t("retryConnection")}
         </Button>
       )}
     </motion.div>

@@ -80,7 +80,7 @@ export function RequestForm({ kind }: { kind: Kind }) {
       ) : (
         <>
           {kind === "booking" && <SelectField label={t("room")} required placeholder={t("selectRoom")} value={form.room} onChange={(v) => setForm({ ...form, room: v })} options={roomOptions} />}
-          <div className="grid grid-cols-2 gap-3"><div><label className={label}>{t("guests")}</label><input type="number" min="1" className={input} value={form.guests || ""} onChange={set("guests")} /></div><div><label className={label}>{kind === "tour" ? t("periodOfStay") : t("preferredDate")}</label><input className={input} value={form.period || ""} onChange={set("period")} placeholder="e.g. 10 days" /></div></div>
+          <div className="grid grid-cols-2 gap-3"><div><label className={label}>{t("guests")}</label><input type="number" min="1" className={input} value={form.guests || ""} onChange={set("guests")} /></div><div><label className={label}>{kind === "tour" ? t("periodOfStay") : t("preferredDate")}</label><input className={input} value={form.period || ""} onChange={set("period")} placeholder={t("examplePeriod")} /></div></div>
           {kind === "tour" && <div><label className={label}>{t("destinations")}</label><input className={input} value={form.destinations || ""} onChange={set("destinations")} /></div>}
           <div><label className={label}>{t("specialRequests")}</label><textarea rows={4} className={input} value={form.special_requests || ""} onChange={set("special_requests")} /></div>
         </>

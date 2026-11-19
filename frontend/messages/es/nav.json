@@ -1,5 +1,6 @@
 {
   "ourTours": "Nuestros Tours",
+  "home": "Inicio",
   "location": "Ubicación",
   "photos": "Fotos",
   "ratesBooking": "Tarifas y Reserva",
@@ -18,5 +19,26 @@
   "cityGuide": "Guía de la Ciudad",
   "newsBlog": "Noticias y Blog",
   "writeReview": "Escribir Reseña",
-  "adminDashboard": "Panel de Administración"
+  "adminDashboard": "Panel de Administración",
+  "mobileNavigation": "Navegación móvil",
+  "headerHome": "Inicio de Dahab Hostel",
+  "mainNavigation": "Navegación principal",
+  "toggleNavigationMenu": "Abrir o cerrar el menú de navegación",
+  "descriptions": {
+    "ourTours": "Aventuras en las pirámides, el Nilo, el Sinaí y el desierto",
+    "requestTourPrices": "Itinerarios personalizados y descuentos para grupos",
+    "entranceFees": "Precios oficiales de las entradas a monumentos de Egipto",
+    "onlineBooking": "Confirmación inmediata y llegada flexible",
+    "roomRates": "Guía de precios de habitaciones privadas y camas compartidas",
+    "servicesBrochure": "Terraza en la azotea, desayuno y servicios",
+    "airportPickup": "Traslado cómodo al aeropuerto de El Cairo las 24 horas",
+    "location": "Plaza Talaat Harb y mapa del centro de El Cairo",
+    "photos": "Jardín en la azotea, habitaciones y ambiente del albergue",
+    "cityInfo": "Comida local, estaciones de metro y consejos de seguridad",
+    "newsBlog": "Guías de viaje, noticias e historias",
+    "aboutUs": "Un oasis en el centro de El Cairo desde 1998",
+    "contactUs": "WhatsApp, teléfono, correo y dirección directos",
+    "writeReview": "Lee opiniones y comparte tu experiencia",
+    "adminDashboard": "Gestión de contenido y análisis"
+  }
 }

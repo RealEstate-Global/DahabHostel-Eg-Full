@@ -29,77 +29,6 @@ import { images } from "@/app/_data";
 import { ThemeToggle } from "./theme-toggle";
 import { LangSwitcher } from "./lang-switcher";
 
-const DESCRIPTIONS: Record<string, Record<string, string>> = {
-  en: {
-    ourTours: "Pyramids, Nile, Sinai & Desert Adventures",
-    requestTourPrices: "Custom itineraries & group discounts",
-    entranceFees: "Official ticket prices for Egypt monuments",
-    onlineBooking: "Instant confirmation & flexible check-in",
-    roomRates: "Private rooms & dorm bed price guide",
-    servicesBrochure: "Rooftop terrace, breakfast & amenities",
-    airportPickup: "24/7 hassle-free Cairo airport transfer",
-    location: "Talaat Harb Square & Downtown Cairo map",
-    photos: "Rooftop garden, rooms & hostel vibes",
-    cityInfo: "Local food, metro stations & safety tips",
-    newsBlog: "Travel guides, news & stories",
-    aboutUs: "Cairo's downtown oasis since 1998",
-    contactUs: "Direct WhatsApp, phone, email & address",
-    writeReview: "Read feedback & share your experience",
-    adminDashboard: "Admin Dashboard",
-  },
-  ar: {
-    ourTours: "أهرامات الجيزة، النيل، وسفاري الصحراء",
-    requestTourPrices: "خطط رحلات خاصة وأسعار للمجموعات",
-    entranceFees: "أسعار تذاكر المعالم السياحية والمتاحف",
-    onlineBooking: "تأكيد فوري للحجز وإلغاء مرن",
-    roomRates: "دليل أسعار الغرف الخاصة والأسرة المشتركة",
-    servicesBrochure: "التراس، الإفطار وكافة مرافق الإقامة",
-    airportPickup: "توصيل واستقبال من مطار القاهرة 24/7",
-    location: "ميدان طلعت Walsh& وخريطة وسط البلد",
-    photos: "صور تراس السطح، الغرف وأجواء الهوستل",
-    cityInfo: "دليل المطاعم ومحطات المترو وأمان المدينة",
-    newsBlog: "مقالات السفر، الأخبار وقصص المسافرين",
-    aboutUs: "واحة المسافرين في قلب القاهرة منذ 1998",
-    contactUs: "واتساب، هاتف، بريد إلكتروني وعنواننا",
-    writeReview: "آراء النزلاء ومشاركة تجربتك معنا",
-    adminDashboard: "لوحة التحكم",
-  },
-  es: {
-    ourTours: "Pirámides, Nilo, Sinaí y desiertos",
-    requestTourPrices: "Itinerarios personalizados y ofertas",
-    entranceFees: "Precios oficiales de monumentos en Egipto",
-    onlineBooking: "Confirmación instantánea y cancelación flexible",
-    roomRates: "Guía de precios de habitaciones y dormitorios",
-    servicesBrochure: "Terraza, desayuno y comodidades",
-    airportPickup: "Traslado al aeropuerto de El Cairo 24/7",
-    location: "Plaza Talaat Harb y centro de El Cairo",
-    photos: "Terraza en la azotea, habitaciones y fotos",
-    cityInfo: "Comida local, estaciones de metro y consejos",
-    newsBlog: "Guías de viaje, noticias e historias",
-    aboutUs: "Oasis en el centro de El Cairo desde 1998",
-    contactUs: "WhatsApp, teléfono, correo y ubicación",
-    writeReview: "Lee opiniones y comparte tu experiencia",
-    adminDashboard: "Panel de administración",
-  },
-  fr: {
-    ourTours: "Pyramides, Nil, Sinaï et aventures désertiques",
-    requestTourPrices: "Itinéraires sur mesure et tarifs groupes",
-    entranceFees: "Prix officiels des billets des monuments",
-    onlineBooking: "Confirmation immédiate et conditions souples",
-    roomRates: "Guide des tarifs des chambres et dortoirs",
-    servicesBrochure: "Terrasse sur le toit, petit-déjeuner et services",
-    airportPickup: "Transfert aéroport du Caire 24h/24 et 7j/7",
-    location: "Place Talaat Harb et centre-ville du Caire",
-    photos: "Terrasse, chambres et ambiance de l'auberge",
-    cityInfo: "Gastronomie locale, métro et conseils sécurité",
-    newsBlog: "Guides de voyage, actualités et récits",
-    aboutUs: "Oasis au centre du Caire depuis 1998",
-    contactUs: "WhatsApp, téléphone, e-mail et adresse",
-    writeReview: "Avis des voyageurs et retour d'expérience",
-    adminDashboard: "Tableau de bord",
-  },
-};
-
 export function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
@@ -111,7 +40,6 @@ export function Header() {
   const tNav = useTranslations("nav");
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const desc = DESCRIPTIONS[locale] || DESCRIPTIONS.en;
   const href = (p: string) => `/${locale}${p}`;
 
   const navGroups = [
@@ -123,19 +51,19 @@ export function Header() {
           title: tNav("ourTours"),
           href: "/our-tours",
           icon: Compass,
-          desc: desc.ourTours,
+          desc: tNav("descriptions.ourTours"),
         },
         {
           title: tNav("requestTourPrices"),
           href: "/tours-prices",
           icon: Receipt,
-          desc: desc.requestTourPrices,
+          desc: tNav("descriptions.requestTourPrices"),
         },
         {
           title: tNav("entranceFees"),
           href: "/entrance-fees",
           icon: Ticket,
-          desc: desc.entranceFees,
+          desc: tNav("descriptions.entranceFees"),
         },
       ],
     },
@@ -147,25 +75,25 @@ export function Header() {
           title: tNav("onlineBooking"),
           href: "/book-now",
           icon: CalendarCheck,
-          desc: desc.onlineBooking,
+          desc: tNav("descriptions.onlineBooking"),
         },
         {
           title: tNav("roomRates"),
           href: "/prices",
           icon: BedDouble,
-          desc: desc.roomRates,
+          desc: tNav("descriptions.roomRates"),
         },
         {
           title: tNav("servicesBrochure"),
           href: "/services-brochure",
           icon: FileText,
-          desc: desc.servicesBrochure,
+          desc: tNav("descriptions.servicesBrochure"),
         },
         {
           title: tNav("airportPickup"),
           href: "/airport-pickup-service",
           icon: Car,
-          desc: desc.airportPickup,
+          desc: tNav("descriptions.airportPickup"),
         },
       ],
     },
@@ -177,25 +105,25 @@ export function Header() {
           title: tNav("location"),
           href: "/location",
           icon: MapPin,
-          desc: desc.location,
+          desc: tNav("descriptions.location"),
         },
         {
           title: tNav("photos"),
           href: "/photos",
           icon: Camera,
-          desc: desc.photos,
+          desc: tNav("descriptions.photos"),
         },
         {
           title: tNav("cityInfo"),
           href: "/city-info",
           icon: Landmark,
-          desc: desc.cityInfo,
+          desc: tNav("descriptions.cityInfo"),
         },
         {
           title: tNav("newsBlog"),
           href: "/blog",
           icon: Newspaper,
-          desc: desc.newsBlog,
+          desc: tNav("descriptions.newsBlog"),
         },
       ],
     },
@@ -207,25 +135,25 @@ export function Header() {
           title: tNav("aboutUs"),
           href: "/about-us",
           icon: Users,
-          desc: desc.aboutUs,
+          desc: tNav("descriptions.aboutUs"),
         },
         {
           title: tNav("contactUs"),
           href: "/contact-us",
           icon: Mail,
-          desc: desc.contactUs,
+          desc: tNav("descriptions.contactUs"),
         },
         {
           title: tNav("writeReview"),
           href: "/write-a-review",
           icon: Star,
-          desc: desc.writeReview,
+          desc: tNav("descriptions.writeReview"),
         },
         {
           title: tNav("adminDashboard"),
           href: "/admin/overview",
           icon: Landmark,
-          desc: "Admin dashboard for content management and analytics",
+          desc: tNav("descriptions.adminDashboard"),
         },
       ],
     },
@@ -274,7 +202,7 @@ export function Header() {
   const MobileDrawer = () => {
     return (
       <div className="border-t border-line bg-surface shadow-2xl lg:hidden animate-in slide-in-from-top-2 duration-200">
-        <nav className="container-page divide-y divide-line/60 py-4" aria-label="Mobile navigation">
+        <nav className="container-page divide-y divide-line/60 py-4" aria-label={tNav("mobileNavigation")}>
           {navGroups.map((group) => {
             const isExpanded = mobileExpanded === group.id;
 
@@ -337,7 +265,7 @@ export function Header() {
           <Link
             href={href("/")}
             className="group relative flex shrink-0 items-center rounded-2xl bg-surface px-3 py-1.5 shadow-xs ring-subtle transition-transform duration-300 hover:scale-105"
-            aria-label="Dahab Hostel home"
+            aria-label={tNav("headerHome")}
           >
             <Image
               src={images.logo}
@@ -352,7 +280,7 @@ export function Header() {
           {/* DESKTOP NAVIGATION WITH DROPDOWNS */}
           <nav
             className="hidden items-center gap-1.5 lg:flex"
-            aria-label="Main navigation"
+            aria-label={tNav("mainNavigation")}
             data-nav-dropdown
           >
             {navGroups.map((group) => {
@@ -433,7 +361,7 @@ export function Header() {
               type="button"
               onClick={() => setMobileOpen((v) => !v)}
               className="grid h-10 w-10 place-items-center rounded-2xl border border-line bg-surface text-ink shadow-xs transition-colors hover:bg-surface-soft lg:hidden"
-              aria-label="Toggle navigation menu"
+              aria-label={tNav("toggleNavigationMenu")}
               aria-expanded={mobileOpen}
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}

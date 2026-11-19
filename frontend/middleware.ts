@@ -9,16 +9,10 @@ const intlMiddleware = createMiddleware(routing);
 export async function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname;
 
-  // Skip Supabase session update for admin dashboard (it's static, no auth needed)
-  const isAdminRoute = pathname.startsWith("/admin");
-  let supabaseResponse: NextResponse;
-
-  if (!isAdminRoute) {
-    // Keep Supabase auth sessions refreshed on non-admin routes.
-    supabaseResponse = (await updateSession(request)).response;
-  } else {
-    supabaseResponse = NextResponse.next({ request });
-  }
+  // Keep Supabase auth sessions refreshed on ALL routes including admin.
+  const supabaseResponse = (await updateSession(request)).response;
+  const isAdminRoute = pathname.startsWith("/admin") ||
+    /^\/(en|ar|fr|es)\/admin/.test(pathname);
 
   // Handle locale routing/redirects with next-intl (also detects the
   // visitor's Accept-Language on `/` and syncs the NEXT_LOCALE cookie).
@@ -29,11 +23,6 @@ export async function middleware(request: NextRequest) {
     supabaseResponse.cookies.getAll().forEach((cookie) => {
       response.cookies.set(cookie.name, cookie.value);
     });
-  }
-
-  // Add cache headers for static admin pages
-  if (isAdminRoute) {
-    response.headers.set("Cache-Control", "public, max-age=300, stale-while-revalidate=86400");
   }
 
   return response;

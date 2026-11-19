@@ -9,9 +9,10 @@ import { Compass, ShieldCheck, Clock, MapPin, Sparkles, ArrowUpRight, Quote, Sta
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "pages.home" });
   return generateSEO({
-    title: "Best Hostel in Egypt — Dahab Hostel Downtown Cairo",
-    description: site.description,
+    title: t("metadataTitle"),
+    description: t("metadataDescription"),
     keywords: site.keywords.split(", "),
     locale,
   });
@@ -21,7 +22,8 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "pages.home" });
   const base = process.env.NEXT_PUBLIC_BASE_URL || site.url;
-  const breadcrumbs = generateBreadcrumbSchema([{ name: "Home", url: `${base}/${locale}` }]);
+  const tNav = await getTranslations({ locale, namespace: "nav" });
+  const breadcrumbs = generateBreadcrumbSchema([{ name: tNav("home"), url: `${base}/${locale}` }]);
   const href = (p: string) => `/${locale}${p}`;
 
   const highlights = [

@@ -30,6 +30,40 @@
     "success": "¡Gracias! Tu mensaje ha sido enviado. Nos pondremos en contacto contigo pronto.",
     "error": "Lo sentimos, ocurrió un error. Por favor contáctanos directamente en"
   },
+  "loading": {
+    "title": "Estamos preparando tu estancia",
+    "description": "Tu pequeño oasis estará listo en un momento…"
+  },
+  "theme": {
+    "light": "Cambiar al modo claro",
+    "dark": "Cambiar al modo oscuro"
+  },
+  "accessibility": {
+    "close": "Cerrar",
+    "previousPhoto": "Foto anterior",
+    "nextPhoto": "Foto siguiente",
+    "networkErrorTitle": "Se perdió la conexión",
+    "networkErrorMessage": "No se pudo conectar con el servidor. Comprueba tu conexión a Internet.",
+    "retryConnection": "Reintentar conexión",
+    "selectOption": "Selecciona una opción",
+    "pagination": "Paginación",
+    "previousPage": "Ir a la página anterior",
+    "nextPage": "Ir a la página siguiente",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "morePages": "Más páginas",
+    "breadcrumb": "Ruta de navegación",
+    "more": "Más",
+    "previousSlide": "Diapositiva anterior",
+    "nextSlide": "Diapositiva siguiente"
+  },
+  "legalLabels": {
+    "terms": "Términos legales",
+    "policy": "Política legal",
+    "email": "Correo electrónico:",
+    "phone": "Teléfono:",
+    "address": "Dirección:"
+  },
   "requestForm": {
     "firstName": "Nombre",
     "lastName": "Apellidos",
@@ -56,6 +90,7 @@
     "bookingButton": "Enviar solicitud de reserva",
     "bookingSuccess": "¡Gracias! Tu solicitud de reserva ha sido enviada.",
     "pickupButton": "Enviar datos de traslado",
-    "pickupSuccess": "¡Perfecto! Los datos de tu vuelo han sido enviados."
+    "pickupSuccess": "¡Perfecto! Los datos de tu vuelo han sido enviados.",
+    "examplePeriod": "p. ej., 10 días"
   }
 }

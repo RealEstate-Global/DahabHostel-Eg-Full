@@ -1,10 +1,13 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { createClient } from "@/utils/supabase/client";
 import { useRouter } from "next/navigation";
+import { useLocale } from "next-intl";
 
 export default function LoginPage() {
+  const t = useTranslations("auth");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [mode, setMode] = useState<"login" | "signup">("login");
@@ -13,6 +16,7 @@ export default function LoginPage() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const router = useRouter();
+  const locale = useLocale();
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -20,49 +24,59 @@ export default function LoginPage() {
     setMessage(null);
     setLoading(true);
 
-    const supabase = createClient();
+    try {
+      const supabase = createClient();
 
-    if (mode === "login") {
-      const { error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      if (error) {
-        setError(error.message);
+      if (mode === "login") {
+        const { error } = await supabase.auth.signInWithPassword({ email, password });
+        if (error) {
+          const messages: Record<string, string> = {
+            invalid_credentials: t("errors.invalidCredentials"),
+            email_not_confirmed: t("errors.emailNotConfirmed"),
+          };
+          setError(messages[error.code ?? ""] ?? t("errors.generic"));
+        } else {
+          router.push(`/${locale}`);
+          router.refresh();
+        }
       } else {
-        router.push("/");
-        router.refresh();
+        const { error } = await supabase.auth.signUp({
+          email,
+          password,
+          options: { data: { full_name: fullName } },
+        });
+        if (error) {
+          const messages: Record<string, string> = {
+            user_already_exists: t("errors.accountExists"),
+            weak_password: t("errors.weakPassword"),
+            invalid_email: t("errors.invalidEmail"),
+            signup_disabled: t("errors.signupUnavailable"),
+          };
+          setError(messages[error.code ?? ""] ?? t("errors.generic"));
+        } else {
+          setMessage(t("confirmationSent"));
+        }
       }
-    } else {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: {
-          data: { full_name: fullName },
-        },
-      });
-      if (error) {
-        setError(error.message);
-      } else {
-        setMessage("Check your email for a confirmation link.");
-      }
+    } catch {
+      setError(t("errors.generic"));
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
   }
 
   return (
     <div className="flex min-h-[70vh] items-center justify-center px-4 py-16">
       <div className="card-modern w-full max-w-md p-6 sm:p-10 shadow-card ring-subtle">
         <h1 className="mb-8 text-center font-display text-3xl font-bold text-ink-heading">
-          {mode === "login" ? "Sign In" : "Create Account"}
+          {mode === "login" ? t("signIn") : t("createAccount")}
         </h1>
 
         <form onSubmit={handleSubmit} className="space-y-4">
           {mode === "signup" && (
             <div>
-              <label className="label-modern">Full Name</label>
+              <label htmlFor="full-name" className="label-modern">{t("fullName")}</label>
               <input
+                id="full-name"
                 type="text"
                 value={fullName}
                 onChange={(e) => setFullName(e.target.value)}
@@ -73,8 +87,9 @@ export default function LoginPage() {
           )}
 
           <div>
-            <label className="label-modern">Email</label>
+            <label htmlFor="email" className="label-modern">{t("email")}</label>
             <input
+              id="email"
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
@@ -84,8 +99,9 @@ export default function LoginPage() {
           </div>
 
           <div>
-            <label className="label-modern">Password</label>
+            <label htmlFor="password" className="label-modern">{t("password")}</label>
             <input
+              id="password"
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -112,32 +128,32 @@ export default function LoginPage() {
             className="btn-primary w-full py-3.5"
           >
             {loading
-              ? "Loading..."
+              ? t("loading")
               : mode === "login"
-                ? "Sign In"
-                : "Create Account"}
+                ? t("signIn")
+                : t("createAccount")}
           </button>
         </form>
 
         <p className="mt-6 text-center text-sm text-ink-muted">
           {mode === "login" ? (
             <>
-              Don&apos;t have an account?{" "}
+              {t("switchToSignUp")}{" "}
               <button
                 onClick={() => setMode("signup")}
                 className="font-semibold text-brand hover:underline"
               >
-                Sign Up
+                {t("signUp")}
               </button>
             </>
           ) : (
             <>
-              Already have an account?{" "}
+              {t("switchToSignIn")}{" "}
               <button
                 onClick={() => setMode("login")}
                 className="font-semibold text-brand hover:underline"
               >
-                Sign In
+                {t("signIn")}
               </button>
             </>
           )}

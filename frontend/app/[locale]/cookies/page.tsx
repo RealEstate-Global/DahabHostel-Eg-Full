@@ -4,9 +4,12 @@ import { Header, Footer } from "@/app/_components/dahab";
 import { site } from "@/app/_data";
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 
 export default function CookiePolicyPage() {
   const t = useTranslations("legal.cookies");
+  const tLabels = useTranslations("common.legalLabels");
+  const locale = useLocale();
 
   return (
     <>
@@ -20,12 +23,12 @@ export default function CookiePolicyPage() {
             className="card-modern p-6 sm:p-12 shadow-soft ring-subtle"
           >
             <div className="mb-10 border-b border-line pb-8">
-              <p className="eyebrow mb-2">Legal Policy</p>
+              <p className="eyebrow mb-2">{tLabels("policy")}</p>
               <h1 className="heading-display mb-3">
                 {t("title")}
               </h1>
               <p className="text-sm font-medium text-ink-muted">
-                {t("lastUpdated")} {new Date().toLocaleDateString()}
+                {t("lastUpdated")} {new Date().toLocaleDateString(locale)}
               </p>
             </div>
 
@@ -170,9 +173,9 @@ export default function CookiePolicyPage() {
                   {t("sections.contact.intro")}
                 </p>
                 <ul className="space-y-2 text-sm text-ink-muted">
-                  <li><span className="font-semibold text-ink">Email:</span> {site.email}</li>
-                  <li><span className="font-semibold text-ink">Phone:</span> {site.phone}</li>
-                  <li><span className="font-semibold text-ink">Address:</span> {site.address}</li>
+                  <li><span className="font-semibold text-ink">{tLabels("email")}</span> {site.email}</li>
+                  <li><span className="font-semibold text-ink">{tLabels("phone")}</span> {site.phone}</li>
+                  <li><span className="font-semibold text-ink">{tLabels("address")}</span> {site.address}</li>
                 </ul>
               </section>
             </div>
