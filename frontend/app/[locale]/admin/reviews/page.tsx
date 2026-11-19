@@ -93,30 +93,30 @@ export default async function ReviewsAdminPage({
         <div className="flex items-center gap-2">
           <a
             href={`/${locale}/admin/reviews`}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               !sp.status
-                ? "bg-brand text-white"
-                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+                ? "bg-brand text-white shadow-soft"
+                : "border border-line bg-surface text-ink-muted hover:border-brand/40 hover:text-ink-heading"
             }`}
           >
             {t("filterAll")}
           </a>
           <a
             href={`/${locale}/admin/reviews?status=pending`}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               sp.status === "pending"
-                ? "bg-brand text-white"
-                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+                ? "bg-star text-white shadow-soft"
+                : "border border-line bg-surface text-ink-muted hover:border-star/40 hover:text-ink-heading"
             }`}
           >
             {t("filterPending")}
           </a>
           <a
             href={`/${locale}/admin/reviews?status=approved`}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               sp.status === "approved"
-                ? "bg-brand text-white"
-                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+                ? "bg-success text-white shadow-soft"
+                : "border border-line bg-surface text-ink-muted hover:border-success/40 hover:text-ink-heading"
             }`}
           >
             {t("filterApproved")}

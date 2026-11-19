@@ -43,8 +43,8 @@ export default async function TourRequestsPage({
         <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
         <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
       </div>
-      <form className="flex gap-2" action="">
-        <input type="text" name="search" defaultValue={sp.search ?? ""} placeholder={t("searchPlaceholder")} className="input-modern max-w-sm" />
+      <form className="flex items-center gap-2 max-w-md" action="">
+        <input type="text" name="search" defaultValue={sp.search ?? ""} placeholder={t("searchPlaceholder")} className="input-modern" />
       </form>
       <AdminDataTable columns={columns} data={result.data as unknown as Record<string, unknown>[]} total={result.total} page={result.page} pageSize={result.pageSize} totalPages={result.totalPages} emptyMessage={t("empty")} locale={locale} basePath={`/${locale}/admin/tour-requests`} />
     </div>

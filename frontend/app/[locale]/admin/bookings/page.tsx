@@ -57,17 +57,17 @@ export default async function BookingsPage({
       </div>
 
       {/* Search */}
-      <form className="flex gap-2" action="">
+      <form className="flex items-center gap-2 max-w-md" action="">
         <input
           type="text"
           name="search"
           defaultValue={sp.search ?? ""}
           placeholder={t("searchPlaceholder")}
-          className="input-modern max-w-sm"
+          className="input-modern"
         />
         <button
           type="submit"
-          className="rounded-xl bg-brand px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-dark"
+          className="btn-primary text-xs px-5 py-2.5 rounded-xl whitespace-nowrap"
         >
           {tTable("name") === "الاسم" ? "بحث" : "Search"}
         </button>

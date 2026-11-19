@@ -62,6 +62,9 @@ export default async function RoomsPage({
           <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
           <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
         </div>
+        <span className="rounded-full bg-brand/10 px-3.5 py-1 text-xs font-semibold text-brand">
+          {rooms.length} {locale === "ar" ? "غرف مسجلة" : "total rooms"}
+        </span>
       </div>
 
       <AdminDataTable

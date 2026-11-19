@@ -57,6 +57,9 @@ export default async function ToursPage({
           <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
           <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
         </div>
+        <span className="rounded-full bg-brand/10 px-3.5 py-1 text-xs font-semibold text-brand">
+          {tours.length} {locale === "ar" ? "جولات مسجلة" : "total tours"}
+        </span>
       </div>
 
       <AdminDataTable

@@ -62,6 +62,10 @@ export function RequestsBarChart({ data }: { data: BarChartData[] }) {
             border: "1px solid hsl(var(--line))",
             borderRadius: 8,
             fontSize: 12,
+            color: "hsl(var(--ink))",
+          }}
+          itemStyle={{
+            color: "hsl(var(--ink-heading))",
           }}
         />
         <Bar
@@ -121,6 +125,10 @@ export function RequestsPieChart({ data, locale }: { data: PieData[]; locale: st
             border: "1px solid hsl(var(--line))",
             borderRadius: 8,
             fontSize: 12,
+            color: "hsl(var(--ink))",
+          }}
+          itemStyle={{
+            color: "hsl(var(--ink-heading))",
           }}
         />
         <Legend

@@ -76,30 +76,30 @@ export default async function AnalyticsAdminPage({
         <div className="flex items-center gap-2">
           <a
             href={`/${locale}/admin/analytics?days=7`}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               days === 7
-                ? "bg-brand text-white"
-                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+                ? "bg-brand text-white shadow-soft"
+                : "border border-line bg-surface text-ink-muted hover:border-brand/40 hover:text-ink-heading"
             }`}
           >
             {t("last7")}
           </a>
           <a
             href={`/${locale}/admin/analytics?days=30`}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               days === 30
-                ? "bg-brand text-white"
-                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+                ? "bg-brand text-white shadow-soft"
+                : "border border-line bg-surface text-ink-muted hover:border-brand/40 hover:text-ink-heading"
             }`}
           >
             {t("last30")}
           </a>
           <a
             href={`/${locale}/admin/analytics?days=90`}
-            className={`rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`rounded-full px-3.5 py-1.5 text-xs font-semibold transition-all ${
               days === 90
-                ? "bg-brand text-white"
-                : "border border-line bg-surface text-ink-muted hover:text-ink-heading"
+                ? "bg-brand text-white shadow-soft"
+                : "border border-line bg-surface text-ink-muted hover:border-brand/40 hover:text-ink-heading"
             }`}
           >
             {t("last90")}

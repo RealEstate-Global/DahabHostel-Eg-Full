@@ -54,10 +54,10 @@ export function AdminDataTable<T extends Record<string, unknown>>({
   return (
     <div className="space-y-4">
       {/* Desktop table */}
-      <div className="hidden overflow-x-auto rounded-xl border border-line bg-surface md:block">
+      <div className="hidden overflow-hidden rounded-2xl border border-line bg-surface shadow-soft md:block">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-line bg-surface-soft">
+            <tr className="border-b border-line bg-surface-soft/80">
               {columns.map((col) => (
                 <th
                   key={col.key}
@@ -120,7 +120,7 @@ export function AdminDataTable<T extends Record<string, unknown>>({
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-between rounded-xl border border-line bg-surface px-4 py-3">
+        <div className="flex items-center justify-between rounded-2xl border border-line bg-surface px-4 py-3 shadow-soft">
           <p className="text-xs text-ink-muted">
             {t("showing", { from, to, total })}
           </p>

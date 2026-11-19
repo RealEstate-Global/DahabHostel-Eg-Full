@@ -32,28 +32,26 @@ export default async function SettingsAdminPage({
       </div>
 
       {settings.length === 0 ? (
-        <div className="flex flex-col items-center justify-center rounded-xl border border-line bg-surface py-16">
+        <div className="flex flex-col items-center justify-center rounded-2xl border border-line bg-surface py-16">
           <p className="text-sm text-ink-muted">{t("empty")}</p>
         </div>
       ) : (
-        <div className="overflow-hidden rounded-xl border border-line bg-surface">
-          <div className="divide-y divide-line">
-            {settings.map((s) => (
-              <div key={s.key} className="p-4 sm:p-5">
-                <div className="flex items-center justify-between">
-                  <h3 className="font-mono text-sm font-semibold text-brand">
-                    {s.key}
-                  </h3>
-                  <span className="text-xs text-ink-muted">
-                    {new Date(s.updated_at).toLocaleDateString()}
-                  </span>
-                </div>
-                <pre className="mt-2 overflow-x-auto rounded-lg bg-surface-soft p-3 font-mono text-xs text-ink">
-                  {JSON.stringify(s.value, null, 2)}
-                </pre>
+        <div className="overflow-hidden rounded-2xl border border-line bg-surface shadow-soft divide-y divide-line">
+          {settings.map((s) => (
+            <div key={s.key} className="p-5 sm:p-6 transition-colors hover:bg-surface-soft/40">
+              <div className="flex items-center justify-between">
+                <h3 className="font-mono text-sm font-semibold text-brand">
+                  {s.key}
+                </h3>
+                <span className="text-xs text-ink-muted">
+                  {new Date(s.updated_at).toLocaleDateString()}
+                </span>
               </div>
-            ))}
-          </div>
+              <pre className="mt-3 overflow-x-auto rounded-xl bg-surface-soft p-4 font-mono text-xs text-ink border border-line/60">
+                {JSON.stringify(s.value, null, 2)}
+              </pre>
+            </div>
+          ))}
         </div>
       )}
     </div>

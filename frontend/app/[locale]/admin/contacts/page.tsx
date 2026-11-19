@@ -50,13 +50,13 @@ export default async function ContactMessagesPage({
         <h2 className="text-2xl font-bold text-ink-heading">{t("title")}</h2>
         <p className="mt-1 text-sm text-ink-muted">{t("subtitle")}</p>
       </div>
-      <form className="flex gap-2" action="">
+      <form className="flex items-center gap-2 max-w-md" action="">
         <input
           type="text"
           name="search"
           defaultValue={sp.search ?? ""}
           placeholder={t("searchPlaceholder")}
-          className="input-modern max-w-sm"
+          className="input-modern"
         />
       </form>
       <AdminDataTable

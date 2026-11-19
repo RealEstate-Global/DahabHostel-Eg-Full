@@ -63,13 +63,13 @@ export default async function UsersAdminPage({
         </div>
       </div>
 
-      <form className="flex gap-2" action="">
+      <form className="flex items-center gap-2 max-w-md" action="">
         <input
           type="text"
           name="search"
           defaultValue={sp.search ?? ""}
           placeholder={tTable("name") === "الاسم" ? "البحث بالاسم أو البريد…" : "Search by name or email…"}
-          className="input-modern max-w-sm"
+          className="input-modern"
         />
       </form>
 

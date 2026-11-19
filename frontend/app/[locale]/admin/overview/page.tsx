@@ -136,7 +136,7 @@ export default async function OverviewPage({
       {/* Charts + Recent Activity */}
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
         {/* Bar Chart */}
-        <div className="rounded-xl border border-line bg-surface p-5 lg:col-span-2">
+        <div className="rounded-2xl border border-line bg-surface p-5 shadow-soft lg:col-span-2">
           <h3 className="mb-4 text-sm font-semibold text-ink-heading">
             {t("requestsOverTime")}
           </h3>
@@ -144,7 +144,7 @@ export default async function OverviewPage({
         </div>
 
         {/* Pie Chart */}
-        <div className="rounded-xl border border-line bg-surface p-5">
+        <div className="rounded-2xl border border-line bg-surface p-5 shadow-soft">
           <h3 className="mb-4 text-sm font-semibold text-ink-heading">
             {t("requestsByType")}
           </h3>
@@ -153,7 +153,7 @@ export default async function OverviewPage({
       </div>
 
       {/* Recent Activity */}
-      <div className="rounded-xl border border-line bg-surface p-5">
+      <div className="rounded-2xl border border-line bg-surface p-5 shadow-soft">
         <h3 className="mb-4 text-sm font-semibold text-ink-heading">
           {t("recentActivity")}
         </h3>

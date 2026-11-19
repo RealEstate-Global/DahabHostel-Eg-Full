@@ -24,5 +24,5 @@ No message namespace or catalog key was deleted. The dependency review did not e
 ## Remaining audit notes
 
 - `localized-data.ts` contains localized catalog descriptions and arrays, rather than UI labels. Its structure is retained; a separate audit should trace each record to its data source before changing it.
-- The repository's `typecheck` currently reports pre-existing database typing errors in the admin server actions and Supabase admin queries. These refer to tables inferred as `never` and are outside the localization changes.
+- The final `pnpm typecheck` and production build type check pass. An earlier standalone typecheck overlapped with regeneration of `.next/types` and reported missing generated files; rerunning after the build completed passed.
 - The original `lint` script had no ESLint configuration and opened an interactive prompt. A standard Next.js ESLint configuration was added so the existing command can run non-interactively; its results are recorded in the delivery summary.

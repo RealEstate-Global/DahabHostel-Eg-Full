@@ -54,7 +54,7 @@ export function RecentActivityList({ items, locale }: Props) {
         return (
           <div
             key={`${item.type}-${item.createdAt}-${i}`}
-            className="flex items-center gap-3 rounded-lg p-3 transition-colors hover:bg-surface-soft"
+            className="flex items-center gap-3 rounded-xl border border-line/60 bg-surface p-3 transition-colors hover:bg-surface-soft hover:border-brand/30"
           >
             <div className={`flex h-9 w-9 flex-shrink-0 items-center justify-center rounded-lg ${color}`}>
               <Icon className="h-4 w-4" />

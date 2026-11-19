@@ -45,7 +45,7 @@ export default async function EntranceFeesPage({
       ) : (
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
           {groups.map((group) => (
-            <div key={group.id} className="rounded-xl border border-line bg-surface p-5">
+            <div key={group.id} className="rounded-2xl border border-line bg-surface p-6 shadow-soft transition-all duration-300 hover:border-brand/40">
               <div className="mb-4 border-b border-line pb-3">
                 <h3 className="font-semibold text-ink-heading">{group.group_name}</h3>
                 {group.tagline && (
@@ -59,18 +59,18 @@ export default async function EntranceFeesPage({
                     <div className="flex items-center gap-2">
                       <span className="text-sm text-ink">{item.site_name}</span>
                       {item.is_addon && (
-                        <span className="rounded bg-surface-soft px-1.5 py-0.5 text-[10px] font-medium text-ink-muted">
+                        <span className="rounded-full bg-surface-soft px-2 py-0.5 text-[10px] font-semibold text-ink-muted">
                           {t("isAddon")}
                         </span>
                       )}
                     </div>
-                    <span className="font-medium text-ink-heading text-sm">{item.price}</span>
+                    <span className="font-bold text-ink-heading text-sm">{item.price}</span>
                   </div>
                 ))}
               </div>
 
               {group.note && (
-                <p className="mt-3 border-t border-line pt-2 text-xs text-ink-muted italic">
+                <p className="mt-4 border-t border-line pt-3 text-xs text-ink-muted italic">
                   {group.note}
                 </p>
               )}
