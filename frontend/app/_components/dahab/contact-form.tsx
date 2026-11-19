@@ -41,7 +41,7 @@ export function ContactForm() {
   return (
     <form onSubmit={submit} className="max-w-[720px] space-y-4">
       <p className="text-[13px] text-ink-subtle"><span className="text-brand">*</span> {t("requiredNote")}</p>
-      {status === "error" && <p className="text-red-600 text-[13px]">{t("error")} {site.email}.</p>}
+      {status === "error" && <p className="text-destructive text-[13px] font-medium">{t("error")} {site.email}.</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className={label}>{t("name")} *</label><input required className={input} value={form.name} onChange={set("name")} /></div>
         <div><label className={label}>{t("email")} *</label><input required type="email" className={input} value={form.email} onChange={set("email")} /></div>

@@ -20,7 +20,7 @@ export default async function EntranceFeesPage({ params }: { params: Promise<{ l
         <PageHero title={t("title")} subtitle={t("subtitle")} image={images.homeBanner} />
         <div className="container-page section-pad max-w-4xl space-y-12">
           {entranceFees.map((g) => (
-            <div key={g.group} className="rounded-2xl bg-surface p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+            <div key={g.group} className="rounded-2xl bg-surface p-6 shadow-soft ring-subtle">
               <h2 className="font-display text-[22px] text-ink mb-3">{g.group}</h2>
               <table className="w-full text-[14px]">
                 <thead>
@@ -40,7 +40,7 @@ export default async function EntranceFeesPage({ params }: { params: Promise<{ l
               </table>
             </div>
           ))}
-          <div className="rounded-2xl bg-gradient-to-br from-brand-soft/30 via-surface-soft to-surface p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10 space-y-3 text-[14px] leading-relaxed">
+          <div className="rounded-2xl bg-gradient-to-br from-brand-soft/30 via-surface-soft to-surface p-6 shadow-soft ring-subtle space-y-3 text-[14px] leading-relaxed">
             {feeNotes.map((n) => <p key={n}>{n}</p>)}
           </div>
           <div className="text-center"><ActionLink href="/tours-prices">{t("requestPrices")}</ActionLink></div>

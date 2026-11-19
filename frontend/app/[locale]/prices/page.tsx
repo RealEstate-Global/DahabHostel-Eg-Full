@@ -26,7 +26,7 @@ export default async function PricesPage({ params }: { params: Promise<{ locale:
           </div>
           <div className="space-y-4">
             {rooms.map((room) => (
-              <div key={room.name} className="rounded-2xl bg-surface-soft/60 p-5 ring-1 ring-black/5 dark:ring-white/10 transition-all duration-200 hover:shadow-soft">
+              <div key={room.name} className="rounded-2xl bg-surface-soft/60 p-5 ring-subtle transition-all duration-200 hover:shadow-soft">
                 <h2 className="font-display text-[19px] text-ink flex flex-wrap justify-between gap-2">
                   <span>{room.name}</span>
                   <strong className="text-brand">{room.price}</strong>

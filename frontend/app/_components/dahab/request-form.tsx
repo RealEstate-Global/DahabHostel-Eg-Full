@@ -64,7 +64,7 @@ export function RequestForm({ kind }: { kind: Kind }) {
   return (
     <form onSubmit={submit} className="max-w-[720px] space-y-4">
       <p className="text-[13px] text-ink-subtle"><span className="text-brand">*</span> {t("requiredNote")}</p>
-      {status === "error" && <p className="text-red-600 text-[13px]">{t("errorRequired")} {site.email}.</p>}
+      {status === "error" && <p className="text-destructive text-[13px] font-medium">{t("errorRequired")} {site.email}.</p>}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div><label className={label}>{t("firstName")} *</label><input required className={input} value={form.first || ""} onChange={set("first")} /></div>
         <div><label className={label}>{t("lastName")} *</label><input required className={input} value={form.last || ""} onChange={set("last")} /></div>

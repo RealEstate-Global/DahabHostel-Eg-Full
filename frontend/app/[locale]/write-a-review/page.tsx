@@ -29,7 +29,7 @@ export default async function WriteAReview({ params }: { params: Promise<{ local
             <h2 className="font-display text-[22px] text-ink mb-4">{t("hostelWorldHeading")}</h2>
             <p className="leading-relaxed text-justify"><a className="text-brand hover:underline" href={site.hostelWorldUrl} target="_blank" rel="noreferrer">{t("hostelWorldText")}</a></p>
             <p className="mt-6">{t("thanks")}</p>
-            <div className="mt-8 rounded-2xl bg-gradient-to-br from-brand-soft/20 to-surface-soft p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+            <div className="mt-8 rounded-2xl bg-gradient-to-br from-brand-soft/20 to-surface-soft p-6 shadow-soft ring-subtle">
               <p className="mb-2"><a className="text-brand hover:underline" href={site.googleReviewUrl} target="_blank" rel="noreferrer">{t("google")}</a></p>
             </div>
           </div>

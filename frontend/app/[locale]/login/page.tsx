@@ -52,91 +52,97 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="mx-auto max-w-md px-4 py-16">
-      <h1 className="mb-8 text-center text-3xl font-bold">
-        {mode === "login" ? "Sign In" : "Create Account"}
-      </h1>
+    <div className="flex min-h-[70vh] items-center justify-center px-4 py-16">
+      <div className="card-modern w-full max-w-md p-6 sm:p-10 shadow-card ring-subtle">
+        <h1 className="mb-8 text-center font-display text-3xl font-bold text-ink-heading">
+          {mode === "login" ? "Sign In" : "Create Account"}
+        </h1>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {mode === "signup" && (
+        <form onSubmit={handleSubmit} className="space-y-4">
+          {mode === "signup" && (
+            <div>
+              <label className="label-modern">Full Name</label>
+              <input
+                type="text"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="input-modern"
+                required
+              />
+            </div>
+          )}
+
           <div>
-            <label className="mb-1 block text-sm font-medium">Full Name</label>
+            <label className="label-modern">Email</label>
             <input
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="input-modern"
               required
             />
           </div>
-        )}
 
-        <div>
-          <label className="mb-1 block text-sm font-medium">Email</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-            required
-          />
-        </div>
+          <div>
+            <label className="label-modern">Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input-modern"
+              required
+              minLength={6}
+            />
+          </div>
 
-        <div>
-          <label className="mb-1 block text-sm font-medium">Password</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="w-full rounded-lg border px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary"
-            required
-            minLength={6}
-          />
-        </div>
+          {error && (
+            <p className="rounded-xl border border-destructive/20 bg-destructive-soft p-3 text-sm font-medium text-destructive">
+              {error}
+            </p>
+          )}
+          {message && (
+            <p className="rounded-xl border border-success/20 bg-success-soft p-3 text-sm font-medium text-success">
+              {message}
+            </p>
+          )}
 
-        {error && (
-          <p className="rounded-lg bg-red-50 p-3 text-sm text-red-600">{error}</p>
-        )}
-        {message && (
-          <p className="rounded-lg bg-green-50 p-3 text-sm text-green-600">{message}</p>
-        )}
+          <button
+            type="submit"
+            disabled={loading}
+            className="btn-primary w-full py-3.5"
+          >
+            {loading
+              ? "Loading..."
+              : mode === "login"
+                ? "Sign In"
+                : "Create Account"}
+          </button>
+        </form>
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full rounded-lg bg-primary px-4 py-3 font-semibold text-white transition hover:opacity-90 disabled:opacity-50"
-        >
-          {loading
-            ? "Loading..."
-            : mode === "login"
-              ? "Sign In"
-              : "Create Account"}
-        </button>
-      </form>
-
-      <p className="mt-6 text-center text-sm text-muted-foreground">
-        {mode === "login" ? (
-          <>
-            Don&apos;t have an account?{" "}
-            <button
-              onClick={() => setMode("signup")}
-              className="font-semibold text-primary hover:underline"
-            >
-              Sign Up
-            </button>
-          </>
-        ) : (
-          <>
-            Already have an account?{" "}
-            <button
-              onClick={() => setMode("login")}
-              className="font-semibold text-primary hover:underline"
-            >
-              Sign In
-            </button>
-          </>
-        )}
-      </p>
+        <p className="mt-6 text-center text-sm text-ink-muted">
+          {mode === "login" ? (
+            <>
+              Don&apos;t have an account?{" "}
+              <button
+                onClick={() => setMode("signup")}
+                className="font-semibold text-brand hover:underline"
+              >
+                Sign Up
+              </button>
+            </>
+          ) : (
+            <>
+              Already have an account?{" "}
+              <button
+                onClick={() => setMode("login")}
+                className="font-semibold text-brand hover:underline"
+              >
+                Sign In
+              </button>
+            </>
+          )}
+        </p>
+      </div>
     </div>
   );
 }

@@ -1,51 +1,55 @@
 "use client";
 
-import { Header, Footer } from '@/app/_components/dahab';
-import { motion } from 'framer-motion';
-import { useTranslations } from 'next-intl';
+import { Header, Footer } from "@/app/_components/dahab";
+import { site } from "@/app/_data";
+import { motion } from "framer-motion";
+import { useTranslations } from "next-intl";
 
 export default function PrivacyPolicyPage() {
-  const t = useTranslations('legal.privacy');
+  const t = useTranslations("legal.privacy");
 
   return (
-    <main className="overflow-hidden">
+    <>
       <Header />
-      
-      <section className="pt-32 pb-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+      <main className="min-h-[70vh] bg-surface-soft py-12 sm:py-20">
+        <div className="container-page max-w-4xl">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ duration: 0.5 }}
+            className="card-modern p-6 sm:p-12 shadow-soft ring-subtle"
           >
-            <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              {t('title')}
-            </h1>
-            <p className="text-gray-600 dark:text-gray-400 mb-8">
-              {t('lastUpdated')} {new Date().toLocaleDateString()}
-            </p>
+            <div className="mb-10 border-b border-line pb-8">
+              <p className="eyebrow mb-2">Legal Policy</p>
+              <h1 className="heading-display mb-3">
+                {t("title")}
+              </h1>
+              <p className="text-sm font-medium text-ink-muted">
+                {t("lastUpdated")} {new Date().toLocaleDateString()}
+              </p>
+            </div>
 
-            <div className="prose prose-lg dark:prose-invert max-w-none space-y-8">
+            <div className="space-y-10 text-ink leading-relaxed">
               {/* Introduction */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.intro.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.intro.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {t('sections.intro.content')}
+                <p className="text-ink">
+                  {t("sections.intro.content")}
                 </p>
               </section>
 
               {/* Information We Collect */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.collect.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.collect.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  {t('sections.collect.intro')}
+                <p className="mb-4 text-ink">
+                  {t("sections.collect.intro")}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
-                  {t.raw('sections.collect.items').map((item: string, idx: number) => (
+                <ul className="list-disc space-y-2 pl-6 text-ink">
+                  {t.raw("sections.collect.items").map((item: string, idx: number) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
@@ -53,14 +57,14 @@ export default function PrivacyPolicyPage() {
 
               {/* How We Use Your Information */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.use.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.use.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  {t('sections.use.intro')}
+                <p className="mb-4 text-ink">
+                  {t("sections.use.intro")}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
-                  {t.raw('sections.use.items').map((item: string, idx: number) => (
+                <ul className="list-disc space-y-2 pl-6 text-ink">
+                  {t.raw("sections.use.items").map((item: string, idx: number) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
@@ -68,52 +72,52 @@ export default function PrivacyPolicyPage() {
 
               {/* Cookies and Tracking */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.cookies.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.cookies.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {t('sections.cookies.content')}
+                <p className="text-ink">
+                  {t("sections.cookies.content")}
                 </p>
               </section>
 
               {/* Data Sharing */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.sharing.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.sharing.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  {t('sections.sharing.intro')}
+                <p className="mb-4 text-ink">
+                  {t("sections.sharing.intro")}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  {t.raw('sections.sharing.items').map((item: string, idx: number) => (
+                <ul className="mb-4 list-disc space-y-2 pl-6 text-ink">
+                  {t.raw("sections.sharing.items").map((item: string, idx: number) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {t('sections.sharing.note')}
+                <p className="rounded-xl bg-surface-soft p-4 text-sm text-ink-muted ring-subtle">
+                  {t("sections.sharing.note")}
                 </p>
               </section>
 
               {/* Data Security */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.security.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.security.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {t('sections.security.content')}
+                <p className="text-ink">
+                  {t("sections.security.content")}
                 </p>
               </section>
 
               {/* Your Rights */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.rights.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.rights.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  {t('sections.rights.intro')}
+                <p className="mb-4 text-ink">
+                  {t("sections.rights.intro")}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
-                  {t.raw('sections.rights.items').map((item: string, idx: number) => (
+                <ul className="list-disc space-y-2 pl-6 text-ink">
+                  {t.raw("sections.rights.items").map((item: string, idx: number) => (
                     <li key={idx}>{item}</li>
                   ))}
                 </ul>
@@ -121,54 +125,53 @@ export default function PrivacyPolicyPage() {
 
               {/* Children's Privacy */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.children.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.children.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {t('sections.children.content')}
+                <p className="text-ink">
+                  {t("sections.children.content")}
                 </p>
               </section>
 
               {/* International Data Transfers */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.international.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.international.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {t('sections.international.content')}
+                <p className="text-ink">
+                  {t("sections.international.content")}
                 </p>
               </section>
 
               {/* Changes to Privacy Policy */}
               <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.updates.title')}
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.updates.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300">
-                  {t('sections.updates.content')}
+                <p className="text-ink">
+                  {t("sections.updates.content")}
                 </p>
               </section>
 
               {/* Contact Us */}
-              <section>
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  {t('sections.contact.title')}
+              <section className="rounded-2xl border border-line bg-surface-soft/60 p-6 ring-subtle">
+                <h2 className="mb-3 font-display text-2xl font-bold text-ink-heading">
+                  {t("sections.contact.title")}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  {t('sections.contact.intro')}
+                <p className="mb-4 text-ink">
+                  {t("sections.contact.intro")}
                 </p>
-                <ul className="list-none text-gray-700 dark:text-gray-300 space-y-2">
-                  <li>Email: info@dahabhostel.com</li>
-                  <li>Phone: +1 (555) 123-4567</li>
-                  <li>Address: 123 Travel Street, Adventure City, AC 12345</li>
+                <ul className="space-y-2 text-sm text-ink-muted">
+                  <li><span className="font-semibold text-ink">Email:</span> {site.email}</li>
+                  <li><span className="font-semibold text-ink">Phone:</span> {site.phone}</li>
+                  <li><span className="font-semibold text-ink">Address:</span> {site.address}</li>
                 </ul>
               </section>
             </div>
           </motion.div>
         </div>
-      </section>
-
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }

@@ -23,7 +23,7 @@ export default async function ContactUs({ params }: { params: Promise<{ locale: 
             <h2 className="font-display text-[26px] text-ink mb-6">{t("heading")}</h2>
             <ContactForm />
           </div>
-          <aside className="rounded-2xl bg-gradient-to-br from-brand-soft/20 via-surface-soft to-surface p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10 h-fit">
+          <aside className="rounded-2xl bg-gradient-to-br from-brand-soft/20 via-surface-soft to-surface p-6 shadow-soft ring-subtle h-fit">
             <h2 className="font-display text-[20px] text-ink mb-4">{t("details")}</h2>
             <ul className="space-y-4 text-ink-muted leading-relaxed">
               <li><strong className="block text-ink">{t("address")}</strong>{site.address}<br />{site.building}</li>

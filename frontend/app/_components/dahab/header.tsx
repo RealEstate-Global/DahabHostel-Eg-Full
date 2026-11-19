@@ -88,11 +88,11 @@ const DESCRIPTIONS: Record<string, Record<string, string>> = {
     airportPickup: "Transfert aéroport du Caire 24h/24 et 7j/7",
     location: "Place Talaat Harb et centre-ville du Caire",
     photos: "Terrasse, chambres et ambiance de l'auberge",
-    cityInfo: "Gastronomie locale, métro et conseils pratiques",
+    cityInfo: "Gastronomie locale, métro et conseils sécurité",
     newsBlog: "Guides de voyage, actualités et récits",
     aboutUs: "Oasis au centre du Caire depuis 1998",
     contactUs: "WhatsApp, téléphone, e-mail et adresse",
-    writeReview: "Avis des voyageurs et partage d'expérience",
+    writeReview: "Avis des voyageurs et retour d'expérience",
   },
 };
 
@@ -101,163 +101,157 @@ export function Header() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
   const [mobileExpanded, setMobileExpanded] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
+
+  const pathname = usePathname();
+  const locale = useLocale();
+  const tNav = useTranslations("nav");
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  const locale = useLocale();
-  const pathname = usePathname();
-  const tNav = useTranslations("nav");
-  const tFooter = useTranslations("footer.links");
-  const href = (path: string) => `/${locale}${path}`;
-
-  const getDesc = (key: string) => {
-    const lang = DESCRIPTIONS[locale] || DESCRIPTIONS.en;
-    return lang[key] || DESCRIPTIONS.en[key] || "";
-  };
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
-  // Close dropdown on route change
-  useEffect(() => {
-    setActiveDropdown(null);
-    setMobileOpen(false);
-  }, [pathname]);
-
-  // Handle outside click to close desktop dropdown
-  useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      if (!target.closest("[data-nav-dropdown]")) {
-        setActiveDropdown(null);
-      }
-    };
-    document.addEventListener("click", handleOutsideClick);
-    return () => document.removeEventListener("click", handleOutsideClick);
-  }, []);
+  const desc = DESCRIPTIONS[locale] || DESCRIPTIONS.en;
+  const href = (p: string) => `/${locale}${p}`;
 
   const navGroups = [
     {
       id: "tours",
       title: tNav("ourTours"),
-      href: "/our-tours",
       items: [
         {
           title: tNav("ourTours"),
           href: "/our-tours",
-          desc: getDesc("ourTours"),
           icon: Compass,
+          desc: desc.ourTours,
         },
         {
-          title: tFooter("requestTourPrices"),
+          title: tNav("requestTourPrices"),
           href: "/tours-prices",
-          desc: getDesc("requestTourPrices"),
           icon: Receipt,
+          desc: desc.requestTourPrices,
         },
         {
-          title: tFooter("entranceFees"),
+          title: tNav("entranceFees"),
           href: "/entrance-fees",
-          desc: getDesc("entranceFees"),
           icon: Ticket,
+          desc: desc.entranceFees,
         },
       ],
     },
     {
-      id: "stay",
-      title: tNav("ratesBooking"),
-      href: "/book-now",
+      id: "pricing",
+      title: tNav("pricingBooking"),
       items: [
         {
-          title: tFooter("onlineBooking"),
+          title: tNav("onlineBooking"),
           href: "/book-now",
-          desc: getDesc("onlineBooking"),
           icon: CalendarCheck,
-          featured: true,
+          desc: desc.onlineBooking,
         },
         {
-          title: tFooter("roomRates"),
+          title: tNav("roomRates"),
           href: "/prices",
-          desc: getDesc("roomRates"),
           icon: BedDouble,
+          desc: desc.roomRates,
         },
         {
           title: tNav("servicesBrochure"),
           href: "/services-brochure",
-          desc: getDesc("servicesBrochure"),
           icon: FileText,
+          desc: desc.servicesBrochure,
         },
         {
-          title: tFooter("airportPickup"),
+          title: tNav("airportPickup"),
           href: "/airport-pickup-service",
-          desc: getDesc("airportPickup"),
           icon: Car,
+          desc: desc.airportPickup,
         },
       ],
     },
     {
-      id: "explore",
-      title: tNav("cityInfo"),
-      href: "/city-info",
+      id: "city",
+      title: tNav("cityGuide"),
       items: [
         {
           title: tNav("location"),
           href: "/location",
-          desc: getDesc("location"),
           icon: MapPin,
+          desc: desc.location,
         },
         {
           title: tNav("photos"),
           href: "/photos",
-          desc: getDesc("photos"),
           icon: Camera,
+          desc: desc.photos,
         },
         {
           title: tNav("cityInfo"),
           href: "/city-info",
-          desc: getDesc("cityInfo"),
           icon: Landmark,
+          desc: desc.cityInfo,
         },
         {
-          title: tFooter("newsBlog"),
+          title: tNav("newsBlog"),
           href: "/blog",
-          desc: getDesc("newsBlog"),
           icon: Newspaper,
+          desc: desc.newsBlog,
         },
       ],
     },
     {
       id: "about",
       title: tNav("aboutUs"),
-      href: "/about-us",
       items: [
         {
           title: tNav("aboutUs"),
           href: "/about-us",
-          desc: getDesc("aboutUs"),
           icon: Users,
+          desc: desc.aboutUs,
         },
         {
           title: tNav("contactUs"),
           href: "/contact-us",
-          desc: getDesc("contactUs"),
           icon: Mail,
+          desc: desc.contactUs,
         },
         {
-          title: tFooter("writeReview"),
+          title: tNav("writeReview"),
           href: "/write-a-review",
-          desc: getDesc("writeReview"),
           icon: Star,
+          desc: desc.writeReview,
         },
       ],
     },
   ];
 
-  const handleMouseEnter = (id: string) => {
+  // Track scroll state
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 15);
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close menus on route change
+  useEffect(() => {
+    setMobileOpen(false);
+    setActiveDropdown(null);
+  }, [pathname]);
+
+  // Handle outside clicks to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement | null;
+      if (!target?.closest("[data-nav-dropdown]")) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  const handleMouseEnter = (groupId: string) => {
     if (dropdownTimeoutRef.current) clearTimeout(dropdownTimeoutRef.current);
-    setActiveDropdown(id);
+    setActiveDropdown(groupId);
   };
 
   const handleMouseLeave = () => {
@@ -270,15 +264,15 @@ export function Header() {
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "border-b border-line bg-white/95 dark:bg-[#0c161a]/95 shadow-md backdrop-blur-md"
-          : "border-b border-line/80 bg-white dark:bg-[#0c161a] shadow-xs"
+          ? "border-b border-line bg-surface/95 shadow-md backdrop-blur-md"
+          : "border-b border-line/80 bg-surface shadow-xs"
       }`}
     >
       <div className="container-page flex h-[74px] items-center justify-between gap-4">
         {/* LOGO */}
         <Link
           href={href("/")}
-          className="group relative flex shrink-0 items-center rounded-2xl bg-white px-3 py-1.5 shadow-xs ring-1 ring-black/5 transition-transform duration-300 hover:scale-105 dark:bg-white/95"
+          className="group relative flex shrink-0 items-center rounded-2xl bg-surface px-3 py-1.5 shadow-xs ring-subtle transition-transform duration-300 hover:scale-105"
           aria-label="Dahab Hostel home"
         >
           <Image
@@ -327,10 +321,10 @@ export function Header() {
                   />
                 </button>
 
-                {/* DROPDOWN MENU POPOVER - SOLID OPAQUE BACKGROUND WITH CLEAN SHADOW */}
+                {/* DROPDOWN MENU POPOVER - SEMANTIC ELEVATED SURFACE */}
                 {isOpen && (
                   <div
-                    className="absolute left-1/2 top-full z-50 mt-2 w-[340px] -translate-x-1/2 rounded-2xl border border-line bg-white p-2 shadow-2xl ring-1 ring-black/10 dark:border-line-strong dark:bg-[#121f24] dark:ring-white/10 animate-in fade-in-0 zoom-in-95 duration-150"
+                    className="absolute left-1/2 top-full z-50 mt-2 w-[340px] -translate-x-1/2 rounded-2xl border border-line bg-surface-raised p-2 shadow-2xl ring-subtle animate-in fade-in-0 zoom-in-95 duration-150"
                   >
                     <div className="grid gap-1">
                       {group.items.map((subItem) => {
@@ -345,14 +339,14 @@ export function Header() {
                             className={`group flex items-start gap-3 rounded-xl p-2.5 transition-all duration-150 ${
                               isSubActive
                                 ? "bg-brand-soft text-brand"
-                                : "hover:bg-brand-soft/50 dark:hover:bg-brand-soft/20 text-ink"
+                                : "hover:bg-brand-soft/50 text-ink"
                             }`}
                           >
                             <div
                               className={`grid h-9 w-9 shrink-0 place-items-center rounded-xl shadow-xs transition-colors duration-150 ${
                                 isSubActive
-                                  ? "bg-brand text-white"
-                                  : "bg-surface-soft text-brand group-hover:bg-brand group-hover:text-white dark:bg-surface-soft dark:text-brand"
+                                  ? "bg-brand text-primary-foreground"
+                                  : "bg-surface-soft text-brand group-hover:bg-brand group-hover:text-primary-foreground"
                               }`}
                             >
                               <Icon size={17} />
@@ -393,7 +387,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="grid h-10 w-10 place-items-center rounded-2xl border border-line bg-white text-ink shadow-xs transition-colors hover:bg-surface-soft dark:bg-[#121f24] lg:hidden"
+            className="grid h-10 w-10 place-items-center rounded-2xl border border-line bg-surface text-ink shadow-xs transition-colors hover:bg-surface-soft lg:hidden"
             aria-label="Toggle navigation menu"
             aria-expanded={mobileOpen}
           >
@@ -402,9 +396,9 @@ export function Header() {
         </div>
       </div>
 
-      {/* MOBILE MENU ACCORDION DRAWER - 100% OPAQUE */}
+      {/* MOBILE MENU ACCORDION DRAWER - 100% OPAQUE SEMANTIC SURFACE */}
       {mobileOpen && (
-        <div className="border-t border-line bg-white shadow-2xl dark:bg-[#0c161a] lg:hidden animate-in slide-in-from-top-2 duration-200">
+        <div className="border-t border-line bg-surface shadow-2xl lg:hidden animate-in slide-in-from-top-2 duration-200">
           <nav className="container-page divide-y divide-line/60 py-4" aria-label="Mobile navigation">
             {navGroups.map((group) => {
               const isExpanded = mobileExpanded === group.id;
@@ -418,15 +412,15 @@ export function Header() {
                   >
                     <span>{group.title}</span>
                     <ChevronDown
-                      size={16}
-                      className={`text-ink-muted transition-transform duration-200 ${
-                        isExpanded ? "rotate-180 text-brand" : ""
+                      size={15}
+                      className={`transition-transform duration-200 ${
+                        isExpanded ? "rotate-180 text-brand" : "text-ink-subtle"
                       }`}
                     />
                   </button>
 
                   {isExpanded && (
-                    <div className="mt-1 grid gap-1 pl-3 pr-1 pt-1 animate-in fade-in-0 duration-150">
+                    <div className="mt-2 space-y-1 pl-2">
                       {group.items.map((subItem) => {
                         const Icon = subItem.icon;
                         const isSubActive = pathname === href(subItem.href);
@@ -436,18 +430,24 @@ export function Header() {
                             key={subItem.href}
                             href={href(subItem.href)}
                             onClick={() => setMobileOpen(false)}
-                            className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13px] font-medium transition-colors ${
+                            className={`flex items-center gap-3 rounded-xl p-2.5 text-sm transition-all ${
                               isSubActive
-                                ? "bg-brand-soft text-brand font-semibold"
+                                ? "bg-brand-soft font-semibold text-brand"
                                 : "text-ink hover:bg-surface-soft"
                             }`}
                           >
-                            <div className="grid h-7 w-7 place-items-center rounded-lg bg-surface-soft text-brand">
-                              <Icon size={15} />
+                            <div
+                              className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${
+                                isSubActive
+                                  ? "bg-brand text-primary-foreground"
+                                  : "bg-surface-soft text-brand"
+                              }`}
+                            >
+                              <Icon size={16} />
                             </div>
                             <div className="flex-1 min-w-0">
-                              <span className="block font-semibold text-ink-heading">{subItem.title}</span>
-                              <span className="block truncate text-[11px] text-ink-muted">{subItem.desc}</span>
+                              <p className="font-semibold leading-tight text-ink-heading">{subItem.title}</p>
+                              <p className="truncate text-xs text-ink-muted">{subItem.desc}</p>
                             </div>
                           </Link>
                         );
@@ -458,23 +458,15 @@ export function Header() {
               );
             })}
 
-            {/* MOBILE QUICK CTA & LANGUAGE */}
-            <div className="space-y-4 pt-4">
+            <div className="pt-4">
               <Link
                 href={href("/book-now")}
                 onClick={() => setMobileOpen(false)}
-                className="btn-primary w-full justify-center !py-3 text-sm font-semibold shadow-soft"
+                className="btn-primary flex w-full items-center justify-center gap-2 py-3 text-center text-sm font-bold shadow-soft"
               >
                 <span>{tNav("bookNow")}</span>
-                <ArrowUpRight size={17} />
+                <ArrowUpRight size={16} />
               </Link>
-
-              <div>
-                <p className="px-3 pb-2 text-[11px] font-bold uppercase tracking-[0.2em] text-ink-muted">
-                  {tNav("language")}
-                </p>
-                <LangSwitcher variant="chips" label={tNav("language")} onPick={() => setMobileOpen(false)} />
-              </div>
             </div>
           </nav>
         </div>

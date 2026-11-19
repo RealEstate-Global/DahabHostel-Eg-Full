@@ -46,7 +46,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           height="min-h-[78vh]"
         />
         <div className="container-page relative -mt-10 z-10">
-          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-surface/95 p-4 shadow-card ring-1 ring-black/5 dark:ring-white/10 backdrop-blur-xl sm:grid-cols-4 sm:p-6">
+          <div className="grid grid-cols-2 gap-3 rounded-3xl bg-surface/95 p-4 shadow-card ring-subtle backdrop-blur-xl sm:grid-cols-4 sm:p-6">
             {highlights.map(({ icon: Icon, value, label }) => (
               <div key={label} className="flex items-center gap-3 rounded-2xl px-3 py-2 transition-colors hover:bg-surface-soft">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-soft text-brand"><Icon size={18} /></span>
@@ -75,7 +75,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
           <div className="container-page grid items-center gap-12 lg:grid-cols-2">
             <div className="relative animate-fade-up">
               <div className="overflow-hidden rounded-[2rem] shadow-card"><Image src={images.collage} alt="Dahab Hostel rooftop collage" width={800} height={600} className="h-full w-full object-cover" /></div>
-              <div className="absolute -bottom-6 -right-4 hidden w-44 rounded-2xl bg-surface p-4 shadow-lift ring-1 ring-black/5 dark:ring-white/10 sm:block">
+              <div className="absolute -bottom-6 -right-4 hidden w-44 rounded-2xl bg-surface p-4 shadow-lift ring-subtle sm:block">
                 <Sparkles className="mb-2 text-brand" size={20} />
                 <p className="font-display text-sm font-semibold text-ink-heading">{t("experience.badge")}</p>
               </div>
@@ -87,7 +87,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                 <p>{t("experience.p1")}</p>
                 <p>{t("experience.p2")}</p>
               </div>
-              <div className="relative mt-7 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-soft/50 via-surface to-surface-soft p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:shadow-card">
+              <div className="relative mt-7 overflow-hidden rounded-3xl bg-gradient-to-br from-brand-soft/50 via-surface to-surface-soft p-6 shadow-soft ring-subtle transition-all duration-300 hover:shadow-card">
                 <div className="flex items-start gap-4">
                   <div className="grid h-10 w-10 shrink-0 place-items-center rounded-2xl bg-brand/10 text-brand shadow-xs">
                     <Quote size={20} className="rotate-180" />
@@ -97,12 +97,12 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
                       &ldquo;{t("experience.quote")}&rdquo;
                     </blockquote>
                     <div className="flex items-center gap-2 pt-1 text-xs font-semibold text-brand">
-                      <div className="flex items-center text-amber-500">
-                        <Star size={13} className="fill-amber-500" />
-                        <Star size={13} className="fill-amber-500" />
-                        <Star size={13} className="fill-amber-500" />
-                        <Star size={13} className="fill-amber-500" />
-                        <Star size={13} className="fill-amber-500" />
+                      <div className="flex items-center text-star">
+                        <Star size={13} className="fill-current" />
+                        <Star size={13} className="fill-current" />
+                        <Star size={13} className="fill-current" />
+                        <Star size={13} className="fill-current" />
+                        <Star size={13} className="fill-current" />
                       </div>
                       <span className="text-ink-muted">· {t("experience.guestFavorite")}</span>
                     </div>
@@ -120,7 +120,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
         {/* WHAT WE PROVIDE */}
         <section className="relative overflow-hidden section-pad">
           <div className="absolute inset-0 -z-10 bg-cover bg-center" style={{ backgroundImage: `url(${images.provideBanner})` }} />
-          <div className="absolute inset-0 -z-10 bg-[#0b2024]/80" />
+          <div className="absolute inset-0 -z-10 bg-surface-dark/80" />
           <div className="container-page">
             <div className="mx-auto max-w-2xl text-center">
               <p className="eyebrow !text-brand-light">{t("provide.eyebrow")}</p>
@@ -172,7 +172,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             </div>
             <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
               {gallery.slice(0, 4).map((p) => (
-                <div key={p.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+                <div key={p.src} className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-soft ring-subtle">
                   <Image src={p.src} alt={p.caption} fill sizes="25vw" className="object-cover transition-transform duration-700 hover:scale-110" />
                 </div>
               ))}
@@ -188,7 +188,7 @@ export default async function Home({ params }: { params: Promise<{ locale: strin
             <h2 className="mx-auto mt-4 max-w-2xl font-display text-3xl font-semibold text-white sm:text-4xl">{t("cta.title")}</h2>
             <p className="mx-auto mt-4 max-w-xl text-white/80">{t("cta.desc")}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Link href={site.bookingUrl} target="_blank" rel="noreferrer" className="btn !bg-white !text-brand hover:!-translate-y-0.5">{t("cta.checkAvailability")} <ArrowUpRight size={16} /></Link>
+              <Link href={site.bookingUrl} target="_blank" rel="noreferrer" className="btn !bg-surface !text-brand hover:!-translate-y-0.5">{t("cta.checkAvailability")} <ArrowUpRight size={16} /></Link>
               <Link href={href("/airport-pickup-service")} className="btn !border !border-white/50 !text-white hover:!bg-white/10">{t("cta.arrangePickup")}</Link>
             </div>
           </div>

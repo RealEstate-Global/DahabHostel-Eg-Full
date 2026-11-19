@@ -29,6 +29,13 @@ const config: Config = {
           DEFAULT: "hsl(var(--surface) / <alpha-value>)",
           soft: "hsl(var(--surface-soft) / <alpha-value>)",
           raised: "hsl(var(--surface-raised) / <alpha-value>)",
+          dark: "hsl(var(--surface-dark) / <alpha-value>)",
+        },
+        star: "hsl(var(--star) / <alpha-value>)",
+        success: {
+          DEFAULT: "hsl(var(--success) / <alpha-value>)",
+          soft: "hsl(var(--success-soft) / <alpha-value>)",
+          foreground: "hsl(var(--success-foreground) / <alpha-value>)",
         },
         line: {
           DEFAULT: "hsl(var(--line) / <alpha-value>)",
@@ -62,6 +69,7 @@ const config: Config = {
         },
         destructive: {
           DEFAULT: "hsl(var(--destructive) / <alpha-value>)",
+          soft: "hsl(var(--destructive-soft) / <alpha-value>)",
           foreground: "hsl(var(--destructive-foreground) / <alpha-value>)",
         },
         border: "hsl(var(--border) / <alpha-value>)",

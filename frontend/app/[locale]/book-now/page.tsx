@@ -26,7 +26,7 @@ export default async function BookNow({ params }: { params: Promise<{ locale: st
               <h2 className="font-display text-[22px] text-ink mb-4">{t("roomRates")}</h2>
               <div className="space-y-3">
                 {rooms.map((room) => (
-                  <div key={room.name} className="flex flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-surface-soft/70 px-5 py-4 ring-1 ring-black/5 dark:ring-white/10 transition-all duration-200 hover:shadow-soft">
+                  <div key={room.name} className="flex flex-wrap items-baseline justify-between gap-2 rounded-2xl bg-surface-soft/70 px-5 py-4 ring-subtle transition-all duration-200 hover:shadow-soft">
                     <div>
                       <h3 className="font-display text-[18px] text-ink">{room.name}</h3>
                       <p className="text-[13px] text-ink-muted mt-1">{room.description}</p>
@@ -42,12 +42,12 @@ export default async function BookNow({ params }: { params: Promise<{ locale: st
               <p className="text-center mt-6 text-ink-muted">{t("questions")} <a href={href("/contact-us")} className="text-brand hover:underline">{t("contactLink")}</a> {t("gladToHelp")}</p>
             </div>
             <aside className="space-y-6">
-              <div className="rounded-2xl bg-gradient-to-br from-brand-soft/30 via-surface-soft to-surface p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+              <div className="rounded-2xl bg-gradient-to-br from-brand-soft/30 via-surface-soft to-surface p-6 shadow-soft ring-subtle">
                 <h2 className="font-display text-[20px] text-ink mb-4">{t("airportPickup")}</h2>
                 <p className="leading-relaxed text-[14px] mb-4">{t("airportPickupDesc")}</p>
                 <ActionLink href="/airport-pickup-service">{t("orderPickup")}</ActionLink>
               </div>
-              <div className="rounded-2xl bg-surface-soft/50 p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+              <div className="rounded-2xl bg-surface-soft/50 p-6 shadow-soft ring-subtle">
                 <h2 className="font-display text-[20px] text-ink mb-4">{t("customRequest")}</h2>
                 <RequestForm kind="booking" />
               </div>

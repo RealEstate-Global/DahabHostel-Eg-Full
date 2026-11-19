@@ -23,7 +23,7 @@ export function Footer() {
   const href = (p: string) => `/${locale}${p}`;
 
   return (
-    <footer className="relative overflow-hidden bg-[#0d1b1e] text-white">
+    <footer className="relative overflow-hidden bg-surface-dark text-white">
       <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-brand/20 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 right-0 h-80 w-80 rounded-full bg-brand/10 blur-3xl" />
 

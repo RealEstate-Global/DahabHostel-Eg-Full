@@ -23,7 +23,7 @@ export default async function ItineraryGenerator({ params }: { params: Promise<{
           <h2 className="font-display text-[26px] text-ink mb-6">{t("heading")}</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {tours.map((item) => (
-              <div key={item.slug} className="rounded-2xl bg-surface-soft/50 p-6 shadow-soft ring-1 ring-black/5 dark:ring-white/10 transition-all duration-200 hover:-translate-y-1 hover:shadow-card">
+              <div key={item.slug} className="rounded-2xl bg-surface-soft/50 p-6 shadow-soft ring-subtle transition-all duration-200 hover:-translate-y-1 hover:shadow-card">
                 <h3 className="font-display text-[20px] text-ink mb-1">{item.title}</h3>
                 <p className="text-brand text-[13px] mb-3">{item.duration}</p>
                 <p className="text-ink-muted text-[14px] leading-relaxed mb-4">{item.description}</p>

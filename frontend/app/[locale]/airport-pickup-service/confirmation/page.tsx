@@ -10,7 +10,7 @@ export default async function PickupConfirmation({ params }: { params: Promise<{
       <main className="bg-surface-soft flex-1 min-h-[60vh]">
         <div className="container-page py-20 md:py-28">
           <div className="flex flex-col sm:flex-row items-start gap-6 sm:gap-8 max-w-[640px] mx-auto">
-            <div className="shrink-0 w-14 h-14 rounded-full border-[3px] border-emerald-500 flex items-center justify-center text-emerald-500"><CheckCircle2 size={32} strokeWidth={3} /></div>
+            <div className="shrink-0 w-14 h-14 rounded-full border-[3px] border-success bg-success-soft/40 flex items-center justify-center text-success"><CheckCircle2 size={32} strokeWidth={3} /></div>
             <div className="pt-0.5">
               <h1 className="font-display text-[28px] md:text-[32px] text-ink-heading leading-snug mb-1">Great!</h1>
               <p className="font-display text-[22px] md:text-[26px] text-ink-heading leading-snug mb-5">Your flight details have been sent to us now.</p>

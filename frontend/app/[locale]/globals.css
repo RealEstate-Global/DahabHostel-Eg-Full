@@ -20,8 +20,16 @@
     --surface: 0 0% 100%;
     --surface-soft: 180 12% 97%;
     --surface-raised: 0 0% 100%;
+    --surface-dark: 195 40% 8%;
+    --surface-dark-foreground: 0 0% 100%;
     --line: 0 0% 91%;
     --line-strong: 0 0% 82%;
+
+    --star: 38 92% 50%;
+
+    --success: 152 69% 40%;
+    --success-soft: 152 50% 95%;
+    --success-foreground: 0 0% 100%;
 
     --background: 0 0% 100%;
     --foreground: 0 0% 28%;
@@ -38,6 +46,7 @@
     --accent: 188 48% 95%;
     --accent-foreground: 190 38% 35%;
     --destructive: 0 72% 51%;
+    --destructive-soft: 0 70% 96%;
     --destructive-foreground: 0 0% 100%;
     --border: 0 0% 91%;
     --input: 0 0% 89%;
@@ -62,8 +71,16 @@
     --surface: 200 20% 10%;
     --surface-soft: 200 17% 13%;
     --surface-raised: 200 16% 16%;
+    --surface-dark: 200 24% 6%;
+    --surface-dark-foreground: 200 14% 92%;
     --line: 200 12% 21%;
     --line-strong: 200 12% 30%;
+
+    --star: 40 94% 56%;
+
+    --success: 152 60% 48%;
+    --success-soft: 152 40% 16%;
+    --success-foreground: 0 0% 100%;
 
     --background: 200 22% 8%;
     --foreground: 200 14% 88%;
@@ -80,6 +97,7 @@
     --accent: 190 32% 17%;
     --accent-foreground: 187 55% 72%;
     --destructive: 0 62% 45%;
+    --destructive-soft: 0 50% 16%;
     --destructive-foreground: 0 0% 100%;
     --border: 200 12% 21%;
     --input: 200 12% 24%;
@@ -158,6 +176,14 @@
 
   .heading-display {
     @apply font-display text-3xl font-semibold leading-tight tracking-tight text-ink-heading sm:text-4xl lg:text-[2.75rem];
+  }
+
+  .ring-subtle {
+    @apply ring-1 ring-black/5 dark:ring-white/10;
+  }
+
+  .card-subtle {
+    @apply rounded-2xl bg-surface p-6 shadow-soft ring-subtle;
   }
 
   .card-modern {

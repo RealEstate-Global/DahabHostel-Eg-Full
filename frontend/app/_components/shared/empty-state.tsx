@@ -28,13 +28,13 @@ export function EmptyState({
         className="mb-6"
       >
         <div className="relative">
-          <div className="w-24 h-24 bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-900/30 dark:to-purple-900/30 rounded-full flex items-center justify-center">
-            <Icon className="w-12 h-12 text-blue-600 dark:text-blue-400" />
+          <div className="w-24 h-24 bg-brand-soft rounded-full flex items-center justify-center shadow-soft">
+            <Icon className="w-12 h-12 text-brand" />
           </div>
           <motion.div
             animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0, 0.5] }}
             transition={{ duration: 2, repeat: Infinity }}
-            className="absolute inset-0 bg-blue-500/20 rounded-full blur-xl"
+            className="absolute inset-0 bg-brand/20 rounded-full blur-xl"
           />
         </div>
       </motion.div>
@@ -46,17 +46,17 @@ export function EmptyState({
         transition={{ delay: 0.4 }}
         className="text-center max-w-md"
       >
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+        <h3 className="text-2xl font-bold text-ink-heading mb-3 font-display">
           {title}
         </h3>
-        <p className="text-gray-600 dark:text-gray-300 mb-6">
+        <p className="text-ink-muted mb-6">
           {description}
         </p>
 
         {action && (
           <Button
             onClick={action.onClick}
-            className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+            className="bg-brand hover:bg-brand-dark text-white shadow-soft"
           >
             {action.label}
           </Button>

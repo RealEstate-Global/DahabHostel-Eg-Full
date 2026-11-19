@@ -24,7 +24,7 @@ export default async function LocationPage({ params }: { params: Promise<{ local
         <PageHero title={t("title")} subtitle={t("subtitle")} image={images.homeBanner} />
         <div className="container-page section-pad max-w-4xl leading-relaxed space-y-4">
           <p className="text-ink">{t("intro")}</p>
-          <div className="relative w-full aspect-[16/9] my-8 overflow-hidden rounded-2xl shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+          <div className="relative w-full aspect-[16/9] my-8 overflow-hidden rounded-2xl shadow-soft ring-subtle">
             <Image src={images.collage} alt="Dahab Hostel rooftop" fill sizes="760px" className="object-cover" />
           </div>
           <h2 className="font-display text-[24px] text-ink pt-4">{t("howToGetThere")}</h2>
@@ -44,7 +44,7 @@ export default async function LocationPage({ params }: { params: Promise<{ local
             {nearby.map((n) => <li key={n}>{n}</li>)}
           </ul>
           <p className="text-ink-muted">{t("evenings")}</p>
-          <div className="mt-8 rounded-2xl bg-surface-soft/70 p-5 ring-1 ring-black/5 dark:ring-white/10 text-[14px] text-ink-muted">
+          <div className="mt-8 rounded-2xl bg-surface-soft/70 p-5 ring-subtle text-[14px] text-ink-muted">
             <p><strong className="text-ink">Address:</strong> {site.address}</p>
             <p><strong className="text-ink">Phone:</strong> {site.phone}</p>
           </div>

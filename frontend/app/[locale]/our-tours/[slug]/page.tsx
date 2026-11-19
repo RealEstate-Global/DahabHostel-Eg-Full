@@ -38,7 +38,7 @@ export default async function TourDetail({ params }: { params: Promise<{ locale:
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 my-6">
                   {tour.gallery.map((img) => (
                     <figure key={img.src}>
-                      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl shadow-soft ring-1 ring-black/5 dark:ring-white/10">
+                      <div className="relative w-full aspect-[4/3] overflow-hidden rounded-2xl shadow-soft ring-subtle">
                         <Image src={img.src} alt={img.caption} fill sizes="(max-width:640px) 100vw, 50vw" className="object-cover" />
                       </div>
                       <figcaption className="text-[13px] text-ink-subtle mt-2">{img.caption}</figcaption>

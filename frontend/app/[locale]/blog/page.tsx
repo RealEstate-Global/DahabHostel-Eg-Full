@@ -21,7 +21,7 @@ export default async function Blog({ params }: { params: Promise<{ locale: strin
         <PageHero title={t("title")} subtitle={t("subtitle")} image={images.homeBanner} />
         <div className="container-page section-pad grid grid-cols-1 sm:grid-cols-3 gap-8">
           {blogPosts.map((post) => (
-            <article key={post.title} className="card-modern overflow-hidden shadow-soft ring-1 ring-black/5 dark:ring-white/10 transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
+            <article key={post.title} className="card-modern overflow-hidden shadow-soft ring-subtle transition-all duration-300 hover:-translate-y-1 hover:shadow-card">
               <div className="relative w-full aspect-[4/3]"><Image src={post.image} alt={post.title} fill sizes="33vw" className="object-cover" /></div>
               <div className="p-6"><h2 className="font-display text-[20px] text-ink leading-snug">{post.title}</h2></div>
             </article>

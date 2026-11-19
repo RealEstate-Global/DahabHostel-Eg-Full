@@ -27,23 +27,23 @@ export function NetworkError({
         }}
         className="mb-6"
       >
-        <div className="w-24 h-24 bg-gradient-to-r from-orange-100 to-red-100 dark:from-orange-900/30 dark:to-red-900/30 rounded-full flex items-center justify-center">
-          <WifiOff className="w-12 h-12 text-orange-600 dark:text-orange-400" />
+        <div className="w-24 h-24 bg-destructive-soft rounded-full flex items-center justify-center">
+          <WifiOff className="w-12 h-12 text-destructive" />
         </div>
       </motion.div>
 
-      <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
+      <h3 className="text-2xl font-bold text-ink-heading mb-3 font-display">
         Connection Lost
       </h3>
       
-      <p className="text-gray-600 dark:text-gray-300 mb-6 text-center max-w-md">
+      <p className="text-ink-muted mb-6 text-center max-w-md">
         {message}
       </p>
 
       {onRetry && (
         <Button
           onClick={onRetry}
-          className="bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-700 hover:to-red-700"
+          className="bg-brand hover:bg-brand-dark text-white shadow-soft"
         >
           <RefreshCw className="w-4 h-4 mr-2" />
           Retry Connection
