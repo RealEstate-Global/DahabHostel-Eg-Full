@@ -3,6 +3,8 @@ import { SidebarNavItem } from "@/app/_components/sidebar-nav-item";
 import { ThemeToggle } from "@/app/_components/dahab/theme-toggle";
 
 
+export const dynamic = "force-static";
+
 export const metadata = {
   title: "Admin Dashboard - Dahab Hostel",
   description: "Admin dashboard for Dahab Hostel Cairo - Content Management & Analytics",

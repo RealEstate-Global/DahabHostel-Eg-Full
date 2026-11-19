@@ -305,7 +305,7 @@ importers:
         specifier: ^0.468.0
         version: 0.468.0(react@19.1.0)
       next:
-        specifier: ^15.0.0
+        specifier: 15.5.19
         version: 15.5.19(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
       next-auth:
         specifier: ^4.24.15
@@ -323,13 +323,13 @@ importers:
         specifier: ^4.1.1
         version: 4.1.1
       react:
-        specifier: ^19.0.0
+        specifier: 19.1.0
         version: 19.1.0
       react-day-picker:
         specifier: ^9.0.0
         version: 9.14.0(react@19.1.0)
       react-dom:
-        specifier: ^19.0.0
+        specifier: 19.1.0
         version: 19.1.0(react@19.1.0)
       react-hook-form:
         specifier: ^7.54.0

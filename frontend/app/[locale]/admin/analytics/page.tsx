@@ -1,3 +1,7 @@
+export async function generateStaticParams() {
+  return [{ locale: "en" }, { locale: "ar" }, { locale: "es" }, { locale: "fr" }];
+}
+
 export default function AnalyticsPage() {
   const locale = "ar" === "ar" ? "ar" : "en";
 
