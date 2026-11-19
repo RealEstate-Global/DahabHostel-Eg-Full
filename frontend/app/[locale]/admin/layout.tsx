@@ -14,6 +14,7 @@ export default async function AdminLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "admin" });
 
   // ── Auth guard: require admin role ────────────────────────────────────────
   let profile;
@@ -55,17 +56,17 @@ export default async function AdminLayout({
             </svg>
           </div>
           <h1 className="text-xl font-bold text-ink-heading mb-2">
-            {locale === "ar" ? "الوصول مرفوض (403)" : "Access Denied (403)"}
+            {t("auth.forbidden")}
           </h1>
           <p className="text-sm text-ink-muted mb-6">
-            {t("auth.forbidden")}
+            {t("auth.unauthorized")}
           </p>
           <div className="flex justify-center gap-3">
             <a href={`/${locale}`} className="btn-outline text-xs px-4 py-2">
-              {locale === "ar" ? "الرئيسية" : "Home"}
+              {t("nav.overview")}
             </a>
             <a href={`/${locale}/login`} className="btn-primary text-xs px-4 py-2">
-              {t("header.logout")}
+              {t("auth.signIn")}
             </a>
           </div>
         </div>
@@ -90,6 +91,6 @@ export default async function AdminLayout({
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const t = await getTranslations({ locale, namespace: "admin.meta" });
-  return { title: t("title"), description: t("description") };
+  const tMeta = await getTranslations({ locale, namespace: "admin.meta" });
+  return { title: tMeta("title"), description: tMeta("description") };
 }
