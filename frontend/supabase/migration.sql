@@ -41,7 +41,7 @@ as $function$
 $function$;
 
 revoke all on function public.is_admin() from public;
-grant execute on function public.is_admin() to authenticated;
+grant execute on function public.is_admin() to anon, authenticated;
 
 -- A row-ownership policy alone does not protect privileged columns such as role.
 create or replace function public.prevent_profile_role_escalation()
@@ -51,7 +51,9 @@ security definer
 set search_path = ''
 as $function$
 begin
-  if new.role is distinct from old.role and not public.is_admin() then
+  if new.role is distinct from old.role
+    and coalesce(auth.role(), '') <> 'service_role'
+    and not public.is_admin() then
     raise exception 'Only an administrator can change profile roles'
       using errcode = '42501';
   end if;
