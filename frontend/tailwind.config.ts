@@ -7,9 +7,35 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", "ui-sans-serif", "system-ui", "sans-serif"],
-        display: ["var(--font-display)", "ui-sans-serif", "system-ui", "sans-serif"],
-        arabic: ["var(--font-arabic)", "ui-sans-serif", "sans-serif"],
+        sans: [
+          "var(--font-sans)",
+          "var(--font-arabic)",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
+        display: [
+          "var(--font-display)",
+          "var(--font-arabic)",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
+        arabic: [
+          "var(--font-arabic)",
+          "system-ui",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          "Segoe UI",
+          "Roboto",
+          "sans-serif",
+        ],
       },
       colors: {
         brand: {

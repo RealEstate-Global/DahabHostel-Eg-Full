@@ -12,13 +12,13 @@ import { site, images } from "@/app/_data";
 const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || site.url;
 
 const sans = Plus_Jakarta_Sans({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   display: "swap",
   variable: "--font-sans",
 });
 
 const display = Sora({
-  subsets: ["latin"],
+  subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
   variable: "--font-display",
@@ -28,7 +28,6 @@ const arabic = Noto_Kufi_Arabic({
   subsets: ["arabic"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
-  preload: false,
   variable: "--font-arabic",
 });
 
@@ -74,7 +73,12 @@ export default async function RootLayout({
   const messages = await getMessages({ locale });
 
   return (
-    <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"} suppressHydrationWarning>
+    <html
+      lang={locale}
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className={`${sans.variable} ${display.variable} ${arabic.variable}`}
+      suppressHydrationWarning
+    >
       <head>
         <JsonLd data={generateOrganizationSchema()} />
         <link rel="manifest" href="/manifest.json" />
@@ -84,7 +88,7 @@ export default async function RootLayout({
           }}
         />
       </head>
-      <body className={`${sans.variable} ${display.variable} ${arabic.variable} ${locale === "ar" ? "font-arabic" : "font-sans"}`} suppressHydrationWarning>
+      <body className={locale === "ar" ? "font-arabic" : "font-sans"} suppressHydrationWarning>
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
             <div className="flex min-h-screen flex-col">

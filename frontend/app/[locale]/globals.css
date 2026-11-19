@@ -123,7 +123,37 @@
   }
 
   body.font-arabic {
-    font-family: var(--font-arabic), ui-sans-serif, sans-serif;
+    font-family: var(--font-arabic), system-ui, -apple-system, sans-serif;
+  }
+
+  /* Arabic & RTL Typography Optimization: Zero letter distortion, native cursive ligatures & optimal line height */
+  [dir="rtl"] {
+    --font-display: var(--font-arabic);
+    --font-sans: var(--font-arabic);
+    font-feature-settings: "liga" 1, "calt" 1;
+  }
+
+  [dir="rtl"] body,
+  [dir="rtl"] .font-display,
+  [dir="rtl"] .font-sans,
+  [dir="rtl"] .heading-display {
+    font-family: var(--font-arabic), system-ui, -apple-system, sans-serif;
+  }
+
+  /* Prevent letter-spacing distortion on cursive Arabic characters */
+  [dir="rtl"] [class*="tracking-"],
+  [dir="rtl"] .eyebrow,
+  [dir="rtl"] .heading-display,
+  [dir="rtl"] .btn {
+    letter-spacing: 0 !important;
+  }
+
+  /* Safe line height for Arabic ascenders, descenders and diacritical marks */
+  [dir="rtl"] .heading-display,
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3 {
+    line-height: 1.35;
   }
 
   ::selection {
