@@ -3,6 +3,8 @@
 import { useTransition } from "react";
 import { useTranslations } from "next-intl";
 import { Check, X, Trash2, Power, Shield } from "lucide-react";
+import { RoomEditor } from "./room-editor";
+import type { Database } from "@/utils/supabase/types";
 import {
   approveReview,
   unapproveReview,
@@ -69,12 +71,15 @@ export function ReviewActions({ id, isApproved }: { id: number; isApproved: bool
   );
 }
 
-export function RoomRowActions({ id, isActive }: { id: number; isActive: boolean }) {
+export function RoomRowActions({ room }: { room: Database["public"]["Tables"]["rooms"]["Row"] }) {
   const [isPending, startTransition] = useTransition();
   const t = useTranslations("admin.actions");
+  const id = room.id;
+  const isActive = room.is_active;
 
   return (
     <div className="flex items-center justify-end gap-2">
+      <RoomEditor room={room} />
       <button
         disabled={isPending}
         onClick={() => {
