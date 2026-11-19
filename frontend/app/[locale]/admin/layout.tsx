@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import { getProfile } from "@/utils/supabase/auth";
 import { AdminShell } from "./_components/admin-shell";
+import { AdminLoadError } from "./_components/admin-load-error";
 
 export const dynamic = "force-dynamic";
 
@@ -18,11 +19,22 @@ export default async function AdminLayout({
 
   // ── Auth guard: admin-only until staff permissions are explicitly modeled. ──
   let profile;
+  let profileLoadError = false;
   try {
     profile = await getProfile();
   } catch {
-    // DB or Supabase unavailable
+    profileLoadError = true;
     profile = null;
+  }
+
+  if (profileLoadError) {
+    return (
+      <div className="flex min-h-dvh items-center justify-center bg-surface-soft p-4" dir={locale === "ar" ? "rtl" : "ltr"}>
+        <div className="w-full max-w-xl">
+          <AdminLoadError locale={locale} retryHref={`/${locale}/admin/overview`} />
+        </div>
+      </div>
+    );
   }
 
   if (!profile) {

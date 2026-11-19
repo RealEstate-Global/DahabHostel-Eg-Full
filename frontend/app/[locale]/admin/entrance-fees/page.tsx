@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { getAdminEntranceFees } from "@/utils/supabase/admin-queries";
+import { AdminLoadError } from "../_components/admin-load-error";
 
 export default async function EntranceFeesPage({
   params,
@@ -22,11 +23,12 @@ export default async function EntranceFeesPage({
       is_addon: boolean | null;
     }>;
   }> = [];
+  let loadError = false;
 
   try {
     groups = await getAdminEntranceFees();
   } catch {
-    groups = [];
+    loadError = true;
   }
 
   return (
@@ -38,7 +40,9 @@ export default async function EntranceFeesPage({
         </div>
       </div>
 
-      {groups.length === 0 ? (
+      {loadError ? (
+        <AdminLoadError locale={locale} retryHref={`/${locale}/admin/entrance-fees`} />
+      ) : groups.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-line bg-surface py-16">
           <p className="text-sm text-ink-muted">{t("empty")}</p>
         </div>

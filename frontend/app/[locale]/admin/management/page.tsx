@@ -9,7 +9,8 @@ import {
 import { AdminDataTable } from "../_components/admin-data-table";
 import { UserRoleSelect } from "../_components/admin-actions";
 import { Users, CalendarCheck, MapPin, Plane, Mail } from "lucide-react";
-import { format } from "date-fns";
+import { formatAdminDate } from "../_lib/date-format";
+import { AdminLoadError } from "../_components/admin-load-error";
 
 export default async function ManagementPage({
   params,
@@ -36,6 +37,7 @@ export default async function ManagementPage({
   let tourReqsRes = { data: [] as Record<string, unknown>[], total: 0, page: 1, pageSize: 20, totalPages: 0 };
   let pickupsRes = { data: [] as Record<string, unknown>[], total: 0, page: 1, pageSize: 20, totalPages: 0 };
   let contactsRes = { data: [] as Record<string, unknown>[], total: 0, page: 1, pageSize: 20, totalPages: 0 };
+  let loadError = false;
 
   try {
     const [u, b, tr, p, c] = await Promise.all([
@@ -51,7 +53,19 @@ export default async function ManagementPage({
     pickupsRes = p as unknown as typeof pickupsRes;
     contactsRes = c as unknown as typeof contactsRes;
   } catch {
-    // Keep empty fallbacks
+    loadError = true;
+  }
+
+  if (loadError) {
+    return (
+      <div className="space-y-6">
+        <div>
+          <h2 className="text-2xl font-bold text-ink-heading">{t("managementPage.title")}</h2>
+          <p className="mt-1 text-sm text-ink-muted">{t("managementPage.subtitle")}</p>
+        </div>
+        <AdminLoadError locale={locale} retryHref={`/${locale}/admin/management?tab=${encodeURIComponent(activeTab)}`} />
+      </div>
+    );
   }
 
   const userColumns = [
@@ -79,7 +93,7 @@ export default async function ManagementPage({
       key: "created_at",
       labelKey: "createdAt",
       render: (row: Record<string, unknown>) =>
-        format(new Date(row.created_at as string), "dd MMM yyyy"),
+        formatAdminDate(row.created_at, locale),
     },
   ];
 
@@ -91,13 +105,13 @@ export default async function ManagementPage({
       key: "check_in",
       labelKey: "checkIn",
       render: (row: Record<string, unknown>) =>
-        row.check_in ? format(new Date(row.check_in as string), "dd MMM yyyy") : "—",
+        formatAdminDate(row.check_in, locale),
     },
     {
       key: "check_out",
       labelKey: "checkOut",
       render: (row: Record<string, unknown>) =>
-        row.check_out ? format(new Date(row.check_out as string), "dd MMM yyyy") : "—",
+        formatAdminDate(row.check_out, locale),
     },
     { key: "guests", labelKey: "guests" },
   ];
@@ -256,6 +270,7 @@ export default async function ManagementPage({
           emptyMessage={tUsers("empty")}
           locale={locale}
           basePath={`/${locale}/admin/management`}
+          queryParams={{ tab: activeTab, search: sp.search }}
           actions={(row) => (
             <UserRoleSelect
               id={row.id as string}
@@ -276,6 +291,7 @@ export default async function ManagementPage({
           emptyMessage={tBookings("empty")}
           locale={locale}
           basePath={`/${locale}/admin/management`}
+          queryParams={{ tab: activeTab, search: sp.search }}
         />
       )}
 
@@ -290,6 +306,7 @@ export default async function ManagementPage({
           emptyMessage={tTourReqs("empty")}
           locale={locale}
           basePath={`/${locale}/admin/management`}
+          queryParams={{ tab: activeTab, search: sp.search }}
         />
       )}
 
@@ -304,6 +321,7 @@ export default async function ManagementPage({
           emptyMessage={tPickups("empty")}
           locale={locale}
           basePath={`/${locale}/admin/management`}
+          queryParams={{ tab: activeTab, search: sp.search }}
         />
       )}
 
@@ -318,6 +336,7 @@ export default async function ManagementPage({
           emptyMessage={tContacts("empty")}
           locale={locale}
           basePath={`/${locale}/admin/management`}
+          queryParams={{ tab: activeTab, search: sp.search }}
         />
       )}
     </div>

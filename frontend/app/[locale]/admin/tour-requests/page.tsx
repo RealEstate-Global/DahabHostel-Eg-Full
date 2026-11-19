@@ -1,7 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { getAdminTourRequests } from "@/utils/supabase/admin-queries";
 import { AdminDataTable } from "../_components/admin-data-table";
-import { format } from "date-fns";
+import { formatAdminDate } from "../_lib/date-format";
 
 export default async function TourRequestsPage({
   params,
@@ -17,9 +17,11 @@ export default async function TourRequestsPage({
   const page = parseInt(sp.page ?? "1", 10);
 
   let result;
+  let loadError = false;
   try {
     result = await getAdminTourRequests({ page, search: sp.search });
   } catch {
+    loadError = true;
     result = { data: [], total: 0, page: 1, pageSize: 20, totalPages: 0 };
   }
 
@@ -33,7 +35,7 @@ export default async function TourRequestsPage({
       key: "created_at",
       labelKey: "createdAt",
       render: (row: Record<string, unknown>) =>
-        format(new Date(row.created_at as string), "dd MMM yyyy"),
+        formatAdminDate(row.created_at, locale),
     },
   ];
 
@@ -46,7 +48,7 @@ export default async function TourRequestsPage({
       <form className="flex items-center gap-2 max-w-md" action="">
         <input type="text" name="search" defaultValue={sp.search ?? ""} placeholder={t("searchPlaceholder")} className="input-modern" />
       </form>
-      <AdminDataTable columns={columns} data={result.data as unknown as Record<string, unknown>[]} total={result.total} page={result.page} pageSize={result.pageSize} totalPages={result.totalPages} emptyMessage={t("empty")} locale={locale} basePath={`/${locale}/admin/tour-requests`} />
+      <AdminDataTable columns={columns} data={result.data as unknown as Record<string, unknown>[]} total={result.total} page={result.page} pageSize={result.pageSize} totalPages={result.totalPages} emptyMessage={t("empty")} locale={locale} basePath={`/${locale}/admin/tour-requests`} queryParams={{ search: sp.search }} loadError={loadError} />
     </div>
   );
 }

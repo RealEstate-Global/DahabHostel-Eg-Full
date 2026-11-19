@@ -27,7 +27,8 @@
     "collapse": "Contraer menú",
     "expand": "Expandir menú",
     "openMenu": "Abrir menú",
-    "closeMenu": "Cerrar menú"
+    "closeMenu": "Cerrar menú",
+    "primaryNavigation": "Navegación de administración"
   },
   "header": {
     "search": "Buscar…",
@@ -107,6 +108,9 @@
     "showing": "Mostrando {from}–{to} de {total}",
     "prev": "Anterior",
     "next": "Siguiente",
+    "pageInfo": "Página {page} de {totalPages}",
+    "yes": "Sí",
+    "no": "No",
     "rowsPerPage": "Filas por página"
   },
   "actions": {
@@ -132,7 +136,10 @@
     "deleteConfirm": "¿Seguro que quieres eliminar esto? No se puede deshacer.",
     "deleteSuccess": "Eliminado correctamente.",
     "saveSuccess": "Guardado correctamente.",
-    "error": "Algo salió mal. Inténtalo de nuevo."
+    "error": "Algo salió mal. Inténtalo de nuevo.",
+    "loadErrorTitle": "No se pudieron cargar los datos",
+    "loadErrorDescription": "La base de datos no devolvió los registros solicitados. Actualiza la página para volver a intentarlo.",
+    "retry": "Reintentar"
   },
   "bookings": {
     "title": "Solicitudes de reserva",
@@ -171,7 +178,7 @@
     "priceEgp": "Precio (EGP)",
     "dorm": "Dormitorio",
     "private": "Privada",
-    "roomCount": "{count} habitaciones"
+    "roomCount": "{count, plural, one {# habitación} other {# habitaciones}}"
   },
   "tours": {
     "title": "Tours",
@@ -187,7 +194,8 @@
     "galleryTab": "Galería",
     "history": "Histórico",
     "adventure": "Aventura",
-    "leisure": "Ocio"
+    "leisure": "Ocio",
+    "tourCount": "{count, plural, one {# recorrido} other {# recorridos}}"
   },
   "fees": {
     "title": "Tarifas de entrada",
@@ -205,7 +213,12 @@
     "empty": "Aún no hay elementos en la galería.",
     "addImage": "Añadir imagen",
     "caption": "Pie de foto",
-    "groupTag": "Grupo"
+    "groupTag": "Grupo",
+    "imageAlt": "Imagen de la galería",
+    "groupRoom": "Habitación",
+    "groupTerrace": "Terraza",
+    "groupTour": "Recorrido",
+    "groupGeneral": "General"
   },
   "blogMgmt": {
     "title": "Blog y contenido",
@@ -254,7 +267,12 @@
     "last7": "Últimos 7 días",
     "last30": "Últimos 30 días",
     "last90": "Últimos 90 días",
-    "noData": "Datos insuficientes para mostrar este gráfico."
+    "noData": "Datos insuficientes para mostrar este gráfico.",
+    "activeGuestCapacity": "Capacidad de huéspedes en habitaciones activas: {count}",
+    "activeToursCount": "Recorridos activos: {count}",
+    "totalReviews": "Total de reseñas: {count}",
+    "incomingRequestsTotal": "Total de solicitudes recibidas",
+    "bookingsWindow": "Solicitudes de reserva de los últimos {days} días"
   },
   "settingsPage": {
     "title": "Ajustes del sitio",
@@ -262,7 +280,12 @@
     "key": "Clave",
     "value": "Valor",
     "empty": "No hay ajustes configurados.",
-    "addSetting": "Añadir ajuste"
+    "addSetting": "Añadir ajuste",
+    "newSetting": "Nuevo ajuste",
+    "invalidJson": "Introduce un valor JSON válido antes de guardar.",
+    "duplicateKey": "Ya existe un ajuste con esta clave.",
+    "saving": "Guardando…",
+    "updatedAt": "Actualizado {date}"
   },
   "auth": {
     "unauthorized": "No tienes autorización para acceder a esta página.",

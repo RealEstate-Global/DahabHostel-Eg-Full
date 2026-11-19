@@ -331,7 +331,7 @@ export async function upsertSiteSetting(key: string, value: unknown) {
   const supabase = await createClient();
   const { error } = await (supabase.from("site_settings") as any)
     .upsert(
-      { key: validatedKey, value: validatedValue },
+      { key: validatedKey, value: validatedValue, updated_at: new Date().toISOString() },
       { onConflict: "key" }
     );
   if (error) throw new Error(error.message);

@@ -27,7 +27,8 @@
     "collapse": "طي القائمة الجانبية",
     "expand": "توسيع القائمة الجانبية",
     "openMenu": "فتح القائمة",
-    "closeMenu": "إغلاق القائمة"
+    "closeMenu": "إغلاق القائمة",
+    "primaryNavigation": "قائمة التنقل الإدارية"
   },
   "header": {
     "search": "بحث…",
@@ -107,6 +108,9 @@
     "showing": "عرض {from}–{to} من {total}",
     "prev": "السابق",
     "next": "التالي",
+    "pageInfo": "الصفحة {page} من {totalPages}",
+    "yes": "نعم",
+    "no": "لا",
     "rowsPerPage": "الصفوف في الصفحة"
   },
   "actions": {
@@ -132,7 +136,10 @@
     "deleteConfirm": "هل أنت متأكد من الحذف؟ لا يمكن التراجع عن هذا الإجراء.",
     "deleteSuccess": "تم الحذف بنجاح.",
     "saveSuccess": "تم الحفظ بنجاح.",
-    "error": "حدث خطأ ما. يُرجى المحاولة مرة أخرى."
+    "error": "حدث خطأ ما. يُرجى المحاولة مرة أخرى.",
+    "loadErrorTitle": "تعذر تحميل البيانات",
+    "loadErrorDescription": "لم تُرجع قاعدة البيانات السجلات المطلوبة. حدّث الصفحة وحاول مرة أخرى.",
+    "retry": "إعادة المحاولة"
   },
   "bookings": {
     "title": "طلبات الحجز",
@@ -171,7 +178,7 @@
     "priceEgp": "السعر (ج.م.)",
     "dorm": "مشترك",
     "private": "خاص",
-    "roomCount": "{count} غرفة"
+    "roomCount": "{count, plural, =0 {لا توجد غرف} one {غرفة واحدة} two {غرفتان} few {# غرف} many {# غرفة} other {# غرفة}}"
   },
   "tours": {
     "title": "الجولات",
@@ -187,7 +194,8 @@
     "galleryTab": "المعرض",
     "history": "تاريخية",
     "adventure": "مغامرة",
-    "leisure": "ترفيهية"
+    "leisure": "ترفيهية",
+    "tourCount": "{count, plural, =0 {لا توجد جولات} one {جولة واحدة} two {جولتان} few {# جولات} many {# جولة} other {# جولة}}"
   },
   "fees": {
     "title": "رسوم الدخول",
@@ -205,7 +213,12 @@
     "empty": "لا توجد عناصر في المعرض بعد.",
     "addImage": "إضافة صورة",
     "caption": "التعليق",
-    "groupTag": "المجموعة"
+    "groupTag": "المجموعة",
+    "imageAlt": "صورة من المعرض",
+    "groupRoom": "الغرف",
+    "groupTerrace": "الشرفة",
+    "groupTour": "الجولات",
+    "groupGeneral": "عام"
   },
   "blogMgmt": {
     "title": "المدونة والمحتوى",
@@ -254,7 +267,12 @@
     "last7": "آخر 7 أيام",
     "last30": "آخر 30 يومًا",
     "last90": "آخر 90 يومًا",
-    "noData": "لا تتوفر بيانات كافية لعرض هذا الرسم البياني."
+    "noData": "لا تتوفر بيانات كافية لعرض هذا الرسم البياني.",
+    "activeGuestCapacity": "سعة النزلاء في الغرف النشطة: {count}",
+    "activeToursCount": "الجولات النشطة: {count}",
+    "totalReviews": "إجمالي التقييمات: {count}",
+    "incomingRequestsTotal": "إجمالي الطلبات الواردة",
+    "bookingsWindow": "طلبات الحجز خلال آخر {days} يومًا"
   },
   "settingsPage": {
     "title": "إعدادات الموقع",
@@ -262,7 +280,12 @@
     "key": "مفتاح الإعداد",
     "value": "القيمة",
     "empty": "لم يتم تهيئة أي إعدادات.",
-    "addSetting": "إضافة إعداد"
+    "addSetting": "إضافة إعداد",
+    "newSetting": "إعداد جديد",
+    "invalidJson": "أدخل قيمة JSON صحيحة قبل الحفظ.",
+    "duplicateKey": "يوجد إعداد بهذا المفتاح بالفعل.",
+    "saving": "جارٍ الحفظ…",
+    "updatedAt": "آخر تحديث: {date}"
   },
   "auth": {
     "unauthorized": "ليس لديك صلاحية للوصول إلى هذه الصفحة.",

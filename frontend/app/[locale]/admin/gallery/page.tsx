@@ -1,6 +1,7 @@
 import { getTranslations } from "next-intl/server";
 import { getAdminGallery } from "@/utils/supabase/admin-queries";
 import Image from "next/image";
+import { AdminLoadError } from "../_components/admin-load-error";
 
 export default async function GalleryAdminPage({
   params,
@@ -9,6 +10,12 @@ export default async function GalleryAdminPage({
 }) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "admin.galleryMgmt" });
+  const groupLabels: Record<string, string> = {
+    room: t("groupRoom"),
+    terrace: t("groupTerrace"),
+    tour: t("groupTour"),
+    general: t("groupGeneral"),
+  };
 
   let items: Array<{
     id: number;
@@ -17,11 +24,12 @@ export default async function GalleryAdminPage({
     group_tag: string | null;
     sort_order: number;
   }> = [];
+  let loadError = false;
 
   try {
     items = await getAdminGallery();
   } catch {
-    items = [];
+    loadError = true;
   }
 
   return (
@@ -33,7 +41,9 @@ export default async function GalleryAdminPage({
         </div>
       </div>
 
-      {items.length === 0 ? (
+      {loadError ? (
+        <AdminLoadError locale={locale} retryHref={`/${locale}/admin/gallery`} />
+      ) : items.length === 0 ? (
         <div className="flex flex-col items-center justify-center rounded-xl border border-line bg-surface py-16">
           <p className="text-sm text-ink-muted">{t("empty")}</p>
         </div>
@@ -47,7 +57,7 @@ export default async function GalleryAdminPage({
               <div className="relative aspect-square w-full">
                 <Image
                   src={item.image_url}
-                  alt={item.caption ?? "Gallery item"}
+                  alt={item.caption ?? t("imageAlt")}
                   fill
                   className="object-cover transition-transform duration-300 group-hover:scale-105"
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 25vw, 20vw"
@@ -61,7 +71,7 @@ export default async function GalleryAdminPage({
                 )}
                 {item.group_tag && (
                   <span className="mt-1 inline-block rounded bg-surface-soft px-1.5 py-0.5 text-[10px] text-ink-muted">
-                    {item.group_tag}
+                    {groupLabels[item.group_tag] ?? item.group_tag}
                   </span>
                 )}
               </div>

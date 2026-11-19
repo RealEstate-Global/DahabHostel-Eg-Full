@@ -27,7 +27,8 @@
     "collapse": "Collapse sidebar",
     "expand": "Expand sidebar",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "primaryNavigation": "Administration navigation"
   },
   "header": {
     "search": "Search…",
@@ -107,6 +108,9 @@
     "showing": "Showing {from}–{to} of {total}",
     "prev": "Previous",
     "next": "Next",
+    "pageInfo": "Page {page} of {totalPages}",
+    "yes": "Yes",
+    "no": "No",
     "rowsPerPage": "Rows per page"
   },
   "actions": {
@@ -132,7 +136,10 @@
     "deleteConfirm": "Are you sure you want to delete this? This action cannot be undone.",
     "deleteSuccess": "Deleted successfully.",
     "saveSuccess": "Saved successfully.",
-    "error": "Something went wrong. Please try again."
+    "error": "Something went wrong. Please try again.",
+    "loadErrorTitle": "Data could not be loaded",
+    "loadErrorDescription": "The database could not return the requested records. Refresh the page to try again.",
+    "retry": "Retry"
   },
   "bookings": {
     "title": "Booking Requests",
@@ -171,7 +178,7 @@
     "priceEgp": "Price (EGP)",
     "dorm": "Dorm",
     "private": "Private",
-    "roomCount": "{count} rooms"
+    "roomCount": "{count, plural, one {# room} other {# rooms}}"
   },
   "tours": {
     "title": "Tours",
@@ -187,7 +194,8 @@
     "galleryTab": "Gallery",
     "history": "History",
     "adventure": "Adventure",
-    "leisure": "Leisure"
+    "leisure": "Leisure",
+    "tourCount": "{count, plural, one {# tour} other {# tours}}"
   },
   "fees": {
     "title": "Entrance Fees",
@@ -205,7 +213,12 @@
     "empty": "No gallery items yet.",
     "addImage": "Add Image",
     "caption": "Caption",
-    "groupTag": "Group"
+    "groupTag": "Group",
+    "imageAlt": "Gallery image",
+    "groupRoom": "Room",
+    "groupTerrace": "Terrace",
+    "groupTour": "Tour",
+    "groupGeneral": "General"
   },
   "blogMgmt": {
     "title": "Blog & Content",
@@ -254,7 +267,12 @@
     "last7": "Last 7 days",
     "last30": "Last 30 days",
     "last90": "Last 90 days",
-    "noData": "Not enough data to display this chart."
+    "noData": "Not enough data to display this chart.",
+    "activeGuestCapacity": "Guest capacity in active rooms: {count}",
+    "activeToursCount": "Active tours: {count}",
+    "totalReviews": "All reviews: {count}",
+    "incomingRequestsTotal": "Total incoming requests",
+    "bookingsWindow": "Booking requests over the last {days} days"
   },
   "settingsPage": {
     "title": "Website Settings",
@@ -262,7 +280,12 @@
     "key": "Setting Key",
     "value": "Value",
     "empty": "No settings configured.",
-    "addSetting": "Add Setting"
+    "addSetting": "Add Setting",
+    "newSetting": "New setting",
+    "invalidJson": "Enter a valid JSON value before saving.",
+    "duplicateKey": "A setting with this key already exists.",
+    "saving": "Saving…",
+    "updatedAt": "Updated {date}"
   },
   "auth": {
     "unauthorized": "You are not authorized to access this page.",

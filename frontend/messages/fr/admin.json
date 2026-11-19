@@ -27,7 +27,8 @@
     "collapse": "Réduire le menu",
     "expand": "Déplier le menu",
     "openMenu": "Ouvrir le menu",
-    "closeMenu": "Fermer le menu"
+    "closeMenu": "Fermer le menu",
+    "primaryNavigation": "Navigation d’administration"
   },
   "header": {
     "search": "Rechercher…",
@@ -107,6 +108,9 @@
     "showing": "Affichage de {from} à {to} sur {total}",
     "prev": "Précédent",
     "next": "Suivant",
+    "pageInfo": "Page {page} sur {totalPages}",
+    "yes": "Oui",
+    "no": "Non",
     "rowsPerPage": "Lignes par page"
   },
   "actions": {
@@ -132,7 +136,10 @@
     "deleteConfirm": "Voulez-vous vraiment supprimer cet élément ? Cette action est irréversible.",
     "deleteSuccess": "Suppression effectuée.",
     "saveSuccess": "Enregistrement effectué.",
-    "error": "Une erreur est survenue. Veuillez réessayer."
+    "error": "Une erreur est survenue. Veuillez réessayer.",
+    "loadErrorTitle": "Les données n’ont pas pu être chargées",
+    "loadErrorDescription": "La base de données n’a pas renvoyé les données demandées. Actualisez la page pour réessayer.",
+    "retry": "Réessayer"
   },
   "bookings": {
     "title": "Demandes de réservation",
@@ -171,7 +178,7 @@
     "priceEgp": "Prix (EGP)",
     "dorm": "Dortoir",
     "private": "Privée",
-    "roomCount": "{count} chambres"
+    "roomCount": "{count, plural, one {# chambre} other {# chambres}}"
   },
   "tours": {
     "title": "Circuits",
@@ -187,7 +194,8 @@
     "galleryTab": "Galerie",
     "history": "Historique",
     "adventure": "Aventure",
-    "leisure": "Détente"
+    "leisure": "Détente",
+    "tourCount": "{count, plural, one {# excursion} other {# excursions}}"
   },
   "fees": {
     "title": "Droits d'entrée",
@@ -205,7 +213,12 @@
     "empty": "Aucun élément dans la galerie.",
     "addImage": "Ajouter une image",
     "caption": "Légende",
-    "groupTag": "Groupe"
+    "groupTag": "Groupe",
+    "imageAlt": "Image de la galerie",
+    "groupRoom": "Chambre",
+    "groupTerrace": "Terrasse",
+    "groupTour": "Excursion",
+    "groupGeneral": "Général"
   },
   "blogMgmt": {
     "title": "Blog et contenu",
@@ -254,7 +267,12 @@
     "last7": "7 derniers jours",
     "last30": "30 derniers jours",
     "last90": "90 derniers jours",
-    "noData": "Données insuffisantes pour ce graphique."
+    "noData": "Données insuffisantes pour ce graphique.",
+    "activeGuestCapacity": "Capacité des chambres actives : {count} personnes",
+    "activeToursCount": "Excursions actives : {count}",
+    "totalReviews": "Nombre total d’avis : {count}",
+    "incomingRequestsTotal": "Total des demandes reçues",
+    "bookingsWindow": "Demandes de réservation des {days} derniers jours"
   },
   "settingsPage": {
     "title": "Paramètres du site",
@@ -262,7 +280,12 @@
     "key": "Clé",
     "value": "Valeur",
     "empty": "Aucun paramètre configuré.",
-    "addSetting": "Ajouter un paramètre"
+    "addSetting": "Ajouter un paramètre",
+    "newSetting": "Nouveau paramètre",
+    "invalidJson": "Saisissez une valeur JSON valide avant l’enregistrement.",
+    "duplicateKey": "Un paramètre portant cette clé existe déjà.",
+    "saving": "Enregistrement…",
+    "updatedAt": "Mis à jour le {date}"
   },
   "auth": {
     "unauthorized": "Vous n'êtes pas autorisé à accéder à cette page.",
