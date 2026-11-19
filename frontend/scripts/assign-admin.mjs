@@ -4,14 +4,20 @@ import * as dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 dotenv.config({ path: ".env" });
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgresql://postgres.gckokgjotdwfhfxplbwj:Memo%40356000@aws-0-eu-west-1.pooler.supabase.com:5432/postgres";
+const connectionString = process.env.DATABASE_URL;
+if (!connectionString) {
+  throw new Error("DATABASE_URL is required. Configure it in .env.local; never hard-code database credentials.");
+}
+
+const targetEmail = process.env.ADMIN_EMAIL?.trim().toLowerCase();
+if (!targetEmail) {
+  throw new Error("ADMIN_EMAIL is required to identify the account to promote.");
+}
+const targetFullName = process.env.ADMIN_FULL_NAME?.trim() || "Site Administrator";
 
 const sql = postgres(connectionString, { prepare: false });
 
 async function main() {
-  const targetEmail = "m.ssaid356@gmail.com";
   console.log(`Checking status for ${targetEmail}...`);
 
   try {
@@ -34,22 +40,30 @@ async function main() {
     if (authUsers.length > 0) {
       const user = authUsers[0];
       // Upsert profile with role = 'admin'
-      await sql`
-        INSERT INTO public.profiles (id, email, full_name, role, updated_at)
-        VALUES (${user.id}, ${targetEmail}, 'Mostafa Said', 'admin', NOW())
-        ON CONFLICT (id) DO UPDATE
-        SET role = 'admin', updated_at = NOW();
-      `;
+      await sql.begin(async (tx) => {
+        // This script uses a trusted DATABASE_URL for one-time administrator bootstrap.
+        await tx`select set_config('request.jwt.claim.role', 'service_role', true)`;
+        await tx`
+          INSERT INTO public.profiles (id, email, full_name, role, updated_at)
+          VALUES (${user.id}, ${targetEmail}, ${targetFullName}, 'admin', NOW())
+          ON CONFLICT (id) DO UPDATE
+          SET role = 'admin', full_name = excluded.full_name, updated_at = NOW();
+        `;
+      });
       console.log(`✅ Successfully assigned role='admin' to ${targetEmail} for id=${user.id}`);
     } else {
       console.log(`⚠️ User ${targetEmail} is not yet registered in auth.users.`);
       console.log(`Checking if any profile exists with that email...`);
       if (profiles.length > 0) {
-        await sql`
-          UPDATE public.profiles
-          SET role = 'admin', updated_at = NOW()
-          WHERE email = ${targetEmail};
-        `;
+        await sql.begin(async (tx) => {
+          // This script uses a trusted DATABASE_URL for one-time administrator bootstrap.
+          await tx`select set_config('request.jwt.claim.role', 'service_role', true)`;
+          await tx`
+            UPDATE public.profiles
+            SET role = 'admin', full_name = ${targetFullName}, updated_at = NOW()
+            WHERE email = ${targetEmail};
+          `;
+        });
         console.log(`✅ Updated existing profile role to 'admin' for ${targetEmail}`);
       } else {
         console.log(`Notice: Once you sign up with ${targetEmail} on /login, a trigger or this script will ensure your role is 'admin'.`);

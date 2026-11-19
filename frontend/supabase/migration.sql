@@ -23,6 +23,50 @@ create table if not exists public.profiles (
   updated_at timestamptz not null default now()
 );
 
+-- Centralized admin predicate. SECURITY DEFINER avoids recursive evaluation of
+-- the profiles table's own RLS policies. Keep the search path fixed/empty.
+create or replace function public.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $function$
+  select exists (
+    select 1
+    from public.profiles
+    where id = (select auth.uid())
+      and role = 'admin'
+  );
+$function$;
+
+revoke all on function public.is_admin() from public;
+grant execute on function public.is_admin() to anon, authenticated;
+
+-- A row-ownership policy alone does not protect privileged columns such as role.
+create or replace function public.prevent_profile_role_escalation()
+returns trigger
+language plpgsql
+security definer
+set search_path = ''
+as $function$
+begin
+  if new.role is distinct from old.role
+    and coalesce(auth.role(), '') <> 'service_role'
+    and not public.is_admin() then
+    raise exception 'Only an administrator can change profile roles'
+      using errcode = '42501';
+  end if;
+  return new;
+end;
+$function$;
+
+revoke all on function public.prevent_profile_role_escalation() from public;
+drop trigger if exists profiles_role_guard on public.profiles;
+create trigger profiles_role_guard
+  before update of role on public.profiles
+  for each row execute function public.prevent_profile_role_escalation();
+
 alter table public.profiles enable row level security;
 
 -- Users can read their own profile
@@ -40,10 +84,7 @@ create policy "Users can update own profile"
 create policy "Admins can view all profiles"
   on public.profiles for select
   using (
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 -- Auto-create profile on signup
@@ -98,10 +139,7 @@ create policy "Anyone can read rooms"
 create policy "Admins can manage rooms"
   on public.rooms for all
   using (
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 -- ============================================================================
@@ -135,10 +173,7 @@ create policy "Anyone can read tours"
 create policy "Admins can manage tours"
   on public.tours for all
   using (
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 -- ============================================================================
@@ -161,10 +196,7 @@ create policy "Anyone can read tour itinerary"
 create policy "Admins can manage tour itinerary"
   on public.tour_itinerary for all
   using (
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 -- ============================================================================
@@ -187,10 +219,7 @@ create policy "Anyone can read tour gallery"
 create policy "Admins can manage tour gallery"
   on public.tour_gallery for all
   using (
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 -- ============================================================================
@@ -218,8 +247,8 @@ alter table public.fee_items enable row level security;
 
 create policy "Anyone can read fee_groups" on public.fee_groups for select to anon, authenticated using (true);
 create policy "Anyone can read fee_items" on public.fee_items for select to anon, authenticated using (true);
-create policy "Admins can manage fee_groups" on public.fee_groups for all using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
-create policy "Admins can manage fee_items" on public.fee_items for all using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+create policy "Admins can manage fee_groups" on public.fee_groups for all using (public.is_admin());
+create policy "Admins can manage fee_items" on public.fee_items for all using (public.is_admin());
 
 -- ============================================================================
 -- 5. GALLERY / PHOTOS
@@ -236,7 +265,7 @@ create table if not exists public.gallery (
 alter table public.gallery enable row level security;
 
 create policy "Anyone can read gallery" on public.gallery for select to anon, authenticated using (true);
-create policy "Admins can manage gallery" on public.gallery for all using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+create policy "Admins can manage gallery" on public.gallery for all using (public.is_admin());
 
 -- ============================================================================
 -- 6. BLOG POSTS
@@ -263,7 +292,7 @@ create policy "Anyone can read published blog posts"
 
 create policy "Admins can manage blog posts"
   on public.blog_posts for all
-  using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+  using (public.is_admin());
 
 -- ============================================================================
 -- 7. REVIEWS
@@ -296,7 +325,7 @@ create policy "Anon can insert reviews"
 
 create policy "Admins can manage reviews"
   on public.reviews for all
-  using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+  using (public.is_admin());
 
 -- ============================================================================
 -- 8. SITE SETTINGS (key-value config store)
@@ -315,7 +344,7 @@ create policy "Anyone can read site settings"
 
 create policy "Admins can manage site settings"
   on public.site_settings for all
-  using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+  using (public.is_admin());
 
 -- ============================================================================
 -- 9. EXISTING FORM TABLES (keep from schema.sql, adding missing policies)
@@ -336,7 +365,7 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 do $$ begin
-  create policy "Admins can read contact_messages" on public.contact_messages for select using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+  create policy "Admins can read contact_messages" on public.contact_messages for select using (public.is_admin());
 exception when duplicate_object then null;
 end $$;
 
@@ -357,7 +386,7 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 do $$ begin
-  create policy "Admins can read tour_requests" on public.tour_requests for select using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+  create policy "Admins can read tour_requests" on public.tour_requests for select using (public.is_admin());
 exception when duplicate_object then null;
 end $$;
 
@@ -379,7 +408,7 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 do $$ begin
-  create policy "Admins can read booking_requests" on public.booking_requests for select using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+  create policy "Admins can read booking_requests" on public.booking_requests for select using (public.is_admin());
 exception when duplicate_object then null;
 end $$;
 
@@ -402,7 +431,7 @@ do $$ begin
 exception when duplicate_object then null;
 end $$;
 do $$ begin
-  create policy "Admins can read airport_pickups" on public.airport_pickups for select using (exists (select 1 from public.profiles where id = auth.uid() and role = 'admin'));
+  create policy "Admins can read airport_pickups" on public.airport_pickups for select using (public.is_admin());
 exception when duplicate_object then null;
 end $$;
 
@@ -436,30 +465,21 @@ create policy "Admins can upload media"
   on storage.objects for insert to authenticated
   with check (
     bucket_id = 'media' and
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 create policy "Admins can update media"
   on storage.objects for update to authenticated
   using (
     bucket_id = 'media' and
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 create policy "Admins can delete media"
   on storage.objects for delete to authenticated
   using (
     bucket_id = 'media' and
-    exists (
-      select 1 from public.profiles
-      where id = auth.uid() and role = 'admin'
-    )
+    public.is_admin()
   );
 
 -- ============================================================================

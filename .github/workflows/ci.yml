@@ -50,5 +50,8 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
+      - name: Localization parity
+        run: pnpm i18n:check
+
       - name: Build
         run: pnpm build
