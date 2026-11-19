@@ -3,7 +3,6 @@ import { SidebarNavItem } from "@/app/_components/sidebar-nav-item";
 import { ThemeToggle } from "@/app/_components/dahab/theme-toggle";
 import { getServerSession } from "next-auth/next";
 import authOptions from "@/app/_lib/auth-options";
-import { usePathname } from "next/navigation";
 
 import OverviewPage from "@/app/admin/overview/page";
 import ContentPage from "@/app/admin/content/page";
@@ -15,14 +14,19 @@ export const metadata = {
   description: "Admin dashboard for Dahab Hostel Cairo - Content Management & Analytics",
 };
 
-export default async function AdminLayout() {
+export default async function AdminLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { locale: string };
+}) {
   const session = await getServerSession(authOptions);
-  const pathname = usePathname();
 
   // Direct access for now - no login required
   // In production, you would add: if (!session) return <Redirect to="/login" />
 
-  const locale = pathname.split("/")[2] || "en";
+  const locale = params?.locale || "en";
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
@@ -43,10 +47,10 @@ export default async function AdminLayout() {
             <nav className="flex-1 flex flex-col overflow-y-auto p-4 space-y-2">
               <SidebarNavItem
                 items={[
-                  { label: "Overview", href: "/admin/overview", icon: "LayoutDashboard" },
-                  { label: "Content", href: "/admin/content", icon: "LibraryBooks" },
-                  { label: "Management", href: "/admin/management", icon: "Settings" },
-                  { label: "Analytics", href: "/admin/analytics", icon: "BarChart3" },
+                  { label: "Overview", href: `/${locale}/admin/overview`, icon: "LayoutDashboard" },
+                  { label: "Content", href: `/${locale}/admin/content`, icon: "LibraryBooks" },
+                  { label: "Management", href: `/${locale}/admin/management`, icon: "Settings" },
+                  { label: "Analytics", href: `/${locale}/admin/analytics`, icon: "BarChart3" },
                 ]}
               />
             </nav>
@@ -61,10 +65,7 @@ export default async function AdminLayout() {
             </header>
 
             <div className="min-h-[400px]">
-              {pathname === "/admin/overview" && <OverviewPage />}
-              {pathname === "/admin/content" && <ContentPage />}
-              {pathname === "/admin/management" && <ManagementPage />}
-              {pathname === "/admin/analytics" && <AnalyticsPage />}
+              {children}
             </div>
           </main>
         </div>
