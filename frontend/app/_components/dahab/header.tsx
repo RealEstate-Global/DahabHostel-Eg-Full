@@ -109,7 +109,6 @@ export function Header() {
   const pathname = usePathname();
   const locale = useLocale();
   const tNav = useTranslations("nav");
-  const tAdmin = useTranslations("adminDashboard");
   const dropdownTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const desc = DESCRIPTIONS[locale] || DESCRIPTIONS.en;
@@ -223,7 +222,7 @@ export function Header() {
           desc: desc.writeReview,
         },
         {
-          title: tAdmin("adminDashboard"),
+          title: tNav("adminDashboard"),
           href: "/admin/overview",
           icon: Landmark,
           desc: "Admin dashboard for content management and analytics",

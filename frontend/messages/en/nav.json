@@ -8,5 +8,15 @@
   "contactUs": "Contact Us",
   "servicesBrochure": "Services Brochure",
   "bookNow": "Book now",
-  "language": "Language"
+  "language": "Language",
+  "requestTourPrices": "Request Tour Prices",
+  "entranceFees": "Entrance Fees",
+  "pricingBooking": "Pricing & Booking",
+  "onlineBooking": "Online Booking",
+  "roomRates": "Room Rates",
+  "airportPickup": "Airport Pickup",
+  "cityGuide": "City Guide",
+  "newsBlog": "News & Blog",
+  "writeReview": "Write a Review",
+  "adminDashboard": "Admin Dashboard"
 }

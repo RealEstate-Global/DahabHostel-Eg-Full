@@ -1,12 +1,8 @@
+import React from "react";
 import { SidebarNavItem } from "@/app/_components/sidebar-nav-item";
 import { ThemeToggle } from "@/app/_components/dahab/theme-toggle";
 import { getServerSession } from "next-auth/next";
 import authOptions from "@/app/_lib/auth-options";
-
-import OverviewPage from "@/app/[locale]/admin/overview/page";
-import ContentPage from "@/app/[locale]/admin/content/page";
-import ManagementPage from "@/app/[locale]/admin/management/page";
-import AnalyticsPage from "@/app/[locale]/admin/analytics/page";
 
 export const metadata = {
   title: "Admin Dashboard - Dahab Hostel",

@@ -8,5 +8,15 @@
   "contactUs": "اتصل بنا",
   "servicesBrochure": "كتالوج الخدمات",
   "bookNow": "احجز الآن",
-  "language": "اللغة"
+  "language": "اللغة",
+  "requestTourPrices": "طلب أسعار الجولات",
+  "entranceFees": "أسعار التذاكر",
+  "pricingBooking": "الأسعار والحجز",
+  "onlineBooking": "الحجز عبر الإنترنت",
+  "roomRates": "أسعار الغرف",
+  "airportPickup": "استقبال من المطار",
+  "cityGuide": "دليل المدينة",
+  "newsBlog": "الأخبار والمدونة",
+  "writeReview": "كتابة تقييم",
+  "adminDashboard": "لوحة التحكم"
 }
